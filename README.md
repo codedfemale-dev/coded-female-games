@@ -1,6 +1,6 @@
 # Coded Female learning games
 
-Six original, untimed browser games by Coded Female. All content uses fictional organisations and curated feedback. No live AI service or accounts are needed.
+Thirteen browser games together in one repository, including six new learning games and seven earlier Coded Female games. All content uses fictional organisations and curated feedback. No live AI service or accounts are needed.
 
 Play the collection: https://codedfemale-dev.github.io/coded-female-games/
 
@@ -13,7 +13,15 @@ Play the collection: https://codedfemale-dev.github.io/coded-female-games/
 | Metric Makeover | Outcome measures, denominators, tail performance, funnels, guardrails and causation | [Play](https://codedfemale-dev.github.io/coded-female-games/metric-makeover/) |
 | The Stakeholder Room | Questions, trade-offs, scope, risk, promises and shared agreements | [Play](https://codedfemale-dev.github.io/coded-female-games/the-stakeholder-room/) |
 
-There are 32 challenges. Repair and redesign games allow retries. Code choices run real predefined JavaScript functions against the displayed test cases, without evaluating player-supplied code. Conversation and agent meters are simplified learning models; they are not measures of real people or operational readiness. Downloads include the decisions, reasoning and further reading.
+| Spot the Scam | Message judgement and scam awareness | [Play](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) |
+| AI Escape Room | Clear briefs, evidence and instruction boundaries | [Play](https://codedfemale-dev.github.io/coded-female-games/ai-escape-room/) |
+| Prompt Practice | Useful prompts and scripted responses | [Play](https://codedfemale-dev.github.io/coded-female-games/prompt-practice/) |
+| Hallucination Detective | Evidence checks and careful summaries | [Play](https://codedfemale-dev.github.io/coded-female-games/hallucination-detective/) |
+| Sprint Survival | Priorities, delivery and team wellbeing | [Play](https://codedfemale-dev.github.io/coded-female-games/sprint-survival/) |
+| Bug Bash | Developer arcade with a practice mode | [Play](https://codedfemale-dev.github.io/coded-female-games/bug-bash/) |
+| First Code Playground | Beginner coding experiments | [Play](https://codedfemale-dev.github.io/coded-female-games/first-code-playground/) |
+
+The six shared-engine games contain 32 challenges. The seven earlier games retain their own formats. Repair and redesign games allow retries. Code choices run real predefined JavaScript functions against the displayed test cases, without evaluating player-supplied code. Conversation and agent meters are simplified learning models; they are not measures of real people or operational readiness. Downloads include the decisions, reasoning and further reading.
 
 ## Run locally
 
@@ -23,14 +31,14 @@ With a current Node.js runtime:
 
 ```
 node generate.mjs
-node --test tests.mjs
+node --test tests.mjs migration-tests.mjs */tests.cjs
 ```
 
-`generate.mjs` updates the static introduction pages after metadata changes. The game content lives in `data.js`, the rules in `models.js`, and the interface in `game.js`. Keep the generated HTML tracked. Update asset version strings when publishing later changes to avoid mixing browser-cached versions.
+`generate.mjs` updates the collection and the six shared-engine introduction pages after metadata changes. `legacy-games.js` supplies the seven other catalogue entries; their implementations stay inside their respective folders. The game content lives in `data.js`, the rules in `models.js`, and the interface in `game.js`. Keep the generated HTML tracked. Update asset version strings when publishing later changes to avoid mixing browser-cached versions.
 
 ## Publication
 
-GitHub Pages can deploy the root of the `main` branch. `.nojekyll` keeps it a plain static site. Each game is a separate directory with a direct play URL. The landing page also links to the existing Coded Female games.
+GitHub Pages can deploy the root of the `main` branch. `.nojekyll` keeps it a plain static site. Each game is a separate directory with a direct play URL. All 13 games are stored in this repository and linked from the landing page. The seven earlier standalone repositories remain available so existing links keep working. Future collection updates should be made here. `MIGRATION.json` records the source commits used during consolidation.
 
 ## Originality and guidance
 
@@ -49,8 +57,8 @@ Exact links appear in `data.js` and in each game’s supporting guidance panel. 
 
 ## Accessibility and privacy
 
-The controls use native buttons, selects and checkboxes, visible labels, focus indicators, keyboard interaction and feedback focus. Motion respects device reduced-motion preferences. Important information is provided as text, including the deliberately problematic visual examples. No timer or drag-only interaction is required. This is not a full accessibility compliance claim; testing with assistive technology and people is still valuable.
+The controls use native buttons, selects and checkboxes, visible labels, focus indicators, keyboard interaction and feedback focus. Motion respects device reduced-motion preferences. Important information is provided as text, including the deliberately problematic visual examples. The six newest games are untimed. Bug Bash offers timed arcade play and an untimed practice mode. This is not a full accessibility compliance claim; testing with assistive technology and people is still valuable.
 
-No analytics, tracking code, cookies, local storage or saved answers. Progress resets on reload. All processing and downloads are local to the page. Fonts are served locally. GitHub Pages handles ordinary hosting requests.
+No sign-up or live AI service is needed. Bug Bash saves its best score in local storage; other progress resets on reload. Game processing happens in your browser. Some earlier games request Google Fonts, while the six newest games serve fonts locally. GitHub Pages handles ordinary hosting requests.
 
 The existing Coded Female Open Sans and Playfair Display font families are retained. Their supplied OFL licences are in `assets/`. No new licence is granted for the game content or brand assets by this repository.

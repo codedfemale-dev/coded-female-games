@@ -1,0 +1,40 @@
+{
+  "description": "Seven existing Coded Female games copied into the shared collection. Original repositories remain available for existing play links. Future collection changes belong here.",
+  "games": [
+    {
+      "directory": "spot-the-scam",
+      "sourceRepository": "https://github.com/codedfemale-dev/spot-the-scam",
+      "sourceCommit": "da6b8b3656bce8f45332958f210f0d42ac1cc54b"
+    },
+    {
+      "directory": "ai-escape-room",
+      "sourceRepository": "https://github.com/codedfemale-dev/ai-escape-room",
+      "sourceCommit": "d0e45c34a5d803586200ee56283474a0ccd2288e"
+    },
+    {
+      "directory": "prompt-practice",
+      "sourceRepository": "https://github.com/codedfemale-dev/prompt-practice",
+      "sourceCommit": "49b83b567a10e044b79f2c1890eb48572b2cc218"
+    },
+    {
+      "directory": "hallucination-detective",
+      "sourceRepository": "https://github.com/codedfemale-dev/hallucination-detective",
+      "sourceCommit": "f5516601fe297dd1bd3a655b8ac448e4fe88cf8f"
+    },
+    {
+      "directory": "sprint-survival",
+      "sourceRepository": "https://github.com/codedfemale-dev/sprint-survival",
+      "sourceCommit": "08987ab1ec6c48d400532b8fd3dce5caf7a50409"
+    },
+    {
+      "directory": "bug-bash",
+      "sourceRepository": "https://github.com/codedfemale-dev/bug-bash",
+      "sourceCommit": "726891f717199f6324759c16866ded849228a1af"
+    },
+    {
+      "directory": "first-code-playground",
+      "sourceRepository": "https://github.com/codedfemale-dev/first-code-playground",
+      "sourceCommit": "85404d38e5743e189e2559529586843006169c2d"
+    }
+  ]
+}

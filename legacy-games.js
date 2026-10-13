@@ -1,0 +1,10 @@
+// Existing games keep their own engines and styles in their directories.
+export const legacyGames = {
+ 'spot-the-scam': {title:'Spot the Scam', mode:'judgement', icon:'design', short:'Read realistic fictional messages and decide what looks suspicious, supported or worth checking.', facts:'8 messages per round · 20 examples'},
+ 'ai-escape-room': {title:'AI Escape Room', mode:'AI judgement', icon:'agent', short:'Escape a fictional AI lab by writing a clearer brief, checking evidence and keeping control of instructions.', facts:'3 locks · Scripted AI practice'},
+ 'prompt-practice': {title:'Prompt Practice', mode:'AI skills', icon:'code', short:'Improve a brief, compare scripted responses and build a prompt you can take into your own work.', facts:'6 rounds · Prompt builder'},
+ 'hallucination-detective': {title:'Hallucination Detective', mode:'evidence', icon:'metrics', short:'Audit convincing AI answers against fictional team records. Separate facts, contradictions and missing evidence.', facts:'5 case files · Evidence review'},
+ 'sprint-survival': {title:'Sprint Survival', mode:'team delivery', icon:'people', short:'Guide a team through shifting priorities and delivery decisions while keeping an eye on their wellbeing.', facts:'3 sprints · Team decisions'},
+ 'bug-bash': {title:'Bug Bash', mode:'arcade', icon:'code', short:'Clear the bugs in a playful developer arcade. Try a timed run or practise at your own pace.', facts:'Arcade and practice · Keyboard controls'},
+ 'first-code-playground': {title:'First Code Playground', mode:'first steps', icon:'window', short:'Experiment with greetings, colours and a counter, then try a short beginner coding quiz.', facts:'Interactive experiments · Beginner friendly'}
+};

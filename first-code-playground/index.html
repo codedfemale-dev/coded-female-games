@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="A small, playful first web project. Experiment with HTML, CSS and JavaScript.">
+  <title>First Code Playground</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="script.js" defer></script>
+<style>.collection-link{display:inline-block;margin:0.5rem 0;padding:0.4rem 0;color:inherit;text-decoration:underline;text-underline-offset:0.2em}</style></head>
+<body>
+  <header class="wrap topbar"><span class="wordmark">&lt;/&gt; First Code Playground</span><a href="#behind">How it works ↗</a></header>
+  <main class="wrap">
+    <section class="hero">
+      <p class="eyebrow">A LITTLE EXPERIMENT. A REAL FIRST PROJECT.</p>
+      <h1>Small clicks.<br><span>Big beginnings.</span></h1>
+      <p class="intro">You don’t need to know everything to build something. Try the buttons, make a change, and see what happens.</p>
+      <a class="button primary" href="#play">Let’s have a play <span aria-hidden="true">↘</span></a>
+      <div class="code-note" aria-hidden="true"><span class="code-label">YOUR FIRST SUPERPOWER</span><code>idea + curiosity<br><span>= something you made ✨</span></code></div>
+    </section>
+    <section id="play" aria-labelledby="play-title">
+      <div class="section-heading"><div><p class="eyebrow">THE PLAYGROUND</p><h2 id="play-title">Go on. Try something.</h2></div><p>No downloads. No wrong turns.</p></div>
+      <div class="grid">
+        <!-- HTML gives each card its content and structure. -->
+        <article class="card"><span class="step">01 / MAKE IT PERSONAL</span><h3>Hello, you.</h3><p>A tiny input can change what a page says.</p><form id="hello-form"><label for="name">What should we call you?</label><div class="input-row"><input id="name" name="name" placeholder="Your first name" maxlength="40" autocomplete="given-name"><button type="submit">Say hello ↗</button></div></form><p class="result" id="greeting" role="status">Hello, future developer! 👋</p><details><summary>What’s happening here?</summary><p>JavaScript reads the input and updates the greeting. Find <code>textContent</code> in script.js.</p></details></article>
+        <article class="card"><span class="step">02 / CHANGE THE MOOD</span><h3>A splash of colour.</h3><p>Same page. A different feeling. Pick an accent.</p><div class="swatches" role="group" aria-label="Choose an accent colour"><button class="swatch gold" data-colour="gold" aria-pressed="true">Gold</button><button class="swatch berry" data-colour="berry" aria-pressed="false">Berry</button><button class="swatch forest" data-colour="forest" aria-pressed="false">Forest</button></div><div class="colour-preview"><span aria-hidden="true">✳</span><p id="colour-status" role="status">A little gold goes a long way.</p></div><details><summary>What’s happening here?</summary><p>CSS variables hold the colours. JavaScript changes them when you choose a button.</p></details></article>
+        <article class="card"><span class="step">03 / START COUNTING</span><h3>One click at a time.</h3><p>Meet a variable: a place to store a value.</p><p class="counter" id="count" role="status" aria-label="Click count">0</p><div class="actions"><button id="add-click" class="primary">Give it a click +</button><button id="reset" class="quiet">Reset</button></div><p id="count-note" class="small">Every click adds one. Try reaching 10!</p><details><summary>What’s happening here?</summary><p><code>let count = 0</code> stores the number. Each click increases it, then updates the page.</p></details></article>
+        <article class="card"><span class="step">04 / A QUICK CHECK</span><h3>Who does what?</h3><p>Which language adds behaviour, like making these buttons work?</p><div class="quiz" role="group" aria-label="Choose the language that adds behaviour"><button data-answer="HTML">HTML</button><button data-answer="CSS">CSS</button><button data-answer="JavaScript">JavaScript</button></div><p class="result" id="quiz-result" role="status">Take a guess. You can try again.</p><details><summary>Need a hint?</summary><p>HTML creates the structure. CSS styles it. JavaScript responds to your actions.</p></details></article>
+      </div>
+    </section>
+    <section class="behind" id="behind" aria-labelledby="behind-title"><p class="eyebrow">NOW MAKE IT YOURS</p><h2 id="behind-title">Three files. Plenty of possibilities.</h2><div class="file-grid"><div><code>index.html</code><h3>The content</h3><p>Change the main heading to your own welcome message.</p></div><div><code>style.css</code><h3>The look</h3><p>Find <code>--accent</code> and experiment with a different colour.</p></div><div><code>script.js</code><h3>The behaviour</h3><p>Change <code>count += 1</code> to <code>count += 2</code>. What happens?</p></div></div><p class="tip">Your first challenge: change one thing, save the file, then refresh the page.</p></section>
+    <noscript><p class="result">Enable JavaScript to try the interactive cards. You can still read the explanations and edit the files.</p></noscript>
+  </main>
+  <footer class="wrap"><span>Made for curious beginners.</span><span>Keep experimenting. That’s how you learn.</span><a class="collection-link" href="../">All 13 games →</a></footer>
+</body>
+</html>
