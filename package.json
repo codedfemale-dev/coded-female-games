@@ -1,1 +1,10 @@
-{"name":"coded-female-games","version":"1.0.0","private":true,"type":"module","scripts":{"generate":"node generate.mjs","test":"node --test tests.mjs"}}
+{
+  "name": "coded-female-games",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "generate": "node generate.mjs",
+    "test": "node --test tests.mjs learning-tests.mjs migration-tests.mjs */tests.cjs"
+  }
+}

@@ -1,9 +1,11 @@
 import {games} from './data.js';
+import {learning,practiceNotes} from './learning.js?v=20261014-1';
 import {contrast,runCodeTests,originalChoice,initialAgent,applyAgentDecision,initialPeople,applyPeopleDecision,makeNotes} from './models.js';
 
 const slug=document.body.dataset.game, game=games[slug], app=document.getElementById('app');
 const escape=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const symbols={window:'▤',code:'{ }',agent:'◎',design:'◇',metrics:'▥',people:'◌'};
+let practiceAttempts=[], reflection='';
 let index=0, log=[], score=0, state, selected=null, tested=false, prediction=null, question=null, phase=0, metric=null, fields=[-1,-1], attempts=0, cleared=false;
 const $=id=>document.getElementById(id);
 function focus(id){$(id)?.focus({preventScroll:true});$(id)?.scrollIntoView({behavior:'instant',block:'nearest'});}
@@ -26,7 +28,7 @@ function showFeedback(title,text,takeaway,canContinue=true){
 function next(){index++;if(index>=game.rounds.length){finish();return;}resetRound();render();focus('round-title');}
 function resetRound(){selected=null;tested=false;prediction=null;question=null;phase=0;metric=null;fields=[-1,-1];attempts=0;cleared=false;}
 function begin(){
-  index=0;score=0;log=[];resetRound();
+  index=0;score=0;log=[];practiceAttempts=[];reflection='';resetRound();
   if(game.mode==='agent')state=initialAgent(Object.fromEntries(['draft','send','spend','share','calendar'].map(key=>[key,$(`permission-${key}`)?.checked??false])));
   if(game.mode==='people')state=initialPeople();
   render();focus('round-title');
@@ -165,16 +167,37 @@ function finish(){
   if(game.mode==='agent')ending=state.trust>=80&&state.budget>=0?'A thoughtful mission, with a log worth reviewing.':'The log shows where your mission needs a closer review.';
   if(game.mode==='people')ending=state.trust>=70&&state.clarity>=70&&state.capacity>=30?'A clearer plan, with room for people.':state.capacity<30?'The plan needs a more realistic capacity agreement.':'The team needs another conversation about its agreement.';
   const finalPreview=game.mode==='access'?`<div class="result-status"><p class="eyebrow">Your repaired page</p><h2>Book a Common Ground workshop</h2><p>Venue information in readable dark text. Clearly named controls. Name → Email → Book in a sensible keyboard order.</p><p><strong>Email address</strong><br>jo@example.com</p><span class="preview-button">Book a workshop</span><p class="simulation-note">If an email needs correcting, the form explains how and preserves the entered value. This illustrated page shows the five repairs, rather than a full accessibility audit.</p></div>`:game.mode==='people'?`<div class="result-status"><h2>Your agreement notebook</h2><ul class="plain-list">${state.promises.map(p=>`<li>${escape(p.text)}</li>`).join('')}</ul><p class="simulation-note">The meters are simplified learning feedback. Real conversations have context, and several responses can be reasonable.</p></div>`:game.mode==='agent'?`<div class="result-status"><h2>Before a real handover</h2><p>Check the bookings, invitation drafts, access confirmation, any blocked actions and remaining spend. The plan percentage measures preparation in this simulation; it does not certify that the event is ready.</p></div>`:'';
-  app.innerHTML=`<section class="results"><p class="eyebrow">${escape(game.title)} · complete</p><h1 id="result-heading" tabindex="-1">${escape(ending)}</h1><p class="result-stat">${escape(stat)}</p><p class="lead">${escape(game.lesson)}</p>${finalPreview}<div class="actions"><button id="download" class="primary">Download my field notes</button><button id="replay" class="secondary">Play again</button><a class="secondary" href="../">Choose another game</a></div><details class="about"><summary>Read or copy my field notes</summary><label class="field"><span>My field notes</span><textarea id="notes-text" readonly rows="12">${escape(makeNotes(game,log,stat))}</textarea></label></details><h2>Your decisions</h2>${log.map((item,i)=>`<details class="review"><summary>${i+1}. ${escape(item.title)}</summary>${item.question?`<p><strong>You asked:</strong> ${escape(item.question)}</p><p><strong>Reply:</strong> ${escape(item.answer)}</p>`:''}<p><strong>Your choice:</strong> ${escape(item.choice)}</p><p>${escape(item.result)}</p><p><strong>Takeaway:</strong> ${escape(item.takeaway)}</p></details>`).join('')}</section>`;
+  app.innerHTML=`<section class="results"><p class="eyebrow">${escape(game.title)} · complete</p><h1 id="result-heading" tabindex="-1">${escape(ending)}</h1><p class="result-stat">${escape(stat)}</p><p class="lead">${escape(game.lesson)}</p>${finalPreview}${renderPractice()}<div class="actions"><button id="download" class="primary">Download my field notes</button><button id="replay" class="secondary">Play again</button><a class="secondary" href="../">Choose another game</a></div><details class="about"><summary>Read or copy my field notes</summary><label class="field"><span>My field notes</span><textarea id="notes-text" readonly rows="12">${escape(completeNotes(stat))}</textarea></label></details><h2>Your decisions</h2>${log.map((item,i)=>`<details class="review"><summary>${i+1}. ${escape(item.title)}</summary>${item.question?`<p><strong>You asked:</strong> ${escape(item.question)}</p><p><strong>Reply:</strong> ${escape(item.answer)}</p>`:''}<p><strong>Your choice:</strong> ${escape(item.choice)}</p><p>${escape(item.result)}</p><p><strong>Takeaway:</strong> ${escape(item.takeaway)}</p></details>`).join('')}</section>`;
+  wirePractice(stat);
   $('replay').onclick=intro;
   $('download').onclick=()=>{
-    const blob=new Blob([makeNotes(game,log,stat)],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');
+    const blob=new Blob([completeNotes(stat)],{type:'text/plain;charset=utf-8'}),url=URL.createObjectURL(blob),link=document.createElement('a');
     link.href=url;link.download=`${slug}-field-notes.txt`;document.body.append(link);link.click();link.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
   };
   focus('result-heading');
 }
+function completeNotes(stat){
+  return makeNotes(game,log,stat)+practiceNotes(learning[slug],practiceAttempts,reflection);
+}
+function renderPractice(){
+  const exercise=learning[slug];
+  return `<section class="practice" aria-labelledby="practice-heading"><p class="eyebrow">Go a little further · Optional · Unscored</p><h2 id="practice-heading">Apply it to a new situation</h2><h3>${escape(exercise.title)}</h3><p>${escape(exercise.scenario)}</p><p class="instruction">Choose a response to see its reasoning. You can compare all three choices. Your game score stays the same.</p><div id="practice-choices" class="choices"></div><div id="practice-feedback"></div><details class="review"><summary>See a worked example</summary>${exercise.code?`<pre class="source-code">${escape(exercise.worked)}</pre>`:`<p class="worked-example">${escape(exercise.worked)}</p>`}<p>Supporting guidance: ${exercise.sources.map(([title,url])=>`<a href="${escape(url)}">${escape(title)}</a>`).join(' · ')}</p></details><label class="field" for="reflection"><span>${escape(exercise.reflect)}</span><textarea id="reflection" rows="4" maxlength="4000" placeholder="Write a thought or a next step (optional)"></textarea></label><p class="instruction">Your reflection is included in your field notes. It stays in this page and resets on replay or reload. Download your notes to keep it. Avoid personal or confidential information.</p><p><strong>Keep practising:</strong> <a href="../${exercise.next}/">${escape(games[exercise.next]?.title||{'first-code-playground':'First Code Playground','hallucination-detective':'Hallucination Detective','sprint-survival':'Sprint Survival'}[exercise.next])}</a>. ${escape(exercise.nextWhy)}</p></section>`;
+}
+function wirePractice(stat){
+  const exercise=learning[slug];
+  const updateNotes=()=>{$('notes-text').value=completeNotes(stat);};
+  function choosePractice(i){
+    practiceAttempts.push(i);
+    choices(exercise.options.map(option=>option[0]),choosePractice,i,false,'practice-choices');
+    $('practice-feedback').innerHTML=`<div id="practice-response" class="feedback" tabindex="-1"><h3>${i===exercise.good?'A useful next step':'Consider the trade-off'}</h3><p>${escape(exercise.options[i][1])}</p></div>`;
+    updateNotes();focus('practice-response');
+  }
+  choices(exercise.options.map(option=>option[0]),choosePractice,null,false,'practice-choices');
+  $('reflection').value=reflection;
+  $('reflection').addEventListener('input',()=>{reflection=$('reflection').value;updateNotes();});
+}
 function intro(){
-  app.innerHTML=`<section class="hero"><div class="hero-copy"><p class="eyebrow">${escape(game.kicker)}</p><h1>${escape(game.title)}</h1><p class="lead">${escape(game.short)}</p><p>${escape(game.intro)}</p>${game.mode==='agent'?`<fieldset class="permissions"><legend>Choose Orbit’s available tools</legend><p class="instruction">Start with draft access for a cautious mission, or enable more tools to explore the consequences. These are simulation controls.</p>${[['draft','Draft plans from public information',true],['send','Send invitations',false],['spend','Make purchases',false],['share','Share attendee details',false],['calendar','Write to the calendar',false]].map(([key,text,checked])=>`<label><input type="checkbox" id="permission-${key}" ${checked?'checked':''}>${text}</label>`).join('')}</fieldset>`:''}<button id="start" class="primary">${escape(game.verb)} →</button><div class="facts"><span>${escape(game.facts)}</span><span>No timer</span><span>No sign-up</span></div></div><div class="hero-art" aria-hidden="true"><span class="caption">The Coded Female learning collection</span><div class="art-board"><span class="art-symbol">${symbols[game.icon]}</span><p class="art-title">${escape(game.mode==='code'?'“Looks ready to me!”':game.mode==='agent'?'A little human judgement':game.mode==='people'?'Let’s talk it through':'A useful little change')}</p><div class="art-line"></div><div class="art-line short"></div><span class="art-chip">Try · Observe · Learn</span></div><p class="art-footer">Original challenges. Practical takeaways.</p></div></section>`;
+  app.innerHTML=`<section class="hero"><div class="hero-copy"><p class="eyebrow">${escape(game.kicker)}</p><h1>${escape(game.title)}</h1><p class="lead">${escape(game.short)}</p><p>${escape(game.intro)}</p><p class="instruction">Finish the game to try a new situation, explore a worked example and save your own reflection.</p>${game.mode==='agent'?`<fieldset class="permissions"><legend>Choose Orbit’s available tools</legend><p class="instruction">Start with draft access for a cautious mission, or enable more tools to explore the consequences. These are simulation controls.</p>${[['draft','Draft plans from public information',true],['send','Send invitations',false],['spend','Make purchases',false],['share','Share attendee details',false],['calendar','Write to the calendar',false]].map(([key,text,checked])=>`<label><input type="checkbox" id="permission-${key}" ${checked?'checked':''}>${text}</label>`).join('')}</fieldset>`:''}<button id="start" class="primary">${escape(game.verb)} →</button><div class="facts"><span>${escape(game.facts)}</span><span>No timer</span><span>No sign-up</span></div></div><div class="hero-art" aria-hidden="true"><span class="caption">The Coded Female learning collection</span><div class="art-board"><span class="art-symbol">${symbols[game.icon]}</span><p class="art-title">${escape(game.mode==='code'?'“Looks ready to me!”':game.mode==='agent'?'A little human judgement':game.mode==='people'?'Let’s talk it through':'A useful little change')}</p><div class="art-line"></div><div class="art-line short"></div><span class="art-chip">Try · Observe · Learn</span></div><p class="art-footer">Original challenges. Practical takeaways.</p></div></section>`;
   $('start').onclick=begin;
 }
 if(game) { $('start').onclick=begin; } else {app.textContent='This game could not be found. Return to the games collection.';}
