@@ -14,7 +14,7 @@ Plain HTML, CSS and JavaScript. No installation, dependencies or build step. No 
 
 Keep `index.html`, `style.css`, `engine.js` and `script.js` together. Open `index.html` in your browser.
 
-1. Choose a team approach and add tasks in delivery order.
+1. Choose a scenario pack before adding tasks, then choose a team approach and add tasks in delivery order.
 2. Lock the plan to reveal a surprise.
 3. Choose a response, then adjust the plan.
 4. Deliver, review and continue through all three sprints.
@@ -31,7 +31,7 @@ Keep `index.html`, `style.css`, `engine.js` and `script.js` together. Open `inde
 - Unfinished planned work returns to the backlog without partial progress and costs 4 wellbeing points per sprint. Work that was never selected has no penalty.
 - Completed tasks remain complete. Sprint goals include work completed in earlier sprints.
 - Value is a fictional estimate. There is no combined score or leaderboard. Accessibility, trust, learning and wellbeing belong in delivery conversations.
-- The same three events appear each game to make comparisons easier. The partner banner becomes available after the first event, even if you defer it.
+- Each of five packs has three fixed events so replaying the same pack makes comparisons easier. The partner banner becomes available after the first event, even if you defer it.
 
 This is a deliberately simplified learning model. It does not prescribe Scrum rules or measure real people’s wellbeing or productivity.
 
@@ -67,3 +67,21 @@ Native buttons support keyboard use. Selection states use `aria-pressed`; phase 
 ## Licence
 
 MIT. Contributions and remixes welcome. See `LICENSE`.
+
+## Expanded scenarios, October 2026
+
+Five selectable packs provide 15 original situations, including 12 new examples:
+
+- **Start with the basics:** a new request, a teammate’s blocker and an earlier demo.
+- **AI meets delivery:** review overload, an invented meeting agreement and a prototype mistaken for a release.
+- **Keep work moving:** cross-team dependencies, conflicting documents and repeated support interruptions.
+- **Protect the people:** reduced capacity, misleading ticket targets and competing sponsors.
+- **Release with care:** unreliable tests, keyboard accessibility and bookings that do not lead to attended sessions.
+
+Every event includes suggested words for a team conversation and a reflection question. These are shown after the response and included in the downloadable reflection. Replay retains the pack; choose another before selecting tasks. Original task IDs, dependencies and numerical rules are retained.
+
+### Research and originality
+
+Themes were informed by [DORA’s March 2026 analysis of AI delivery trade-offs](https://dora.dev/insights/balancing-ai-tensions/) and [Atlassian’s 2025 developer experience research](https://www.atlassian.com/blog/developer/developer-experience-report-2025), reviewed on 14 October 2026. DORA discusses verification work and the gap between prototypes and production. Atlassian discusses friction in collaboration and finding information. The people and release packs also extend longstanding delivery issues; they are not presented as a ranked list of 2026 trends.
+
+All situations, choices, dialogue and questions were newly written for the fictional Mentor Match product. They do not reproduce reported incidents or survey respondents’ stories. Research does not support the invented capacity, value or wellbeing numbers. No claim is made that every similar idea is unique across the internet. Privacy, accessibility and quality risks have consequences beyond this simplified model.
