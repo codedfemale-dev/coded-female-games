@@ -81,4 +81,6 @@ Further opportunities in the other games, not implemented in this pass:
 
 ## Product Quest
 
+**[Play Product Quest in your browser →](https://codedfemale-dev.github.io/coded-female-games/product-quest/)**
+
 The retro RPG lives in `product-quest/` with its own original pixel art, dialogue and pure game engine. Seven stakeholder battles turn an everyday spoon pitch into a small corporate adventure. See [its README](product-quest/README.md) for controls, scoring, tests and publication details. It uses the existing static Pages setup and has no external runtime dependencies.
