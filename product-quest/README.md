@@ -4,7 +4,7 @@ An original retro pixel-art browser RPG for Coded Female. You are a Product Mana
 
 ## Play
 
-After publication: https://codedfemale-dev.github.io/coded-female-games/product-quest/
+**[Play Product Quest in your browser →](https://codedfemale-dev.github.io/coded-female-games/product-quest/)**
 
 Choose dialogue with the mouse, touch, or keys **1–3**. Press **C** for a coffee break; **Enter** starts the game or advances after a win. Native buttons also support Tab and Enter. Sound is off by default and can be toggled. There is no timer. The field guide explains the full rules before play.
 
