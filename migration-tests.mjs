@@ -6,9 +6,9 @@ import path from 'node:path';
 import {games} from './data.js';
 import {legacyGames} from './legacy-games.js';
 const root=fileURLToPath(new URL('.',import.meta.url));
-test('all 13 games are local catalogue entries with return links',async()=>{
+test('all 14 games are local catalogue entries with return links',async()=>{
  const html=await readFile(path.join(root,'index.html'),'utf8');
- assert.equal((html.match(/<article class="card">/g)||[]).length,13);
+ assert.equal((html.match(/<article class="card">/g)||[]).length,14);
  for(const slug of [...Object.keys(games),...Object.keys(legacyGames)]){
   assert(html.includes(`href="${slug}/"`));
   const page=await readFile(path.join(root,slug,'index.html'),'utf8');

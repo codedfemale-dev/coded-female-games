@@ -1,11 +1,12 @@
 # Coded Female learning games
 
-Thirteen browser games together in one repository, including six new learning games and seven earlier Coded Female games. All content uses fictional organisations and curated feedback. No live AI service or accounts are needed.
+Fourteen browser games together in one repository, including six shared-engine learning games, seven earlier Coded Female games and Product Quest. All content uses fictional organisations and curated feedback. No live AI service or accounts are needed.
 
 Play the collection: https://codedfemale-dev.github.io/coded-female-games/
 
 | Game | What you practise | Play |
 | --- | --- | --- |
+| Product Quest | Stakeholder pitches, trade-offs and resource management in a retro RPG | [Play](https://codedfemale-dev.github.io/coded-female-games/product-quest/) |
 | Open for Everyone | Labels, contrast, button names, focus order and error recovery | [Play](https://codedfemale-dev.github.io/coded-female-games/open-for-everyone/) |
 | Ship It or Fix It | Read requirements, predict actual tests, select code repairs and keep working code | [Play](https://codedfemale-dev.github.io/coded-female-games/ship-it-or-fix-it/) |
 | Agent Mission Control | Tool boundaries, human approval, budget limits, external instructions and handovers | [Play](https://codedfemale-dev.github.io/coded-female-games/agent-mission-control/) |
@@ -38,7 +39,7 @@ node --test tests.mjs learning-tests.mjs migration-tests.mjs */tests.cjs
 
 ## Publication
 
-GitHub Pages can deploy the root of the `main` branch. `.nojekyll` keeps it a plain static site. Each game is a separate directory with a direct play URL. All 13 games are stored in this repository and linked from the landing page. The seven earlier standalone repositories remain available so existing links keep working. Future collection updates should be made here. `MIGRATION.json` records the source commits used during consolidation.
+GitHub Pages can deploy the root of the `main` branch. `.nojekyll` keeps it a plain static site. Each game is a separate directory with a direct play URL. All 14 games are stored in this repository and linked from the landing page. The seven earlier standalone repositories remain available so existing links keep working. Future collection updates should be made here. `MIGRATION.json` records the source commits used during consolidation.
 
 ## Originality and guidance
 
@@ -77,3 +78,7 @@ Further opportunities in the other games, not implemented in this pass:
 - Spot the Scam: a follow-up exercise on reporting and verifying a suspicious request through an independent channel.
 - Prompt Practice and AI Escape Room: alternative briefs with different constraints so learners practise adapting their reasoning.
 - Sprint Survival: build on its recently expanded scenario packs with comparisons between replayed decisions.
+
+## Product Quest
+
+The retro RPG lives in `product-quest/` with its own original pixel art, dialogue and pure game engine. Seven stakeholder battles turn an everyday spoon pitch into a small corporate adventure. See [its README](product-quest/README.md) for controls, scoring, tests and publication details. It uses the existing static Pages setup and has no external runtime dependencies.

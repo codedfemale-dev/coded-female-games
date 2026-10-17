@@ -1,5 +1,6 @@
 // Existing games keep their own engines and styles in their directories.
 export const legacyGames = {
+ 'product-quest': {title:'Product Quest', mode:'retro RPG', icon:'people', short:'Pitch a humble spoon to seven MEGACORP stakeholders in a pixel-art adventure. Read the room and protect your energy.', facts:'7 bosses · Strategic dialogue · Corporate satire'},
  'spot-the-scam': {title:'Spot the Scam', mode:'judgement', icon:'design', short:'Read realistic fictional messages and decide what looks suspicious, supported or worth checking.', facts:'8 messages per round · 20 examples'},
  'ai-escape-room': {title:'AI Escape Room', mode:'AI judgement', icon:'agent', short:'Escape a fictional AI lab by writing a clearer brief, checking evidence and keeping control of instructions.', facts:'3 locks · Scripted AI practice'},
  'prompt-practice': {title:'Prompt Practice', mode:'AI skills', icon:'code', short:'Improve a brief, compare scripted responses and build a prompt you can take into your own work.', facts:'6 rounds · Prompt builder'},
