@@ -19,10 +19,10 @@ test('every challenge supports the three-choice game rule and has complete feedb
 test('the offline game bundle has all linked assets', () => {
   const html = fs.readFileSync(path.join(__dirname, 'index.html'), 'utf8');
   for (const match of html.matchAll(/(?:src|href)="([^"#]+)"/g)) {
-    if (!match[1].startsWith('https://')) assert.ok(fs.existsSync(path.join(__dirname, match[1])), match[1]);
+    if (!match[1].startsWith('https://')) assert.ok(fs.existsSync(path.join(__dirname, match[1].split(/[?#]/)[0])), match[1]);
   }
   const css = fs.readFileSync(path.join(__dirname, 'style.css'), 'utf8');
-  for (const match of css.matchAll(/url\('([^']+)'\)/g)) assert.ok(fs.existsSync(path.join(__dirname, match[1])), match[1]);
+  for (const match of css.matchAll(/url\('([^']+)'\)/g)) assert.ok(fs.existsSync(path.join(__dirname, match[1].split(/[?#]/)[0])), match[1]);
   for (const file of ['OFL-open-sans.txt', 'OFL-playfair-display.txt']) assert.ok(fs.readFileSync(path.join(__dirname, 'assets', file), 'utf8').includes('SIL OPEN FONT LICENSE'));
 });
 test('all script DOM targets exist and identifiers are unique', () => {

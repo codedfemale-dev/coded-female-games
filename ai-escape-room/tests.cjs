@@ -33,6 +33,6 @@ test('all rooms have clues, two hint levels and a takeaway',()=>{
 test('page wiring and local assets are complete',()=>{
  const html=fs.readFileSync(path.join(__dirname,'index.html'),'utf8');const ids=[...html.matchAll(/id="([^"]+)"/g)].map(m=>m[1]);assert.equal(new Set(ids).size,ids.length);
  const js=fs.readFileSync(path.join(__dirname,'script.js'),'utf8');for(const m of js.matchAll(/\$\('([^']+)'\)/g))assert.ok(ids.includes(m[1]),m[1]);
- for(const m of html.matchAll(/(?:src|href)="([^"#]+)"/g))if(!m[1].startsWith('https://'))assert.ok(fs.existsSync(path.join(__dirname,m[1])),m[1]);
- const css=fs.readFileSync(path.join(__dirname,'style.css'),'utf8');for(const m of css.matchAll(/url\('([^']+)'\)/g))assert.ok(fs.existsSync(path.join(__dirname,m[1])),m[1]);
+ for(const m of html.matchAll(/(?:src|href)="([^"#]+)"/g))if(!m[1].startsWith('https://'))assert.ok(fs.existsSync(path.join(__dirname,m[1].split(/[?#]/)[0])),m[1]);
+ const css=fs.readFileSync(path.join(__dirname,'style.css'),'utf8');for(const m of css.matchAll(/url\('([^']+)'\)/g))assert.ok(fs.existsSync(path.join(__dirname,m[1].split(/[?#]/)[0])),m[1]);
 });

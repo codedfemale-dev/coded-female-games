@@ -11,9 +11,9 @@ document.querySelector('#hello-form').addEventListener('submit', (event) => {
 
 // 2. Store related colours in an object, then update CSS variables.
 const palettes = {
-  gold: { accent: '#CA9B52', dark: '#705020', tint: '#FAF8F4', message: 'A little gold goes a long way.' },
-  berry: { accent: '#a94e6f', dark: '#813551', tint: '#fcf3f6', message: 'Berry nice choice. Make it yours.' },
-  forest: { accent: '#467c61', dark: '#2b6044', tint: '#f1f8f4', message: 'A fresh start in forest green.' }
+  gold: { accent: '#f3cd65', dark: '#f3cd65', tint: '#352e3e', message: 'A little gold goes a long way.' },
+  berry: { accent: '#f1a4d5', dark: '#f1a4d5', tint: '#3b2944', message: 'Berry nice choice. Make it yours.' },
+  forest: { accent: '#a6e5bd', dark: '#a6e5bd', tint: '#263d39', message: 'A fresh start in forest green.' }
 };
 document.querySelectorAll('[data-colour]').forEach((button) => {
   button.addEventListener('click', () => {

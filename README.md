@@ -61,7 +61,7 @@ Exact links appear in `data.js` and in each game’s supporting guidance panel. 
 
 The controls use native buttons, selects and checkboxes, visible labels, focus indicators, keyboard interaction and feedback focus. Motion respects device reduced-motion preferences. Important information is provided as text, including the deliberately problematic visual examples. The six shared-engine games are untimed. Bug Bash and Release Manager offer timed arcade play and an untimed mode. This is not a full accessibility compliance claim; testing with assistive technology and people is still valuable.
 
-No sign-up or live AI service is needed. Bug Bash saves its best score in local storage; Release Manager saves the current career in local storage and game files in a scoped offline cache; other progress resets on reload. Game processing happens in your browser. Some earlier games request Google Fonts, while the six newest games serve fonts locally. GitHub Pages handles ordinary hosting requests.
+No sign-up or live AI service is needed. Bug Bash saves its best score in local storage; Release Manager saves the current career in local storage and game files in a scoped offline cache; other progress resets on reload. Game processing happens in your browser. Fonts are served with the collection. GitHub Pages handles ordinary hosting requests.
 
 The existing Coded Female Open Sans and Playfair Display font families are retained. Their supplied OFL licences are in `assets/`. No new licence is granted for the game content or brand assets by this repository.
 
@@ -110,3 +110,24 @@ The styling carries through introductions, active missions, choices, feedback, r
 `arcade-worlds.js` defines mission copy, discipline metadata and original SVG scenes. `arcade.css` adds the two visual systems over the shared base stylesheet. `arcade-hub.js` filters the catalogue entirely on-device. Update the identity map when adding a new catalogue game, and run `node generate.mjs` after changing shared introductions or landing-page markup. Generated pages stay tracked. Keep the introductory mission panel in `game.js` and `generate.mjs` consistent so replay uses the same presentation. Versioned asset URLs avoid mixing the old interface with the new one.
 
 The scenes use original geometric artwork and the collection’s pixel-character grammar, with no external images, copied film assets, new fonts, analytics or runtime packages. Colours and geometric grids evoke the requested neon arcade style; no Tron names, logos or film artwork appear in the game UI. Motion remains modest and respects reduced-motion preferences.
+
+
+## Remaining arcade worlds, 18 October 2026
+
+The seven earlier standalone games now complete the collection’s arcade presentation. All 15 games have arcade styling, and the seven remaining cartridges now depict their own settings rather than a generic discipline image.
+
+| Game | World | Style |
+| --- | --- | --- |
+| Spot the Scam | The Signal Desk: inspect incoming messages and verify requests | Neon grid |
+| AI Escape Room | Loop Lab: three locks for clarity, evidence and instruction boundaries | Neon grid |
+| Bug Bash | Friday Grid: clear pixel bugs, collect coffee and protect the duck | Neon grid |
+| Prompt Practice | The Brief Forge: turn vague requests into useful briefs | Pixel world |
+| Hallucination Detective | The Relay Archive: audit B.I.T.’s claims against source records | Pixel world |
+| Sprint Survival | Mentor Match Depot: plan three delivery stops and protect the crew | Pixel world |
+| First Code Playground | The Code Garden: grow HTML, CSS and JavaScript interactions | Pixel world |
+
+`arcade-standalone.css` adds a presentation layer over each game’s local stylesheet. The original engines, scenario selection, answers, hints, downloads, scoring and save behaviour remain in their own directories. Bug Bash uses original SVG pixel targets while keeping its accessible square labels and existing practice and pause modes. Code Garden’s palette choices use bright, readable colours and dark tints; its own `style.css` still owns the `--accent` default, so the beginner remix instruction continues to work. No new external fonts, artwork, accounts or analytics are introduced.
+
+`generate-standalone.mjs`, called by `node generate.mjs`, refreshes the marked intro, mission header and results-art regions from `arcade-worlds.js` and writes the three SVG target assets. It leaves the playable forms and game DOM IDs intact. Keep the `arcade-world` comment markers when editing standalone HTML. The catalogue, six shared-engine pages and seven standalone presentation regions can now all be regenerated with the same command.
+
+Validation includes the repository’s existing engine, content and local-asset checks; full browser runs of Spot the Scam, AI Escape Room, Prompt Practice, Hallucination Detective and Sprint Survival; Code Garden’s greeting, palette, counter and quiz; and Bug Bash scoring and pause in practice mode. The redesign is not an accessibility conformance audit.

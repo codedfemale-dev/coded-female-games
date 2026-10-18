@@ -1,5 +1,5 @@
 /* CSS controls how the page looks. Change these variables to experiment. */
-:root { --accent: #CA9B52; --accent-dark: #705020; --tint: #FAF8F4; --ink: #191919; }
+:root { --accent: #f3cd65; --accent-dark: #f3cd65; --tint: #352e3e; --ink: #191919; }
 * { box-sizing: border-box; }
 html { scroll-behavior: smooth; }
 body { margin: 0; background: white; color: #333333; font-family: system-ui, -apple-system, sans-serif; line-height: 1.6; }
