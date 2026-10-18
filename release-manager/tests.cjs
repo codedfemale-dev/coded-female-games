@@ -16,7 +16,7 @@ test('offline shell installs every required file and stays scoped to this game',
  const fs=require('node:fs/promises'),path=require('node:path'),vm=require('node:vm');
  const handlers={},stored=new Map(),deleted=[];let added=[];
  const cache={addAll:async urls=>{added=urls;for(const u of urls)stored.set(u,{cached:u});},match:async r=>stored.get(typeof r==='string'?r:r.url)};
- const sandbox={URL,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v4'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
+ const sandbox={URL,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v7'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
  vm.runInNewContext(await fs.readFile(path.join(__dirname,'sw.js'),'utf8'),sandbox);
  let pending;handlers.install({waitUntil:p=>pending=p});await pending;
  for(const u of added){const relative=new URL(u).pathname.replace('/coded-female-games/','');await fs.access(path.join(__dirname,'..',relative));}
@@ -35,3 +35,21 @@ test('RICE ranks the developer queue by score rather than hidden MoSCoW labels',
 test('RICE Include and Defer affect work without losing assignments or progress',async()=>{const {e,s}=await setup();e.plan(s,'checkout','dev','ada');e.plan(s,'errors','dev','ada');e.setFramework(s,'rice');e.advance(s);e.plan(s,'checkout','scope','defer');e.advance(s);assert.equal(s.tasks[0].progress,3);assert.equal(s.tasks[1].progress,2);e.choose(s,1);e.plan(s,'checkout','scope','include');assert.equal(s.tasks[0].dev,'ada');assert.equal(s.tasks[0].progress,3);e.advance(s);assert.equal(s.tasks[0].progress,6);});
 test('selected method survives resume, old saves migrate, and invalid methods are rejected',async()=>{const {e,s}=await setup();e.plan(s,'checkout','dev','ada');e.advance(s);e.setFramework(s,'rice');const resumed=e.restore(JSON.stringify(s));assert.equal(resumed.framework,'rice');assert.equal(resumed.tasks[0].progress,3);delete s.framework;const legacy=e.restore(JSON.stringify(s));assert.equal(legacy.framework,'moscow');assert.equal(legacy.tasks[0].dev,'ada');assert.equal(legacy.tasks[0].progress,3);assert.equal(e.setFramework(legacy,'other'),false);assert.equal(e.restore(JSON.stringify({...s,framework:'other'})),null);});
 test('RICE retrospectives explain scores and scope rather than MoSCoW labels',async()=>{const {e,s}=await setup();e.plan(s,'confetti','priority','Must');e.setFramework(s,'rice');while(s.phase!=='gate'){if(s.phase==='event')e.choose(s,1);else e.advance(s);}const r=e.release(s);assert.equal(r.framework,'rice');assert(r.feedback.every(t=>t.text.includes('RICE ')));assert(!r.feedback.some(t=>t.text.includes('· Must.')||t.text.includes('· Could.')||t.text.includes('An unmet Must')));assert(e.notes(s).includes('Planning method: RICE'));});
+
+test('review ties missing requirements to roster and assignment and records broken promises',async()=>{
+ const e=await mod(),s=e.fresh('practice');['nia','lex','kit'].forEach(id=>e.hire(s,id));e.begin(s);
+ while(s.phase!=='gate'){if(s.phase==='event')e.choose(s,0);else e.advance(s);}
+ const r=e.release(s),text=r.strategyFeedback.map(x=>x.title+' '+x.text).join('\n');
+ for(const expected of ['0/14','without an owner','none of your hires','promised confetti','12 leadership','Promise the sparkle'])assert(text.includes(expected),expected);
+ assert(e.notes(s).includes('Your roster missed a useful skill'));assert(e.restore(JSON.stringify(s)));
+});
+test('required delivery and skill match earn grounded positive feedback',async()=>{
+ const e=await mod(),s=e.fresh('practice');['ada','bo','lex'].forEach(id=>e.hire(s,id));e.begin(s);e.plan(s,'checkout','dev','ada');e.plan(s,'checkout','priority','Must');e.plan(s,'monitor','dev','bo');
+ while(s.phase!=='gate'){if(s.phase==='event')e.choose(s,1);else e.advance(s);}
+ const r=e.release(s);assert.equal(r.missing,0);assert(r.strategyFeedback.some(x=>x.title==='You protected the outcome'&&x.kind==='good'));assert(r.strategyFeedback.some(x=>x.title==='Your skills matched the work'&&x.text.includes('Ada')));assert(!r.strategyFeedback.some(x=>x.title==='Your roster missed a useful skill'));assert(r.strategyFeedback.some(x=>x.title==='Your stakeholder choice'&&x.text.includes('shared outcome')));
+});
+test('feedback distinguishes deferral from slow delivery and supports legacy reviews',async()=>{
+ const e=await mod(),s=e.fresh('practice');['ada','bo','lex'].forEach(id=>e.hire(s,id));e.begin(s);e.plan(s,'checkout','dev','lex');e.plan(s,'checkout','priority','Won’t');
+ while(s.phase!=='gate'){if(s.phase==='event')e.choose(s,1);else e.advance(s);}
+ const r=e.release(s);assert(r.strategyFeedback.some(x=>x.text.includes('You deferred work')));assert(r.strategyFeedback.some(x=>x.text.includes('Ada specialises in core')));delete r.strategyFeedback;assert(e.restore(JSON.stringify(s)));assert(e.notes(s).includes('Minimum Viable Panic'));
+});

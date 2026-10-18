@@ -65,3 +65,13 @@ Learning references, reviewed 18 October 2026:
 - [GitHub Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)
 
 All characters, scenarios and numerical effects are fictional. The game draws on the management genre; no Rock Manager assets, scenarios, music or interface were copied. Pixel characters follow the collection's existing original Product Quest art system. Existing repository content and brand permissions apply; no new licence is granted.
+
+## The room edition · 18 October 2026
+
+The campaign now opens as a standalone workplace adventure: choose Rae, Jules, Imani or Alex, walk through the door and assemble your party. Character choice is cosmetic. At-your-pace play is the default; the optional arcade clock starts paused. The room is the main screen, with clickable colleagues and a project board. On small screens, named conversation buttons sit below the scene so targets remain readable and easy to press. Full screen is optional.
+
+The project board uses task tabs, priority/scope buttons and developer portraits instead of form selects. Read the evidence on every task. MoSCoW and RICE retain the same queue and scoring rules; the pocket field guide explains both during play. Stakeholder choices pause time, and the player can inspect the board before returning to a pending decision. Keys 1–3 answer stakeholder choices; Escape returns to the room. Left/right arrows move through character selection. Sound stays off until selected. Reduced-motion settings skip the entrance movement and confetti animation.
+
+Every new release report explains the actual result with specific feedback: required delivery, specialist matches, missing skills, final unassigned/overloaded queues, recorded stakeholder choices, confetti commitments, delays, energy and debt. It distinguishes final allocations from a complete assignment history, so it does not claim that a developer was idle all week merely because their final board is empty. Feedback suggests concrete changes for the next release. Existing saved careers remain compatible; reports created before this update keep their original card feedback. New strategy feedback is included in downloaded field notes. `scene.js` contains original room and player artwork.
+
+When an older offline version is open, close all Release Manager tabs and installed windows, then reopen after the update is ready. The versioned offline shell preserves the same game scope and storage key.
