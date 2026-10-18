@@ -10,3 +10,5 @@
 @media(max-width:760px){.intro h1{font-size:clamp(42px,12vw,68px);letter-spacing:-2px}.game-heading h1{font-size:23px}.brandbar>a{font-size:18px}.brandbar>a span{font-size:8px}.studio-grid .office{height:240px}.studio-canvas{object-fit:cover}.workspace>.metrics{padding:12px;gap:10px}.ending>h2{font-size:40px}}
 @media(max-width:1100px){.inbox{display:block}.inbox .message{margin-top:14px}.inbox .outcome{padding-top:12px;margin-top:12px}}
 @media(max-width:760px){.studio-grid .office,.intro .office{height:auto;aspect-ratio:12/5;min-height:150px}.studio-canvas{object-fit:contain}.office-label{font-size:6px;left:7px;top:7px;padding:4px 6px}.inbox{padding:16px}.inbox h2{font-size:18px}.inbox .tiny{margin-bottom:0}}
+
+.rice-score{display:flex;align-items:center;gap:18px;background:#29233b;border:1px solid #514462;padding:12px;margin:14px 0}.rice-score>b{font:26px monospace;color:var(--orange)}.rice-score small{display:block;font:8px monospace;white-space:nowrap;margin-top:5px;color:var(--muted)}.rice-score>span{font:10px/1.7 monospace;color:var(--muted)}
