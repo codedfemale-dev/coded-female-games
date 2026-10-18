@@ -16,7 +16,7 @@ test('offline shell installs every required file and stays scoped to this game',
  const fs=require('node:fs/promises'),path=require('node:path'),vm=require('node:vm');
  const handlers={},stored=new Map(),deleted=[];let added=[];
  const cache={addAll:async urls=>{added=urls;for(const u of urls)stored.set(u,{cached:u});},match:async r=>stored.get(typeof r==='string'?r:r.url)};
- const sandbox={URL,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v7'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
+ const sandbox={URL,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v10'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
  vm.runInNewContext(await fs.readFile(path.join(__dirname,'sw.js'),'utf8'),sandbox);
  let pending;handlers.install({waitUntil:p=>pending=p});await pending;
  for(const u of added){const relative=new URL(u).pathname.replace('/coded-female-games/','');await fs.access(path.join(__dirname,'..',relative));}
@@ -52,4 +52,27 @@ test('feedback distinguishes deferral from slow delivery and supports legacy rev
  const e=await mod(),s=e.fresh('practice');['ada','bo','lex'].forEach(id=>e.hire(s,id));e.begin(s);e.plan(s,'checkout','dev','lex');e.plan(s,'checkout','priority','Won’t');
  while(s.phase!=='gate'){if(s.phase==='event')e.choose(s,1);else e.advance(s);}
  const r=e.release(s);assert(r.strategyFeedback.some(x=>x.text.includes('You deferred work')));assert(r.strategyFeedback.some(x=>x.text.includes('Ada specialises in core')));delete r.strategyFeedback;assert(e.restore(JSON.stringify(s)));assert(e.notes(s).includes('Minimum Viable Panic'));
+});
+
+test('walking routes use the aisle, reach each person and clamp progress',async()=>{
+ const {home,destinations,routeTo,positionOn}=await import('./movement.js');
+ for(const from of [home,...Object.values(destinations)])for(const target of Object.keys(destinations)){
+  const route=routeTo(from,target);assert.deepEqual(positionOn(route,-1),from);assert.deepEqual(positionOn(route,1),destinations[target]);assert.deepEqual(positionOn(route,2),destinations[target]);
+  assert(Number.isFinite(route.duration));if(route.length)assert(route.duration>=250);
+  for(let i=1;i<route.points.length;i++)assert(route.points[i].x===route.points[i-1].x||route.points[i].y===route.points[i-1].y,'walk follows aisle corners');
+ }
+ const route=routeTo(home,'engineer');const mid=positionOn(route,.5);assert(mid.x>home.x&&mid.x<destinations.engineer.x);assert.equal(mid.y,300);assert.equal(routeTo(home,'nobody'),null);
+});
+test('developer fit follows actual tasks, required skills, mentoring and capacity',async()=>{
+ const {fitFor,profiles}=await import('./people.js'),{developers,levels}=await content(),e=await mod(),s=e.fresh();
+ assert.equal(Object.keys(profiles).length,developers.length);
+ for(let l=0;l<levels.length;l++){s.level=l;for(const d of developers){const fit=fitFor(s,d);assert.equal(fit.matched.length,levels[l].tasks.filter(t=>t.kind===d.skill).length);assert.equal(fit.required,levels[l].tasks.some(t=>t.must&&t.kind===d.skill));assert(fit.rates.every(r=>r.rate>=1));}}
+ s.level=0;const sam=developers.find(d=>d.id==='sam'),lex=developers.find(d=>d.id==='lex');assert(fitFor(s,sam).required);assert(fitFor(s,sam).tight);s.mentor=true;assert(!fitFor(s,sam).tight);s.mentor=false;assert.equal(fitFor(s,lex).matched.length,0);assert.equal(fitFor(s,lex,levels[0].tasks[0]).rates[0].rate,3);
+ const before=fitFor(s,sam,levels[0].tasks[0]).rates[0].rate;s.mentor=true;assert.equal(fitFor(s,sam,levels[0].tasks[0]).rates[0].rate,before+1);s.energy=20;s.debt=80;assert.equal(fitFor(s,sam,levels[0].tasks[0]).rates[0].rate,1);
+});
+test('reduced-motion room finishes movement immediately and opens conversation once',async()=>{
+ const {drawRoom,players}=await import('./scene.js'),{routeTo,home,destinations}=await import('./movement.js');
+ const ctx={fillRect(){},fillText(){}},canvas={getContext:()=>ctx,isConnected:true};let arrived=0,at;
+ const stop=drawRoom(canvas,{level:0},players[0],{motion:false,walking:{route:routeTo(home,'support'),started:performance.now()},onPosition:p=>at=p,onArrive:()=>arrived++});
+ await Promise.resolve();assert.deepEqual(at,destinations.support);assert.equal(arrived,1);stop();
 });

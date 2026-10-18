@@ -1,4 +1,5 @@
 // Original pixel artwork. Characters and room are drawn locally, with no image services.
+import {positionOn} from './movement.js';
 export const players=[
  {id:'rae',name:'Rae',tag:'The calm in the chaos',coat:'#b69de4',skin:'#ad7253',hair:'#30202f',style:0},
  {id:'jules',name:'Jules',tag:'Good questions. Better coffee.',coat:'#85bfa6',skin:'#f0c5a1',hair:'#ad5f40',style:1},
@@ -12,8 +13,8 @@ export function person(c,x,y,p,scale=2,step=0){
  r(4,4,7,6,p.skin);r(5,6,1,1,'#292133');r(9,6,1,1,'#292133');r(7,9,2,1,'#694455');r(6,11,3,2,'#f7ecdb');
 }
 export function drawPlayer(canvas,p){canvas.width=80;canvas.height=92;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;person(c,12,8,p,4);}
-export function drawRoom(canvas,state,p,{arrival=false,title=false,motion=true,focus=''}={}){
- canvas.width=800;canvas.height=400;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;let start=performance.now(),frame;
+export function drawRoom(canvas,state,p,{arrival=false,title=false,motion=true,focus='',actor={x:133,y:300},walking=null,onPosition=()=>{},onArrive=()=>{}}={}){
+ canvas.width=800;canvas.height=400;const c=canvas.getContext('2d');c.imageSmoothingEnabled=false;let start=performance.now(),frame,completed=false;
  const render=now=>{
  const r=(x,y,w,h,col)=>{c.fillStyle=col;c.fillRect(x,y,w,h);};
  const text=(s,x,y,col='#c8b9d7',size=8)=>{c.font=`${size}px monospace`;c.fillStyle=col;c.textAlign='center';c.fillText(s,x,y);};
@@ -36,11 +37,15 @@ export function drawRoom(canvas,state,p,{arrival=false,title=false,motion=true,f
  for(const x of [144,749]){r(x,297,23,29,'#b08786');r(x-3,293,29,6,'#d1a093');r(x+10,255,4,38,'#6c947c');r(x-3,265,16,12,'#86ae86');r(x+12,252,15,14,'#a1c39b');r(x+1,245,12,15,'#86ae86');}
  r(613,63,19,23,'#191829');r(616,66,13,17,'#e5d6bf');r(622,69,1,8,'#62516e');r(622,76,5,1,'#62516e');
  const elapsed=motion?Math.min(1,(now-start)/1800):1,walk=arrival?elapsed:1;
- const px=arrival?56+walk*76:133,py=arrival?210+walk*90:300;
- person(c,px,py,p,3,arrival&&walk<1?Math.round(Math.sin(now/90)):0);
+ const progress=walking?(motion&&walking.route.duration?Math.min(1,(now-walking.started)/walking.route.duration):1):1;
+ const at=walking?positionOn(walking.route,progress):actor;
+ const px=arrival?56+walk*76:at.x,py=arrival?210+walk*90:at.y;
+ if(walking)onPosition({x:px,y:py});
+ person(c,px,py,p,3,(arrival&&walk<1||walking&&progress<1)?Math.round(Math.sin(now/90)):0);
  text(p.name.toUpperCase(),px+22,py+82,'#d1ee87',8);
  if(focus){const positions={ceo:[247,174],engineer:[441,172],support:[585,220],board:[709,50]};const a=positions[focus];if(a)text('▼',a[0],a[1]-8,'#d1ee87',12);}
  if(title){r(0,0,800,400,'#17142244');}
- if(arrival&&walk<1&&canvas.isConnected)frame=requestAnimationFrame(render);
- };render(start);return ()=>cancelAnimationFrame(frame);
+ if((arrival&&walk<1||walking&&progress<1)&&canvas.isConnected)frame=requestAnimationFrame(render);
+ else if(walking&&!completed){completed=true;queueMicrotask(onArrive);}
+ };render(start);return ()=>{if(frame!==undefined)cancelAnimationFrame(frame);};
 }
