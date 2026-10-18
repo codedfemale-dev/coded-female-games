@@ -1,0 +1,67 @@
+# Release Manager: Ship Happens
+
+A standalone Coded Female management arcade web app, styled as a companion to Product Quest. Hire a developer team, plan your backlog and survive six releases at fictional MEGACORP. The product changes; the stakeholder opinions do not run out.
+
+**[Play the web app](https://codedfemale-dev.github.io/coded-female-games/release-manager/)**
+
+## Play and install
+
+Open the link in a browser. Choose an arcade campaign (12 seconds per workday) or untimed play. The clock starts paused, and stops for stakeholder decisions. Run/Pause controls the clock; Next day advances manually. A campaign takes about 15–25 minutes including planning and feedback.
+
+The app can be added to a home screen or installed in supporting browsers. Use the in-game Install app button when offered; otherwise use the browser's install menu. On iPhone/iPad Safari, Share → Add to Home Screen. The manifest scopes the installed app to this game. Installation availability and wording vary by browser.
+
+Wait for **OFFLINE PLAY READY** after a successful first visit. Then this game can reopen without a connection, including its artwork, fonts, rules and saved career. Links to other games and learning sources require a connection. A service worker caches a complete version of the game and affects only this game's directory, plus its explicit shared font request; it does not take over the collection. Updates activate after all old game windows close. The app tells you when an update is waiting. Increment the cache version in `sw.js` whenever releasing changed game files, and update versioned asset URLs and precache entries together when changing those URLs.
+
+## The campaign
+
+1. **Minimum Viable Panic** — checkout essentials versus CEO confetti.
+2. **The Agent Has Entered the Chat** — a bounded AI pilot versus unreviewed autonomy.
+3. **Vibe Now, Debug Later** — generated-code debt, tests and mentoring.
+4. **The Retention Intervention** — real activation versus misleading metrics and cancellation friction.
+5. **Cloudy With a Chance of Invoices** — operating cost, model quality and dependable fallbacks.
+6. **The Board Wants a Demo** — reversible rollout and honest communication.
+
+Each release has four authored tasks, an explicit outcome, and two stakeholder interruptions. Select three developers within 12 hiring credits. Each developer works on one assigned card each day, ordered Must → Should → Could; ties follow card order. Won’t work is deferred. Specialists gain +1 work on matching tasks. Reassigning work retains progress. A finished card cannot be reassigned. Work does not spill into a second task on the same day.
+
+MoSCoW labels organise the queue; choosing a label alone earns no points. RICE provides a second lens using visible, fictional reach × impact × confidence ÷ effort estimates over the same release horizon. The player still needs to inspect requirements and evidence. Each release has one clearly marked requirement that the agreed outcome depends on.
+
+At day six, ship completed work or negotiate exactly one extra day (−6 leadership support, −3 team energy). Review the consequences and individual card explanations in the retrospective. Meters and queued consequences persist across releases. Hiring credits reset to 12; the roster can change. No low score locks the player out of later lessons.
+
+Customer trust, leadership support, energy and debt are bounded 0–100. Low energy (<35) and high debt (>55) each reduce daily work by one, with a minimum of one. Mentoring Sam adds one to Sam's future capacity. Some choices return later in the same release; the agent-purchase and blanket-model-switch shortcuts return in the next release. Promising confetti is checked against what actually ships. The activity log and downloadable field notes preserve these reveals.
+
+**Scoring:** 10 × shipped value, minus 100 per missed release requirement and 20 per unfinished Must, minimum zero per release. Missing a requirement costs 18 customer trust and 10 leadership support. Each unfinished Must costs another 3 leadership support. Completed leadership work adds 6 leadership support per card; the release adds 3. Shipped value adds rounded(value/5) customer trust. Completed quality work reduces debt by 7; otherwise debt increases by 8. A working day costs 2 energy; releasing restores 10, and moving to the next release restores another 8. Stakeholder decisions have additional authored effects. The ending considers customer trust, energy and inverse debt as well as displaying the career score. These are teaching mechanics, not forecasts of real colleagues.
+
+## Run and verify
+
+No package installation, backend, API key, build or paid service is needed. Serve the collection root over HTTP and open `/release-manager/`. Localhost is a secure development context; published service workers require HTTPS.
+
+```sh
+node --test release-manager/tests.cjs
+node --test tests.mjs learning-tests.mjs migration-tests.mjs */tests.cjs
+node generate.mjs
+```
+
+- `content.js`: original scenarios, developer roster and source links.
+- `engine.js`: state transitions, work queues, consequences, scoring and save validation.
+- `app.js`: semantic controls, local save, audio, install controls and offline status.
+- `art.js`: original low-resolution office and character sprites in Product Quest's palette/style.
+- `sw.js` / `manifest.webmanifest`: versioned offline files and install metadata.
+- `tests.cjs`: campaign, planning, consequences, scoring and offline-cache behaviour.
+
+The existing GitHub Pages publication from `main` / repository root hosts this under `/coded-female-games/release-manager/`. Relative paths keep it compatible with project Pages. No separate hosting account or deployment workflow is introduced. Future hosting remains subject to GitHub Pages' free-tier availability and usage limits.
+
+## Privacy, accessibility and sources
+
+Career data lives only in local storage under `cf-release-manager-v1`. There is no sign-in, cross-device sync, analytics, real AI or network gameplay. Optional sound is generated locally and off by default. Field notes download on-device. Reset removes the saved career; clearing this site's browser data also removes offline files. Shared-origin browser storage may be cleared for other Coded Female games at the same time. GitHub handles ordinary hosting requests.
+
+Native buttons, selects, visible focus, keyboard interaction, a pause control and an untimed mode support different ways of playing. The interface is responsive and respects reduced motion. This has not been audited with every browser or assistive technology. Saved careers are paused when resumed; time spent away does not advance the game.
+
+Learning references, reviewed 18 October 2026:
+
+- [MoSCoW — Agile Business Consortium](https://www.agilebusiness.org/resource/what-is-moscow-prioritization/)
+- [RICE — Intercom](https://www.intercom.com/blog/rice-simple-prioritization-for-product-managers)
+- [AI complexity and engineering fundamentals — Thoughtworks, 2026](https://www.thoughtworks.com/about-us/news/2026/combat-ai-cognitive-debt-radar-v34)
+- [Installable web apps — MDN](https://developer.mozilla.org/en-US/docs/Web/Progressive_web_apps/Guides/Making_PWAs_installable)
+- [GitHub Pages limits](https://docs.github.com/en/pages/getting-started-with-github-pages/github-pages-limits)
+
+All characters, scenarios and numerical effects are fictional. The game draws on the management genre; no Rock Manager assets, scenarios, music or interface were copied. Pixel characters follow the collection's existing original Product Quest art system. Existing repository content and brand permissions apply; no new licence is granted.

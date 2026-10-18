@@ -1,11 +1,12 @@
 # Coded Female learning games
 
-Fourteen browser games together in one repository, including six shared-engine learning games, seven earlier Coded Female games and Product Quest. All content uses fictional organisations and curated feedback. No live AI service or accounts are needed.
+Fifteen browser games together in one repository, including six shared-engine learning games, seven earlier Coded Female games, Product Quest and Release Manager. All content uses fictional organisations and curated feedback. No live AI service or accounts are needed.
 
 Play the collection: https://codedfemale-dev.github.io/coded-female-games/
 
 | Game | What you practise | Play |
 | --- | --- | --- |
+| Release Manager: Ship Happens | Team hiring, release planning, MoSCoW, RICE and consequences across six releases | [Play](https://codedfemale-dev.github.io/coded-female-games/release-manager/) |
 | Product Quest | Stakeholder pitches, trade-offs and resource management in a retro RPG | [Play](https://codedfemale-dev.github.io/coded-female-games/product-quest/) |
 | Open for Everyone | Labels, contrast, button names, focus order and error recovery | [Play](https://codedfemale-dev.github.io/coded-female-games/open-for-everyone/) |
 | Ship It or Fix It | Read requirements, predict actual tests, select code repairs and keep working code | [Play](https://codedfemale-dev.github.io/coded-female-games/ship-it-or-fix-it/) |
@@ -39,7 +40,7 @@ node --test tests.mjs learning-tests.mjs migration-tests.mjs */tests.cjs
 
 ## Publication
 
-GitHub Pages can deploy the root of the `main` branch. `.nojekyll` keeps it a plain static site. Each game is a separate directory with a direct play URL. All 14 games are stored in this repository and linked from the landing page. The seven earlier standalone repositories remain available so existing links keep working. Future collection updates should be made here. `MIGRATION.json` records the source commits used during consolidation.
+GitHub Pages can deploy the root of the `main` branch. `.nojekyll` keeps it a plain static site. Each game is a separate directory with a direct play URL. All 15 games are stored in this repository and linked from the landing page. The seven earlier standalone repositories remain available so existing links keep working. Future collection updates should be made here. `MIGRATION.json` records the source commits used during consolidation.
 
 ## Originality and guidance
 
@@ -58,9 +59,9 @@ Exact links appear in `data.js` and in each game’s supporting guidance panel. 
 
 ## Accessibility and privacy
 
-The controls use native buttons, selects and checkboxes, visible labels, focus indicators, keyboard interaction and feedback focus. Motion respects device reduced-motion preferences. Important information is provided as text, including the deliberately problematic visual examples. The six newest games are untimed. Bug Bash offers timed arcade play and an untimed practice mode. This is not a full accessibility compliance claim; testing with assistive technology and people is still valuable.
+The controls use native buttons, selects and checkboxes, visible labels, focus indicators, keyboard interaction and feedback focus. Motion respects device reduced-motion preferences. Important information is provided as text, including the deliberately problematic visual examples. The six shared-engine games are untimed. Bug Bash and Release Manager offer timed arcade play and an untimed mode. This is not a full accessibility compliance claim; testing with assistive technology and people is still valuable.
 
-No sign-up or live AI service is needed. Bug Bash saves its best score in local storage; other progress resets on reload. Game processing happens in your browser. Some earlier games request Google Fonts, while the six newest games serve fonts locally. GitHub Pages handles ordinary hosting requests.
+No sign-up or live AI service is needed. Bug Bash saves its best score in local storage; Release Manager saves the current career in local storage and game files in a scoped offline cache; other progress resets on reload. Game processing happens in your browser. Some earlier games request Google Fonts, while the six newest games serve fonts locally. GitHub Pages handles ordinary hosting requests.
 
 The existing Coded Female Open Sans and Playfair Display font families are retained. Their supplied OFL licences are in `assets/`. No new licence is granted for the game content or brand assets by this repository.
 
@@ -84,3 +85,7 @@ Further opportunities in the other games, not implemented in this pass:
 **[Play Product Quest in your browser →](https://codedfemale-dev.github.io/coded-female-games/product-quest/)**
 
 The retro RPG lives in `product-quest/` with its own original pixel art, dialogue and pure game engine. Seven stakeholder battles turn an everyday spoon pitch into a small corporate adventure. See [its README](product-quest/README.md) for controls, scoring, tests and publication details. It uses the existing static Pages setup and has no external runtime dependencies.
+
+## Release Manager: Ship Happens
+
+The installable, offline-capable product-management web app lives in `release-manager/`, using Product Quest’s plum, lime and lavender visual language and pixel-art style. Six releases include a developer roster, per-person work queues, MoSCoW and RICE, stakeholder decisions, delayed consequences, release gates and retrospectives. It runs on the existing free GitHub Pages hosting, without a backend or paid service. See [its README](release-manager/README.md) for rules, installation, save privacy and validation.
