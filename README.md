@@ -89,3 +89,24 @@ The retro RPG lives in `product-quest/` with its own original pixel art, dialogu
 ## Release Manager: Ship Happens
 
 The installable, offline-capable product-management web app lives in `release-manager/`, using Product Quest’s plum, lime and lavender visual language and pixel-art style. Six releases include a developer roster, per-person work queues, MoSCoW and RICE, stakeholder decisions, delayed consequences, release gates and retrospectives. It runs on the existing free GitHub Pages hosting, without a backend or paid service. See [its README](release-manager/README.md) for rules, installation, save privacy and validation.
+
+## Arcade collection refresh, 18 October 2026
+
+The collection homepage is now an arcade game-select screen, with original cabinet artwork, illustrated cartridges for all 15 games and six discipline filters. All game links remain available without JavaScript. The filters use native buttons, keep the selected state visible and announce the result count.
+
+Six shared-engine learning games now have distinct visual worlds and authored mission introductions:
+
+| Game | Style | Discipline and setting |
+| --- | --- | --- |
+| Ship It or Fix It | Neon grid | Pip’s patch circuit: predict JavaScript behaviour, inspect actual tests and repair code. |
+| Agent Mission Control | Neon grid | Orbit control: permissions, external instructions, reviewed spending and handover. |
+| Metric Makeover | Neon grid | Signal observatory: activation, retention, denominators, guardrails and investigations. |
+| Open for Everyone | Pixel world | Common Ground: repair a community centre’s booking barriers. |
+| Undo the Nudge | Pixel world | Loopbox: fair pricing, voluntary extras, neutral choices and an easy exit. |
+| The Stakeholder Room | Pixel world | The agreement room: listen, negotiate scope, protect capacity and record commitments. |
+
+The styling carries through introductions, active missions, choices, feedback, results and further practice. The existing 32 authored challenges, real predefined code tests, decisions, scores and field notes remain in place. The illustrated accessibility and ethical-design screens retain their original light palette and deliberate faults, so the redesign does not remove the evidence the player must inspect. The six games remain untimed. Product Quest and Release Manager retain their own standalone implementations.
+
+`arcade-worlds.js` defines mission copy, discipline metadata and original SVG scenes. `arcade.css` adds the two visual systems over the shared base stylesheet. `arcade-hub.js` filters the catalogue entirely on-device. Update the identity map when adding a new catalogue game, and run `node generate.mjs` after changing shared introductions or landing-page markup. Generated pages stay tracked. Keep the introductory mission panel in `game.js` and `generate.mjs` consistent so replay uses the same presentation. Versioned asset URLs avoid mixing the old interface with the new one.
+
+The scenes use original geometric artwork and the collection’s pixel-character grammar, with no external images, copied film assets, new fonts, analytics or runtime packages. Colours and geometric grids evoke the requested neon arcade style; no Tron names, logos or film artwork appear in the game UI. Motion remains modest and respects reduced-motion preferences.
