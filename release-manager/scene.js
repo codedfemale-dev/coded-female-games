@@ -1,5 +1,7 @@
 // Original pixel artwork. Characters and room are drawn locally, with no image services.
 import {positionOn} from './movement.js';
+import {roomTeam,eventRepresentative} from './team-room.js';
+import {developers,levels} from './content.js';
 export const players=[
  {id:'rae',name:'Rae',tag:'The calm in the chaos',coat:'#b69de4',skin:'#ad7253',hair:'#30202f',style:0},
  {id:'jules',name:'Jules',tag:'Good questions. Better coffee.',coat:'#85bfa6',skin:'#f0c5a1',hair:'#ad5f40',style:1},
@@ -28,10 +30,13 @@ export function drawRoom(canvas,state,p,{arrival=false,title=false,motion=true,f
  r(639,190,135,41,'#332a41');r(642,186,132,8,'#a18086');r(650,201,50,22,'#5c4a62');r(711,201,50,22,'#5c4a62');r(679,208,10,2,'#c9ad8d');r(720,208,10,2,'#c9ad8d');r(659,170,20,16,'#d3c5b8');r(663,161,12,13,'#3a344a');r(717,176,22,9,'#be9d75');
  // People behind the table.
  const npc=[{...players[1],coat:'#d7ac72',hair:'#594251'},{...players[2],coat:'#88b9ad'},{...players[0],coat:'#c3a2d4',hair:'#59394a'}];
- person(c,226,180,npc[0],3);person(c,420,178,npc[1],3);person(c,564,226,npc[2],3);
+ person(c,140,190,npc[0],3);person(c,564,226,npc[2],3);
+ const team=roomTeam(state);
+ team.forEach(d=>person(c,d.seat.x,d.seat.y,{coat:d.colour,skin:['#d49c84','#edc5a0','#b57a68','#e5af90'][developers.findIndex(p=>p.id===d.id)%4],hair:'#412b4a',style:0},3));
+ if(state.phase==='event'&&eventRepresentative(state,levels[state.level].events[state.event]?.who||'')==='engineer')person(c,658,238,npc[1],3);
  // Oversized table with original pixel props.
  r(192,270,399,58,'#30283a');r(201,255,382,58,'#755567');r(193,251,398,17,'#c09288');r(183,246,418,13,'#d1a497');r(205,313,12,28,'#272332');r(567,313,12,28,'#272332');r(218,271,350,3,'#906c78');
- for(const x of [261,442]){r(x,232,40,26,'#252335');r(x+3,235,34,20,'#8fbcaf');r(x+8,241,19,2,'#cfed9b');r(x-6,259,52,4,'#4b435c');}
+ for(const x of [245,383,521]){r(x,232,40,26,'#252335');r(x+3,235,34,20,'#8fbcaf');r(x+8,241,19,2,'#cfed9b');r(x-6,259,52,4,'#4b435c');}
  r(344,249,37,22,'#eee1c8');r(349,254,22,2,'#9a87a4');r(349,261,15,2,'#9a87a4');r(397,247,12,15,'#e8d9c5');r(400,245,6,2,'#4b3141');r(409,250,5,8,'#e8d9c5');
  // Plants, clock and a very unnecessary confetti cannon.
  for(const x of [144,749]){r(x,297,23,29,'#b08786');r(x-3,293,29,6,'#d1a093');r(x+10,255,4,38,'#6c947c');r(x-3,265,16,12,'#86ae86');r(x+12,252,15,14,'#a1c39b');r(x+1,245,12,15,'#86ae86');}
@@ -43,7 +48,7 @@ export function drawRoom(canvas,state,p,{arrival=false,title=false,motion=true,f
  if(walking)onPosition({x:px,y:py});
  person(c,px,py,p,3,(arrival&&walk<1||walking&&progress<1)?Math.round(Math.sin(now/90)):0);
  text(p.name.toUpperCase(),px+22,py+82,'#d1ee87',8);
- if(focus){const positions={ceo:[247,174],engineer:[441,172],support:[585,220],board:[709,50]};const a=positions[focus];if(a)text('▼',a[0],a[1]-8,'#d1ee87',12);}
+ if(focus){const positions={ceo:[160,184],engineer:[679,232],support:[585,220],board:[709,50],...Object.fromEntries(team.map(d=>[d.id,[d.seat.x+21,d.seat.y-6]]))};const a=positions[focus];if(a)text('▼',a[0],a[1]-8,'#d1ee87',12);}
  if(title){r(0,0,800,400,'#17142244');}
  if((arrival&&walk<1||walking&&progress<1)&&canvas.isConnected)frame=requestAnimationFrame(render);
  else if(walking&&!completed){completed=true;queueMicrotask(onArrive);}

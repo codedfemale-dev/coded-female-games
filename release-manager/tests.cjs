@@ -16,7 +16,7 @@ test('offline shell installs every required file and stays scoped to this game',
  const fs=require('node:fs/promises'),path=require('node:path'),vm=require('node:vm');
  const handlers={},stored=new Map(),deleted=[];let added=[];
  const cache={addAll:async requests=>{assert(requests.every(r=>r.cache==='reload'));added=requests.map(r=>r.url);for(const u of added)stored.set(u,{cached:u});},match:async r=>stored.get(typeof r==='string'?r:r.url)};
- const sandbox={URL,Request,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v11'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
+ const sandbox={URL,Request,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v12'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
  vm.runInNewContext(await fs.readFile(path.join(__dirname,'sw.js'),'utf8'),sandbox);
  let pending;handlers.install({waitUntil:p=>pending=p});await pending;
  for(const u of added){const relative=new URL(u).pathname.replace('/coded-female-games/','');await fs.access(path.join(__dirname,'..',relative));}
@@ -75,4 +75,35 @@ test('reduced-motion room finishes movement immediately and opens conversation o
  const ctx={fillRect(){},fillText(){}},canvas={getContext:()=>ctx,isConnected:true};let arrived=0,at;
  const stop=drawRoom(canvas,{level:0},players[0],{motion:false,walking:{route:routeTo(home,'support'),started:performance.now()},onPosition:p=>at=p,onArrive:()=>arrived++});
  await Promise.resolve();assert.deepEqual(at,destinations.support);assert.equal(arrived,1);stop();
+});
+
+test('room seats use only the hired roster in selected order and support every roster combination',async()=>{
+ const {roomTeam}=await import('./team-room.js'),{developers}=await content(),e=await mod();assert.deepEqual(roomTeam({}),[]);
+ for(let a=0;a<6;a++)for(let b=a+1;b<6;b++)for(let c=b+1;c<6;c++){
+  const team=[a,b,c].map(i=>developers[i].id),room=roomTeam({...e.fresh(),team});assert.deepEqual(room.map(d=>d.id),team);assert.equal(new Set(room.map(d=>d.seat.walk.x)).size,3);assert(room.every(d=>d.colour===developers.find(x=>x.id===d.id).colour));
+ }
+});
+test('developer check-ins follow actual queues, progress, method changes and reassignment',async()=>{
+ const {developerWork}=await import('./team-room.js'),e=await mod(),s=e.fresh('practice');['ada','bo','lex'].forEach(id=>e.hire(s,id));e.begin(s);assert.equal(developerWork(s,'nia'),null);assert.equal(developerWork(s,'ada').current,null);
+ e.plan(s,'confetti','dev','ada');e.plan(s,'confetti','priority','Must');e.plan(s,'checkout','dev','ada');assert.equal(developerWork(s,'ada').current.id,'confetti');e.setFramework(s,'rice');assert.equal(developerWork(s,'ada').current.id,'checkout');e.advance(s);assert.equal(developerWork(s,'ada').current.progress,3);assert.equal(developerWork(s,'ada').remaining,11);
+ e.plan(s,'checkout','dev','lex');assert.equal(developerWork(s,'ada').current.id,'confetti');assert.equal(developerWork(s,'lex').current.progress,3);e.plan(s,'checkout','scope','defer');assert.equal(developerWork(s,'lex').current,null);assert.equal(developerWork(s,'lex').deferred.length,1);
+ s.tasks.find(t=>t.id==='confetti').progress=12;assert.equal(developerWork(s,'ada').ready.length,1);assert.equal(developerWork(s,'ada').current,null);
+});
+test('individual check-ins report energy, debt and time constraints without changing state',async()=>{
+ const {developerWork}=await import('./team-room.js'),e=await mod(),s=e.fresh('practice');['ada','bo','lex'].forEach(id=>e.hire(s,id));e.begin(s);e.plan(s,'checkout','dev','ada');s.energy=20;s.debt=80;s.day=5;const before=JSON.stringify(s),w=developerWork(s,'ada');assert.equal(w.rate,1);assert(w.concerns.some(t=>t.includes('Low team energy')));assert(w.concerns.some(t=>t.includes('Technical debt')));assert(w.concerns.some(t=>t.includes('only 1 remain')));assert.equal(JSON.stringify(s),before);
+});
+test('named stakeholder requests route to hired developers and absent guests remain reachable',async()=>{
+ const {eventRepresentative,roomTeam}=await import('./team-room.js'),{routeTo,positionOn,home}=await import('./movement.js'),s={team:['bo','lex','ada']};assert.equal(eventRepresentative(s,'Lex · Engineering'),'lex');assert.equal(eventRepresentative(s,'Sam · Engineering'),'engineer');assert.equal(eventRepresentative(s,'The team'),'bo');assert.equal(eventRepresentative(s,'Jo · Support'),'support');
+ for(const d of roomTeam(s)){const r=routeTo(home,d.id,d.seat.walk);assert.deepEqual(positionOn(r,1),d.seat.walk);assert(r.points.every(p=>p.y===300));}
+});
+
+test('actual interface renders hired names and individual work conversations without a browser',async()=>{
+ const fs=require('node:fs/promises'),vm=require('node:vm');const modules=await Promise.all(['content','art','scene','engine','movement','people','team-room'].map(n=>import(`./${n}.js`))),e=modules[3],s=e.fresh('practice');['ada','bo','lex'].forEach(id=>e.hire(s,id));e.begin(s);e.plan(s,'checkout','dev','ada');e.plan(s,'checkout','priority','Must');
+ const node=()=>({innerHTML:'',textContent:'',addEventListener(){},querySelectorAll(){return[];},querySelector(){return null;},setAttribute(){},focus(){},scrollIntoView(){}}),app=node(),other=node();
+ const sandbox={...Object.assign({},...modules),performance,console,URL,Blob,setTimeout,setInterval(){},matchMedia:()=>({matches:false}),localStorage:{getItem:()=>JSON.stringify(s),setItem(){}},navigator:{},window:{addEventListener(){}},document:{querySelector:x=>x==='#app'?app:x.startsWith('#')?other:null,addEventListener(){},querySelectorAll(){return[];}}};
+ vm.createContext(sandbox);const source=(await fs.readFile(require('node:path').join(__dirname,'app.js'),'utf8')).replace(/^import .*;\n/gm,'');vm.runInContext(source,sandbox);
+ for(const id of s.team)assert(app.innerHTML.includes(`data-person="${id}"`));assert(!app.innerHTML.includes('data-person="nia"'));assert(!app.innerHTML.includes('class="hotspot engineer'));
+ vm.runInContext("talk='ada';render();",sandbox);assert(app.innerHTML.includes('Fix the payment dead end'));assert(app.innerHTML.includes('14 remaining'));assert(app.innerHTML.includes('ADA / Full-stack anchor'));
+ vm.runInContext("devTopic='queue';render();",sandbox);assert(app.innerHTML.includes('NEXT WORKDAY / Fix the payment dead end'));
+ vm.runInContext("talk='bo';devTopic='status';render();",sandbox);assert(app.innerHTML.includes('I do not have any included work assigned yet.'));
 });
