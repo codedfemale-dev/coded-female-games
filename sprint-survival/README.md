@@ -1,10 +1,10 @@
-> This game is now maintained in the [Coded Female games collection](https://github.com/codedfemale-dev/coded-female-games). Publish the collection root, rather than this folder separately. [Play this version](https://codedfemale-dev.github.io/coded-female-games/sprint-survival/) · [All games](../README.md). Earlier standalone setup notes below are retained for reference.
+> Sprint Survival is maintained here as part of the [Coded Female Arcade](../README.md). The former standalone address redirects to this version.
 
 # Sprint Survival
 
 A small browser simulator by [Coded Female](https://codedfemale.com). Guide a fictional mentoring app through three sprints: choose useful work, handle surprises and protect team wellbeing.
 
-Plain HTML, CSS and JavaScript. No installation, dependencies or build step. No sign-up, analytics or remote data storage. There is no timer. Progress is held in memory and resets on reload.
+Plain HTML, CSS and JavaScript. No installation, dependencies or build step. No sign-up, analytics or remote data storage. There is no timer. Progress saves automatically in this browser using localStorage; return to resume the same journey.
 
 ## Play online
 
@@ -12,9 +12,9 @@ Plain HTML, CSS and JavaScript. No installation, dependencies or build step. No 
 
 ## Play locally
 
-Keep `index.html`, `style.css`, `engine.js` and `script.js` together. Open `index.html` in your browser.
+Keep all application HTML, CSS and JavaScript files together, including `scenarios.js`, `save.js`, `studio.js` and `studio.css`. Open `index.html` in your browser.
 
-1. Choose a scenario pack before adding tasks, then choose a team approach and add tasks in delivery order.
+1. Choose a team approach and add tasks in delivery order.
 2. Lock the plan to reveal a surprise.
 3. Choose a response, then adjust the plan.
 4. Deliver, review and continue through all three sprints.
@@ -31,7 +31,7 @@ Keep `index.html`, `style.css`, `engine.js` and `script.js` together. Open `inde
 - Unfinished planned work returns to the backlog without partial progress and costs 4 wellbeing points per sprint. Work that was never selected has no penalty.
 - Completed tasks remain complete. Sprint goals include work completed in earlier sprints.
 - Value is a fictional estimate. There is no combined score or leaderboard. Accessibility, trust, learning and wellbeing belong in delivery conversations.
-- Each of five packs has three fixed events so replaying the same pack makes comparisons easier. The partner banner becomes available after the first event, even if you defer it.
+- The same three events appear each game to make comparisons easier. The partner banner becomes available after the first event, even if you defer it.
 
 This is a deliberately simplified learning model. It does not prescribe Scrum rules or measure real people’s wellbeing or productivity.
 
@@ -55,8 +55,10 @@ Suggested repository description: “A playful delivery simulator about prioriti
 | `index.html` | Introduction, instructions and page structure |
 | `style.css` | Coded Female colours, layout and responsive styles |
 | `engine.js` | Task data, events and simulation rules |
-| `script.js` | Interface, controls and reflection download |
+| `script.js` | Shared controls and reflection download |
 | `tests.cjs` | Rule checks with Node’s built-in test runner |
+| `save.js` | Validated browser-local save and resume |
+| `studio-tests.cjs` | Studio, replay and persistence checks |
 
 Run optional rule checks with `node --test tests.cjs`. The checks are development tools; players do not need Node.
 
@@ -68,20 +70,38 @@ Native buttons support keyboard use. Selection states use `aria-pressed`; phase 
 
 MIT. Contributions and remixes welcome. See `LICENSE`.
 
-## Expanded scenarios, October 2026
+## Illustrated team studio
 
-Five selectable packs provide 15 original situations, including 12 new examples:
+All three sprints and the final reflection share one illustrated studio with Maya, Jo, Sam and a duck guide. Sprint 1 explores priorities and scope; sprint 2 explores blockers, support and an inclusive booking journey; sprint 3 explores tested demonstrations, feedback and outcome evidence.
 
-- **Start with the basics:** a new request, a teammate’s blocker and an earlier demo.
-- **AI meets delivery:** review overload, an invented meeting agreement and a prototype mistaken for a release.
-- **Keep work moving:** cross-team dependencies, conflicting documents and repeated support interruptions.
-- **Protect the people:** reduced capacity, misleading ticket targets and competing sponsors.
-- **Release with care:** unreliable tests, keyboard accessibility and bookings that do not lead to attended sessions.
+The duck introduces worked examples at the moment a decision matters. Character dialogue models team conversations. Each sprint has a short debrief with explanations for both answers. The cumulative product preview shows only delivered features, with example feedback questions clearly distinguished from real user evidence. The final story and downloadable reflection include each sprint’s response, lessons and answered debriefs.
 
-Every event includes suggested words for a team conversation and a reflection question. These are shown after the response and included in the downloadable reflection. Replay retains the pack; choose another before selecting tasks. Original task IDs, dependencies and numerical rules are retained.
+`studio.js` renders the journey using the original engine and shared controls; `studio.css` supplies responsive layouts and code-native SVG/CSS illustrations. Mission cards include unfinished prerequisite work from earlier sprints. Queue reordering protects prerequisites. Pace labels include any recovery reduction from starting wellbeing. The original capacity, dependency and wellbeing rules are retained.
 
-### Research and originality
+Replay a sprint from its review, or revisit any sprint from the final story. This restores that sprint’s starting state while retaining earlier results; later results and debrief answers are cleared. Start a new journey to return to the introduction and reset everything. Progress saves on this browser; no personal information is collected.
 
-Themes were informed by [DORA’s March 2026 analysis of AI delivery trade-offs](https://dora.dev/insights/balancing-ai-tensions/) and [Atlassian’s 2025 developer experience research](https://www.atlassian.com/blog/developer/developer-experience-report-2025), reviewed on 14 October 2026. DORA discusses verification work and the gap between prototypes and production. Atlassian discusses friction in collaboration and finding information. The people and release packs also extend longstanding delivery issues; they are not presented as a ranked list of 2026 trends.
+Run all rule and studio integration checks with `node --test tests.cjs studio-tests.cjs`.
 
-All situations, choices, dialogue and questions were newly written for the fictional Mentor Match product. They do not reproduce reported incidents or survey respondents’ stories. Research does not support the invented capacity, value or wellbeing numbers. No claim is made that every similar idea is unique across the internet. Privacy, accessibility and quality risks have consequences beyond this simplified model.
+## Save and resume
+
+After starting, every game decision saves automatically under the namespaced `codedfemale:sprint-survival:studio:v1` localStorage key. Refreshing or returning shows a resume screen with the saved sprint and phase. The save includes the plan order, pace, response, delivered work, wellbeing, history and debrief answers. Replay checkpoints are rebuilt from history when resuming, so revisiting earlier sprints still works. Completed journeys can also be reopened.
+
+Starting fresh asks before replacing saved progress. Cancel keeps the current save. Saves stay on the same browser/device; clearing site data or private browsing can remove them. There is no account, remote storage, cross-device sync or analytics. If browser storage is unavailable, the game remains playable and clearly says that it cannot save.
+
+`save.js` versions and validates saves by rebuilding their history through the engine. Unreadable, incompatible or inconsistent saves fall back to a playable introduction instead of rendering stored content or breaking the game. The browser stores one journey; if several tabs play independently, the last saved action becomes the saved journey.
+
+## Branching stories and original block-built art
+
+Choose a story before starting a new journey. **First steps** retains the original three situations. **Changing pressures** adds seven original situations: AI review work, recovery, conflicting decisions, unfinished foundations, unreliable booking checks, keyboard access and attendance evidence. There are ten situations across the two stories.
+
+Changing pressures selects later situations from earlier responses, delivered work and end-of-sprint wellbeing. A review-after-hours promise brings recovery into sprint 2; an unfinished booking journey brings a foundations discussion; unresolved pressure brings verification into sprint 3. Otherwise, missing keyboard booking prompts an access scenario, while delivered keyboard booking leads to an attendance investigation. Each branch states why it appeared, with worked examples, team dialogue and debrief explanations. Numerical capacity/wellbeing effects also differ by situation.
+
+Branch selection uses only completed earlier sprints. A situation cannot switch midway through its response or review, and identical decisions give a consistent comparison. Saves retain the story; replay rebuilds the appropriate branch from the retained earlier history. Existing version-one and version-two saves without a story field continue in First steps. Downloaded reflections record the actual situations and their causes.
+
+The characters, studio and duck use original vector cuboids and visible construction seams. These are generic block-built illustrations created for this game, without third-party branding, logos or copied toy figures.
+
+## Consolidated arcade edition
+
+This is the single maintained Sprint Survival game. It retains the studio journey, team/duck, worked examples, two original studio stories, branching consequences, replay and save/resume. The four earlier arcade packs (AI meets delivery, Keep work moving, Protect the people, Release with care) are retained in the same interface: six stories and 22 situations in total. The purple and lime arcade theme is supplied by `arcade-studio.css`; the generator leaves this custom studio intact.
+
+The old standalone URL redirects here. Both URLs are on the same GitHub Pages origin, so the namespaced browser save remains available after the move. There is no second live game or separate engine to maintain in the old repository.

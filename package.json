@@ -5,6 +5,6 @@
   "type": "module",
   "scripts": {
     "generate": "node generate.mjs",
-    "test": "node --test tests.mjs learning-tests.mjs migration-tests.mjs */tests.cjs"
+    "test": "node --test tests.mjs learning-tests.mjs migration-tests.mjs */tests.cjs sprint-survival/studio-tests.cjs"
   }
 }

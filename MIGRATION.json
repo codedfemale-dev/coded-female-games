@@ -1,5 +1,5 @@
 {
-  "description": "Seven existing Coded Female games copied into the shared collection. Original repositories remain available for existing play links. Future collection changes belong here.",
+  "description": "Existing games consolidated into the shared collection. Sprint Survival is maintained only here; its former standalone address redirects to the arcade.",
   "games": [
     {
       "directory": "spot-the-scam",
@@ -24,7 +24,8 @@
     {
       "directory": "sprint-survival",
       "sourceRepository": "https://github.com/codedfemale-dev/sprint-survival",
-      "sourceCommit": "08987ab1ec6c48d400532b8fd3dce5caf7a50409"
+      "sourceCommit": "099b2be6a8ebd2a9f3c9f1c55eab24cede16fc60",
+      "consolidation": "Studio updates merged with all four existing arcade packs; standalone repository becomes a redirect."
     },
     {
       "directory": "bug-bash",

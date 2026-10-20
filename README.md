@@ -123,7 +123,7 @@ The seven earlier standalone games now complete the collection’s arcade presen
 | Bug Bash | Friday Grid: clear pixel bugs, collect coffee and protect the duck | Neon grid |
 | Prompt Practice | The Brief Forge: turn vague requests into useful briefs | Pixel world |
 | Hallucination Detective | The Relay Archive: audit B.I.T.’s claims against source records | Pixel world |
-| Sprint Survival | Mentor Match Depot: plan three delivery stops and protect the crew | Pixel world |
+| Sprint Survival | Team Studio: three sprints, six stories, branching consequences and browser saves | Purple and lime studio |
 | First Code Playground | The Code Garden: grow HTML, CSS and JavaScript interactions | Pixel world |
 
 `arcade-standalone.css` adds a presentation layer over each game’s local stylesheet. The original engines, scenario selection, answers, hints, downloads, scoring and save behaviour remain in their own directories. Bug Bash uses original SVG pixel targets while keeping its accessible square labels and existing practice and pause modes. Code Garden’s palette choices use bright, readable colours and dark tints; its own `style.css` still owns the `--accent` default, so the beginner remix instruction continues to work. No new external fonts, artwork, accounts or analytics are introduced.
@@ -131,3 +131,9 @@ The seven earlier standalone games now complete the collection’s arcade presen
 `generate-standalone.mjs`, called by `node generate.mjs`, refreshes the marked intro, mission header and results-art regions from `arcade-worlds.js` and writes the three SVG target assets. It leaves the playable forms and game DOM IDs intact. Keep the `arcade-world` comment markers when editing standalone HTML. The catalogue, six shared-engine pages and seven standalone presentation regions can now all be regenerated with the same command.
 
 Validation includes the repository’s existing engine, content and local-asset checks; full browser runs of Spot the Scam, AI Escape Room, Prompt Practice, Hallucination Detective and Sprint Survival; Code Garden’s greeting, palette, counter and quiz; and Bug Bash scoring and pause in practice mode. The redesign is not an accessibility conformance audit.
+
+## Sprint Survival consolidation
+
+Sprint Survival now has one maintained implementation at `sprint-survival/`: the complete studio game, with the arcade’s purple and lime theme. It includes six stories (22 situations), the block-built team and duck, educational explanations, branching consequences, replay and browser-local save/resume. The old standalone address redirects to the arcade game; existing browser saves use the same origin and key. All earlier arcade scenario packs are retained.
+
+The studio opts out of generated world regions so regenerating the arcade cannot replace its design. Run the repository test script to include the studio and save compatibility checks.
