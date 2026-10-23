@@ -1,58 +1,346 @@
-export const stations=[
- {id:'scan',name:'Ship scanner',short:'SCAN',x:27,y:46,icon:'◎'},
- {id:'signal',name:'Signal terminal',short:'SIGNAL',x:50,y:34,icon:'⌁'},
- {id:'crew',name:'Speak to Pip',short:'CREW',x:73,y:54,icon:'♧'}
+export const stations = [
+  {
+    "id": "scan",
+    "name": "System scanner",
+    "short": "SCAN",
+    "x": 27,
+    "y": 46,
+    "icon": "◎"
+  },
+  {
+    "id": "signal",
+    "name": "Data terminal",
+    "short": "DATA",
+    "x": 50,
+    "y": 34,
+    "icon": "⌁"
+  },
+  {
+    "id": "crew",
+    "name": "Speak to Pip",
+    "short": "CREW",
+    "x": 73,
+    "y": 54,
+    "icon": "♧"
+  }
 ];
-export const missions=[
- {
- title:'The unknown signal',sector:'07',subtitle:'First contact protocol',brief:'An alien craft is following the Curiosity. Your crew thinks it is preparing to attack. Work out what the evidence supports before you respond.',alien:'ZIG',transmission:'“Three pulses. A pause. Three more pulses.”',
- clues:[
- {station:'scan',title:'A ship in trouble',text:'The craft’s engines flicker. Its shields and weapon systems are offline. It is drifting towards the asteroid belt.'},
- {station:'signal',title:'A repeated pattern',text:'The transmission repeats every eight seconds. Your translator finds no match. A repeated pattern alone does not reveal its meaning.'},
- {station:'crew',title:'Pip has a theory',text:'“They are following us, so they must be hostile!” Pip has seen their position on the radar, but has no evidence of their intentions.'}
- ],
- claims:[{text:'The craft’s engines are unstable.',kind:'fact',why:'The scanner directly reports flickering engines.'},{text:'The aliens are preparing to attack.',kind:'assumption',why:'This is Pip’s interpretation. Following you does not establish hostile intent.'},{text:'The signal means “help us”.',kind:'unknown',why:'There is no translation yet. It might be a request for help, but its meaning is not established.'}],
- options:[
- {id:'hail',title:'Send a simple greeting',text:'Keep a safe distance, send a neutral signal and watch the response.',points:3,effect:{signal:12,energy:-3,oxygen:0},result:'You leave room for a reply without assuming what the signal means. Your crew stands down from panic stations.'},
- {id:'flee',title:'Use an emergency jump',text:'Get away immediately, before the craft can reply.',points:1,effect:{signal:-8,energy:-15,oxygen:-3},result:'You create distance, but use a large energy reserve and lose the chance to clarify the signal.'},
- {id:'accuse',title:'Broadcast a warning',text:'Tell the aliens you know they are planning an attack.',points:0,effect:{signal:-12,energy:-7,oxygen:0},result:'You present an assumption as a fact. The craft backs away and its transmission becomes harder to read.'}
- ],
- update:'A picture arrives: two aliens beside a cracked fuel cell. A navigation marker points to a nearby repair station.',
- adapt:[{id:'revise',title:'Update the working explanation',text:'Treat a request for assistance as more likely, verify the repair marker and offer directions.',good:true},{id:'stick',title:'Keep the original threat theory',text:'Dismiss the picture and keep treating the craft as hostile.',good:false}],
- lesson:'A strong first impression is still an interpretation. Keep facts, assumptions and unanswered questions separate.',transfer:'At work: “People stopped at the payment screen” is evidence. “The price is too high” is one explanation to investigate.'
- },
- {
- title:'The airlock alarm',sector:'08',subtitle:'Find the fault',brief:'Zig is now helping from the comms channel. An oxygen warning lights up after a software patch. Is the ship leaking, or is the reading wrong?',alien:'ZIG',transmission:'“Your ship is making the unhappy noise.”',
- clues:[
- {station:'scan',title:'Two sensors disagree',text:'The bridge oxygen sensor reads 91% and is stable. The cargo sensor reads 38%. Cabin pressure is stable in both areas.'},
- {station:'signal',title:'The patch record',text:'The warning began just after patch 2.4 changed the cargo sensor’s calibration. This timing suggests a link, but does not prove the patch caused it.'},
- {station:'crew',title:'A useful boundary',text:'Pip can isolate the cargo bay without cutting oxygen to the bridge. An independent portable sensor is available for a check.'}
- ],
- claims:[{text:'The two oxygen sensors disagree.',kind:'fact',why:'Both readings are recorded and they differ.'},{text:'Patch 2.4 definitely caused the warning.',kind:'assumption',why:'The timing is a clue, not proof of a cause.'},{text:'The cargo bay’s true oxygen level is safe.',kind:'unknown',why:'The sensors disagree. An independent measurement is still needed.'}],
- options:[
- {id:'vent',title:'Purge the entire ship',text:'Reset every oxygen system and hope the warning disappears.',points:0,effect:{signal:0,energy:-18,oxygen:-18},result:'A broad reset spends oxygen and power without narrowing down the fault. The crew switches to emergency reserves.'},
- {id:'test',title:'Isolate and measure',text:'Keep the cargo bay closed and check it with the portable sensor.',points:3,effect:{signal:5,energy:-4,oxygen:-2},result:'You contain a possible hazard and test the explanation with an independent reading.'},
- {id:'ignore',title:'Silence the warning',text:'Assume the patch broke the display and carry on.',points:0,effect:{signal:-4,energy:-2,oxygen:-5},result:'The noise stops, but nobody has established whether it is safe to enter the cargo bay.'}
- ],
- update:'The portable sensor reads 90%. Reverting the calibration makes the cargo display match. Pressure remains stable.',
- adapt:[{id:'stick',title:'Keep the cargo bay closed indefinitely',text:'Disregard the new measurements and continue treating the warning as a confirmed leak.',good:false},{id:'revise',title:'Restore access with monitoring',text:'Record the faulty calibration, restore the tested setting and keep watching the readings.',good:true}],
- lesson:'Choose a small, reversible action that tests your explanation. Check the result before expanding the action.',transfer:'At work: isolate the affected feature, compare independent evidence and test a rollback before restarting an entire service.'
- },
- {
- title:'The rescue window',sector:'09',subtitle:'Adapt the plan',brief:'A small shuttle needs help before an ion storm arrives. Zig proposes a direct tow. Pip’s shift is nearly over. Choose a plan the crew can actually sustain.',alien:'MOSS',transmission:'“We have snacks. We do not have an engine.”',
- clues:[
- {station:'scan',title:'A narrow route',text:'The direct tow takes 18 minutes. The latest forecast puts the storm here in 14 minutes. A sheltered rendezvous is six minutes away.'},
- {station:'signal',title:'Help is nearby',text:'A rescue tug confirms it can meet you at the sheltered rendezvous in ten minutes. Its message includes its identity and approach route.'},
- {station:'crew',title:'Capacity is a constraint',text:'Pip has worked a long shift. Zig can navigate to the rendezvous, but is not trained to operate your towing equipment.'}
- ],
- claims:[{text:'The direct tow finishes before the forecast storm.',kind:'assumption',why:'The recorded times contradict this optimistic claim: 18 minutes is longer than 14.'},{text:'A tug has confirmed a rendezvous.',kind:'fact',why:'The tug has provided an explicit response and approach route.'},{text:'The storm will arrive at exactly the forecast time.',kind:'unknown',why:'A forecast is an estimate. The exact future arrival remains uncertain.'}],
- options:[
- {id:'direct',title:'Push through the direct tow',text:'Ask Pip to keep working and try to beat the storm.',points:0,effect:{signal:0,energy:-22,oxygen:-8},result:'The tow exposes both craft to the storm and relies on an exhausted crew member. The schedule was already longer than the forecast window.'},
- {id:'wait',title:'Wait in open space',text:'Leave the shuttle where it is until the tug arrives.',points:1,effect:{signal:-5,energy:-6,oxygen:-5},result:'The tug is coming, but waiting in the exposed route leaves little margin if the storm moves.'},
- {id:'shelter',title:'Move to the sheltered rendezvous',text:'Let Zig navigate, protect Pip’s rest and hand over to the verified tug.',points:3,effect:{signal:10,energy:-5,oxygen:-2},result:'You match the task to available skills, build in shelter and arrange a clear handover.'}
- ],
- update:'The storm accelerates. The exposed route is now unsafe. The rescue tug confirms the sheltered approach is still open.',
- adapt:[{id:'revise',title:'Recheck the sheltered route and confirm handover',text:'Use the new forecast, tell the shuttle what changed and coordinate the tug’s approach.',good:true},{id:'stick',title:'Follow the first plan without another check',text:'Avoid changing anything because the original plan has already been agreed.',good:false}],
- lesson:'A plan is a working choice, not a promise to ignore new evidence. Adapt it and tell the people affected.',transfer:'At work: when a deadline or dependency changes, revisit scope, capacity and the handover instead of asking everyone to push harder.'
- }
+
+export const missions = [
+  {
+    "title": "The docking bug",
+    "sector": "07",
+    "subtitle": "Coding & Development",
+    "topic": "CODING & DEVELOPMENT",
+    "skill": "Debugging · falsy values · boundary tests",
+    "brief": "Zig cannot request a landing slot through Beacon, the Curiosity’s docking app. Explore the bridge, trace the failed request and help the team choose a repair.",
+    "alien": "ZIG",
+    "transmission": "“My ship ID is zero. Your app says I do not exist. Rude.”",
+    "clues": [
+      {
+        "station": "scan",
+        "title": "A reproducible failure",
+        "text": "A test request with ship ID 0 is rejected. Ship ID 7 works. The server is online. Beacon’s rules allow whole-number IDs from 0 upwards."
+      },
+      {
+        "station": "signal",
+        "title": "The validation code",
+        "text": "The latest update rejects a request when !shipId is true. In JavaScript, the number 0 is falsy: !0 is true. The new check therefore treats this valid ID as missing."
+      },
+      {
+        "station": "crew",
+        "title": "Pip’s first explanation",
+        "text": "“Maybe Zig typed the ID wrong?” Pip has not checked the request. Your request log shows that Zig sent the number 0. Reports from other pilots have not been checked yet."
+      }
+    ],
+    "claims": [
+      {
+        "text": "The valid ship ID 0 is being rejected.",
+        "kind": "fact",
+        "why": "The recorded request and repeatable test both show that ID 0 fails."
+      },
+      {
+        "text": "Zig entered the wrong ship ID.",
+        "kind": "assumption",
+        "why": "Pip offered this explanation without checking. The request actually contains a valid ID."
+      },
+      {
+        "text": "No other pilots have been affected.",
+        "kind": "unknown",
+        "why": "Other reports have not been checked. One reproduced failure does not establish the full impact."
+      }
+    ],
+    "options": [
+      {
+        "id": "repair",
+        "title": "Repair the rule and test boundaries",
+        "text": "Accept whole numbers from 0 upwards. Test 0, an ordinary ID and invalid values before releasing.",
+        "points": 3,
+        "effect": {
+          "health": 12,
+          "energy": -3,
+          "trust": 5
+        },
+        "result": "The repair tests the actual rule instead of treating every falsy value as missing. The boundary test for 0 now passes."
+      },
+      {
+        "id": "workaround",
+        "title": "Give Zig a temporary manual booking",
+        "text": "Help this pilot dock, but leave the validation check unchanged.",
+        "points": 1,
+        "effect": {
+          "health": 0,
+          "energy": -7,
+          "trust": 0
+        },
+        "result": "Zig can dock through a manual booking. The software still rejects valid ID 0, so the team needs a tracked repair and a check for other affected pilots."
+      },
+      {
+        "id": "blame",
+        "title": "Tell Zig to enter a different ID",
+        "text": "Assume the pilot caused the problem and close the report.",
+        "points": 0,
+        "effect": {
+          "health": -10,
+          "energy": -5,
+          "trust": -10
+        },
+        "result": "Zig’s ID is valid. Closing the report leaves the app broken and asks the pilot to work around your team’s mistake."
+      }
+    ],
+    "update": "You find that the old check also accepts -1 because negative numbers are truthy. A regression test should cover valid zero, positive integers and rejected negative or missing values.",
+    "adapt": [
+      {
+        "id": "revise",
+        "title": "Check both ends of the rule",
+        "text": "Run the valid and invalid cases against the repair, add them as regression tests and check the support log.",
+        "good": true
+      },
+      {
+        "id": "stick",
+        "title": "Stop after one successful booking",
+        "text": "Treat the single success as proof that all validation works.",
+        "good": false
+      }
+    ],
+    "lesson": "JavaScript treats 0 as falsy. Validate the rule you actually mean, and test its boundaries so a repair does not leave another gap.",
+    "transfer": "On your next bug: reproduce it with one input, compare the result with the requirement, test the smallest repair and keep a regression test that catches the original failure.",
+    "takeaway": "A regression test checks that a previously fixed bug has not come back.",
+    "related": {
+      "href": "../ship-it-or-fix-it/",
+      "title": "Practise more coding repairs"
+    },
+    "sources": [["MDN: falsy values", "https://developer.mozilla.org/en-US/docs/Glossary/Falsy"], ["MDN: Number.isInteger", "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/isInteger"]],
+    "demo": "validation"
+  },
+  {
+    "title": "The very impressive dashboard",
+    "sector": "08",
+    "subtitle": "Product Management",
+    "topic": "PRODUCT MANAGEMENT",
+    "skill": "Success rates · denominators · user outcomes",
+    "brief": "Beacon’s dashboard says docking requests have doubled. The captain wants to call the launch a success. Find out whether more pilots are actually completing their booking.",
+    "alien": "ZIG",
+    "transmission": "“Your chart is enormous. I am still in the queue.”",
+    "clues": [
+      {
+        "station": "scan",
+        "title": "What counts as success?",
+        "text": "The product goal is for more pilots to complete a docking booking. A page view or repeated attempt is not a completed booking."
+      },
+      {
+        "station": "signal",
+        "title": "Counts and completion",
+        "text": "Last week: 80 of 100 pilots who started completed a booking. This week: 100 of 200 completed. Each pilot is counted once per week. Request attempts rose from 200 to 400."
+      },
+      {
+        "station": "crew",
+        "title": "A tempting explanation",
+        "text": "Pip thinks the new onboarding screen caused the drop in completion. It launched this week, but several new fleets also joined. The team has not compared where different pilots get stuck."
+      }
+    ],
+    "claims": [
+      {
+        "text": "This week, 100 of 200 starting pilots completed.",
+        "kind": "fact",
+        "why": "The weekly records state both the completed count and the number who started."
+      },
+      {
+        "text": "The new onboarding screen caused the lower rate.",
+        "kind": "assumption",
+        "why": "The timing suggests a possible explanation, but the pilot mix also changed. Cause has not been established."
+      },
+      {
+        "text": "The main reason pilots abandon their booking is known.",
+        "kind": "unknown",
+        "why": "The team has not investigated the steps or compared pilot groups yet."
+      }
+    ],
+    "options": [
+      {
+        "id": "celebrate",
+        "title": "Celebrate twice as many requests",
+        "text": "Report the higher activity count as proof that the product goal was met.",
+        "points": 0,
+        "effect": {
+          "health": -5,
+          "energy": -6,
+          "trust": -8
+        },
+        "result": "More attempts might include retries. You have reported activity without checking whether pilots can complete the task."
+      },
+      {
+        "id": "investigate",
+        "title": "Compare completion rates and investigate",
+        "text": "Report 80% becoming 50%, alongside 20 more completions. Inspect the journey before choosing a fix.",
+        "points": 3,
+        "effect": {
+          "health": 5,
+          "energy": -4,
+          "trust": 5
+        },
+        "result": "Completed bookings rose from 80 to 100, while the completion rate fell from 80% to 50%. Showing both makes the trade-off visible without claiming to know its cause."
+      },
+      {
+        "id": "revert",
+        "title": "Remove onboarding immediately",
+        "text": "Treat this week’s timing as proof that the new screen caused the problem.",
+        "points": 0,
+        "effect": {
+          "health": -4,
+          "energy": -10,
+          "trust": -3
+        },
+        "result": "A rollback may become useful, but the current comparison does not isolate the cause. You change a feature before finding where the difficulty lies."
+      }
+    ],
+    "update": "The journey breakdown shows that many new-fleet pilots stop at the language selector. A small usability session reveals that the “continue” control is unclear. This supports testing a clearer control, not blaming every part of onboarding.",
+    "adapt": [
+      {
+        "id": "stick",
+        "title": "Keep reporting only request volume",
+        "text": "Leave the headline unchanged and ignore the journey evidence.",
+        "good": false
+      },
+      {
+        "id": "revise",
+        "title": "Test the clearer control and watch completion",
+        "text": "Try a small change, check whether pilots can finish and monitor support contacts for new problems.",
+        "good": true
+      }
+    ],
+    "lesson": "A percentage needs a denominator: the group it is calculated from. Pair completion counts with completion rates, then investigate before claiming a cause.",
+    "transfer": "For your next product update, write the user goal first. Report completed tasks divided by started tasks, show both counts and explain what the data cannot yet tell you.",
+    "takeaway": "80/100 = 80%. 100/200 = 50%. That is a fall of 30 percentage points, even though 20 more pilots completed.",
+    "related": {
+      "href": "../metric-makeover/",
+      "title": "Investigate more product metrics"
+    },
+    "sources": [["GOV.UK: measuring completion rate", "https://www.gov.uk/service-manual/measuring-success/measuring-completion-rate"]],
+    "demo": "metrics"
+  },
+  {
+    "title": "One tiny feature before launch",
+    "sector": "09",
+    "subtitle": "Agile & Teamwork",
+    "topic": "AGILE & TEAMWORK",
+    "skill": "Sprint goals · scope · capacity · change",
+    "brief": "Beacon’s team has six hours left to help pilots confirm their landing slot. The captain asks for animated alien avatars before the fleet demo. Keep the goal useful and the workload realistic.",
+    "alien": "MOSS",
+    "transmission": "“Just one tiny feature. Only twelve tentacles to animate.”",
+    "clues": [
+      {
+        "station": "scan",
+        "title": "The work behind the goal",
+        "text": "Confirming a booking needs four hours of accessibility repairs and two hours of testing. Animated avatars need another four hours. The team has six hours of capacity."
+      },
+      {
+        "station": "signal",
+        "title": "What pilots need",
+        "text": "Five pilot support conversations describe trouble confirming a booking. None mentions avatars. The demo can show the confirmed-booking journey with the existing portraits."
+      },
+      {
+        "station": "crew",
+        "title": "Pip’s capacity check",
+        "text": "Pip says adding everything would mean skipping testing or working late. The captain thinks animation is essential for a good demo, but has not checked that with the pilot group."
+      }
+    ],
+    "claims": [
+      {
+        "text": "Animated avatars are essential for a useful pilot demo.",
+        "kind": "assumption",
+        "why": "That is the captain’s belief. The current pilot evidence points to completing a booking."
+      },
+      {
+        "text": "The agreed repairs and testing fill the six available hours.",
+        "kind": "fact",
+        "why": "Four hours plus two hours uses the recorded capacity."
+      },
+      {
+        "text": "Pilots would complete more bookings because of animated avatars.",
+        "kind": "unknown",
+        "why": "There is no evidence here connecting animation to booking completion."
+      }
+    ],
+    "options": [
+      {
+        "id": "overtime",
+        "title": "Promise everything and work late",
+        "text": "Keep all ten hours of work in a six-hour plan and ask Pip to absorb the gap.",
+        "points": 0,
+        "effect": {
+          "health": -8,
+          "energy": -22,
+          "trust": -5
+        },
+        "result": "A ten-hour promise does not create four extra hours of capacity. The team carries the cost through exhaustion, skipped checks or a missed promise."
+      },
+      {
+        "id": "refuse",
+        "title": "Reject the request without a conversation",
+        "text": "Say the plan is fixed and give the captain no explanation or alternative.",
+        "points": 1,
+        "effect": {
+          "health": 0,
+          "energy": -4,
+          "trust": -5
+        },
+        "result": "You protect capacity, but miss a chance to explain the goal, hear the need behind the request and agree a useful demo."
+      },
+      {
+        "id": "negotiate",
+        "title": "Agree the trade-off around the goal",
+        "text": "Protect repairs and testing, demonstrate the booking journey and discuss avatars as later work.",
+        "points": 3,
+        "effect": {
+          "health": 10,
+          "energy": -3,
+          "trust": 5
+        },
+        "result": "You make the capacity visible and agree what the demo needs to achieve. Pip can deliver useful work without a hidden overtime promise."
+      }
+    ],
+    "update": "Testing finds an extra keyboard-navigation problem that needs two hours. The pilot demo can move to tomorrow; nobody has agreed that change yet. The plan needs another conversation.",
+    "adapt": [
+      {
+        "id": "revise",
+        "title": "Replan together and confirm the new commitment",
+        "text": "Explain the new finding, agree moving the demo, protect the repair and test time, and tell the affected people.",
+        "good": true
+      },
+      {
+        "id": "stick",
+        "title": "Keep the promise and quietly drop testing",
+        "text": "Avoid another discussion by absorbing the new work and leaving the checks out.",
+        "good": false
+      }
+    ],
+    "lesson": "Use a shared goal to discuss change. Make scope, testing and capacity visible, then agree a new commitment when the evidence changes.",
+    "transfer": "In your next delivery conversation, try: “We can finish the confirmation journey with the time available. Adding this means moving something else. What best supports the goal?”",
+    "takeaway": "A Sprint Goal gives a Scrum team a shared objective. Scope can be discussed and adapted as the team learns, while protecting that objective.",
+    "related": {
+      "href": "../sprint-survival/",
+      "title": "Practise more delivery trade-offs"
+    },
+    "sources": [["The Scrum Guide: the Sprint Goal and adapting scope", "https://scrumguides.org/scrum-guide.html"]]
+  }
 ];

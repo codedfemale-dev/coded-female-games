@@ -141,10 +141,15 @@ The studio opts out of generated world regions so regenerating the arcade cannot
 
 ## Mission Control: First Contact
 
-A standalone alien exploration game at `mission-control/`, linked from the arcade under Teamwork. Three connected missions adapt Observe, Orient, Decide, Act into a civilian decision-making exercise: an unknown alien signal, a sensor warning and a rescue before a storm. This is separate from Agent Mission Control.
+A standalone alien exploration game at `mission-control/`, linked from the arcade under Teamwork. Three connected missions adapt Observe, Orient, Decide, Act into a civilian decision-making exercise: a JavaScript validation bug, a misleading product dashboard and a release scope/capacity decision. This is separate from Agent Mission Control.
 
-Explore the original green-phosphor bridge using WASD/arrows and E, click stations on the deck, or use named station buttons for the same evidence. Sort facts, assumptions and unknowns, choose a next step, then respond to fresh information. There is no countdown, combat, account or external runtime dependency. Decisions change bounded fictional ship meters. Each mission earns up to eight learning points, and classification retries are free. Field notes download locally; progress resets on reload.
+Explore the original green-phosphor bridge using WASD/arrows and E, click stations on the deck, or use named station buttons for the same evidence. Sort facts, assumptions and unknowns, choose a next step, then respond to fresh information. There is no countdown, combat, account or external runtime dependency. Decisions change bounded fictional service-health, crew-energy and pilot-trust meters. Each mission earns up to eight learning points, and classification retries are free. Field notes download locally; progress resets on reload.
 
 Supports keyboard, touch, reduced motion, visible focus and pause. The bridge background is an original AI-generated asset created for this game; sprites and interaction overlays are drawn in code. `mission-control/art-prompt.txt` retains its generation prompt. The flight manual links to the supporting Air University explanation and distinguishes this simplified game from military training.
 
 Run `node --test mission-control/tests.cjs` for all 216 full campaign decision paths, stage gates, score consistency and restart state. Full collection tests include these checks. Browser QA covers a complete 24/24 campaign, corrective feedback, field-note download, replay, WASD/E, pause, guide, catalogue filtering, and desktop/phone layouts. This is not an accessibility conformance audit.
+
+
+### First Contact content connection
+
+The alien story now follows Beacon, a fictional docking app. Its three missions map explicitly to Coded Female’s Coding & Development, Product Management, and Agile & Teamwork topics. Debugging teaches zero as a falsy value and boundary/regression tests; product analysis compares 80/100 with 100/200 and distinguishes activity from outcomes; delivery makes the shared goal, scope, testing and sustainable capacity visible. Each debrief includes a practical next step, a related arcade game and primary guidance. The coding worked example runs actual predefined JavaScript tests; the metrics example calculates its displayed percentages. OODA, the bridge, characters, movement, clues, branching actions, new evidence, scores and notes remain. All 216 decision paths still finish.
