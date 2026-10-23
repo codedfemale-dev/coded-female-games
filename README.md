@@ -153,3 +153,8 @@ Run `node --test mission-control/tests.cjs` for all 216 full campaign decision p
 ### First Contact content connection
 
 The alien story now follows Beacon, a fictional docking app. Its three missions map explicitly to Coded Female’s Coding & Development, Product Management, and Agile & Teamwork topics. Debugging teaches zero as a falsy value and boundary/regression tests; product analysis compares 80/100 with 100/200 and distinguishes activity from outcomes; delivery makes the shared goal, scope, testing and sustainable capacity visible. Each debrief includes a practical next step, a related arcade game and primary guidance. The coding worked example runs actual predefined JavaScript tests; the metrics example calculates its displayed percentages. OODA, the bridge, characters, movement, clues, branching actions, new evidence, scores and notes remain. All 216 decision paths still finish.
+
+
+### First Contact journey improvements
+
+A persistent next-step panel names the current mission and translates OODA into four plain actions. It suggests the next unvisited station without enforcing an order, reflects classification/plan readiness and provides a direct route to the next step. The bridge numbers all three stations and highlights the suggested stop. Each collected clue opens in a native dialog with its own progress count and a next-station or sort-evidence action; Escape or Back to the bridge closes it. During classification and planning, a local evidence disclosure keeps clues beside the task. The selected plan is named before confirmation, new evidence explains how to complete a mission, and the next-mission action precedes optional further learning. Mission rules, content, scoring and all decision paths are unchanged.
