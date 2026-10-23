@@ -9,5 +9,5 @@ export const legacyGames = {
  'sprint-survival': {title:'Sprint Survival', mode:'team delivery', icon:'people', short:'Guide a team through shifting priorities and delivery decisions while keeping an eye on their wellbeing.', facts:'3 sprints · 6 stories · 22 situations · Save & resume'},
  'bug-bash': {title:'Bug Bash', mode:'arcade', icon:'code', short:'Clear the bugs in a playful developer arcade. Try a timed run or practise at your own pace.', facts:'Arcade and practice · Keyboard controls'},
  'first-code-playground': {title:'First Code Playground', mode:'first steps', icon:'window', short:'Experiment with greetings, colours and a counter, then try a short beginner coding quiz.', facts:'Interactive experiments · Beginner friendly'},
- 'mission-control': {title:'Mission Control: First Contact',mode:'space exploration',icon:'agent',short:'Help an alien tech team debug its docking app, question product metrics and protect a useful release. Explore, investigate and adapt with OODA.',facts:'3 missions · Explore the ship · No countdown'},
+ 'mission-control': {title:'Mission Control: First Contact',mode:'space exploration',icon:'agent',short:'Build docking circuits, dispatch repair drones and fit a release into the crew’s shift. Recover three cores and get the alien fleet home.',facts:'3 playable systems · Free experiments · No countdown'},
 };
