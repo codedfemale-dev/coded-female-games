@@ -1,8 +1,8 @@
 import {stations,missions} from './content.js';
 import {createState,current,observe,orient,classify,checkOrientation,decide,choose,act,adapt,next,notes} from './engine.js';
-import {journeyFor,visitLabel} from './journey.js';
+import {journeyFor,visitLabel} from './journey.js?v=20261023-3';
 import {validationExamples,completionRate} from './practice.js';
-import {createScene,sprite,portrait} from './scene.js';
+import {createScene,sprite,portrait} from './scene.js?v=20261023-3';
 const $=s=>document.querySelector(s);
 let state=createState(),activeClue=null,paused=false,feedbackChecked=false;
 const phaseList=['observe','orient','decide','act'];
