@@ -10,3 +10,12 @@ test('perfect campaign earns 24 and a fresh state clears all progress',async()=>
 
 test('coding example tests actual JavaScript and metrics use a defined denominator',async()=>{const p=await import('./practice.js');assert.equal(p.acceptsShipId(0),true);assert.equal(p.acceptsShipId(7),true);for(const v of [-1,2.5,'',null,undefined,'0',NaN,Infinity])assert.equal(p.acceptsShipId(v),false);assert.equal(p.validationExamples().find(r=>r.input==='0').before,false);assert.equal(p.validationExamples().find(r=>r.input==='-1').before,true);assert.equal(p.completionRate(80,100),80);assert.equal(p.completionRate(100,200),50);assert.equal(p.completionRate(0,0),null);});
 test('every mission links a Coded Female topic to a takeaway, further practice and primary guidance',async()=>{const [e,{missions}]=await load();assert.deepEqual(missions.map(m=>m.subtitle),['Coding & Development','Product Management','Agile & Teamwork']);for(const m of missions){assert(m.skill);assert(m.takeaway);assert(m.related.href.startsWith('../'));assert(m.sources.length>0);}});
+test('journey guidance follows readiness, all clue orders and the full mission lifecycle',async()=>{
+ const [e,{missions}]=await load();const {journeyFor}=await import('./journey.js');
+ let s=e.createState();assert.equal(journeyFor(s).action,'start');s={...s,phase:'observe'};
+ for(const order of [['scan','signal','crew'],['crew','scan','signal'],['signal','crew','scan']]){
+   let v={...s,clues:[]};for(const id of order){assert.equal(journeyFor(v).action,'visit');assert(!v.clues.includes(journeyFor(v).station));v=e.observe(v,id);}assert.equal(journeyFor(v).action,'to-orient');
+ }
+ for(const m of missions){s={...s,phase:'observe'};for(const id of ['scan','signal','crew'])s=e.observe(s,id);s=e.orient(s);assert.equal(journeyFor(s).ready,false);for(let i=0;i<3;i++)s=e.classify(s,i,m.claims[i].kind);assert.equal(journeyFor(s).action,'check');assert.equal(journeyFor(s).ready,true);s=e.checkOrientation(s);assert.equal(journeyFor(s).action,'to-decide');s=e.decide(s);assert.equal(journeyFor(s).ready,false);s=e.choose(s,m.options.find(o=>o.points===3).id);assert.equal(journeyFor(s).ready,true);assert(journeyFor(s).detail.includes(m.options.find(o=>o.points===3).title));s=e.act(s);assert.equal(journeyFor(s).action,'read-update');s=e.adapt(s,m.adapt.find(o=>o.good).id);assert.equal(journeyFor(s).action,'next');s=e.next(s);}
+ assert.equal(journeyFor(s).action,'download');assert.equal(s.score,24);
+});
