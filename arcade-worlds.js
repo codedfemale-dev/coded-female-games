@@ -19,6 +19,7 @@ Object.assign(worlds,{
 });
 export const categories={all:'All games',coding:'Coding',ai:'AI judgement',product:'Product',design:'Design',security:'Scam awareness',people:'Teamwork'};
 const extras={
+ 'mission-control':{theme:'grid',discipline:'people',art:'contact',sector:'DECISION MAKING / FIRST CONTACT'},
  'release-manager':{theme:'quest',discipline:'product',art:'people',sector:'RELEASE STRATEGY'},
  'product-quest':{theme:'quest',discipline:'product',art:'people',sector:'STAKEHOLDER RPG'},
  'spot-the-scam':{theme:'grid',discipline:'security',art:'shield',sector:'SCAM AWARENESS'},
@@ -36,6 +37,8 @@ function person(x,y,coat,skin='#e5af90'){
  return rows.map((row,j)=>[...row].map((p,i)=>p==='.'?'':rect(x+i*3,y+j*3,3,3,pal[p])).join('')).join('');
 }
 export function sceneSvg(kind){
+ if(kind==='contact')return `<svg viewBox="0 0 480 224" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false" shape-rendering="crispEdges"><rect width="480" height="224" fill="#07130d"/><image href="mission-control/bridge.webp" width="480" height="224" preserveAspectRatio="xMidYMid slice"/><rect width="480" height="224" fill="#031208" opacity=".25"/><g fill="#b5ff87"><rect x="222" y="78" width="36" height="36"/><rect x="216" y="90" width="48" height="36"/><rect x="228" y="120" width="24" height="12"/><rect x="222" y="72" width="6" height="12"/><rect x="252" y="72" width="6" height="12"/><rect x="228" y="132" width="6" height="12"/><rect x="246" y="132" width="6" height="12"/></g><g fill="#10251a"><rect x="222" y="96" width="12" height="12"/><rect x="246" y="96" width="12" height="12"/><rect x="237" y="117" width="6" height="3"/></g><path d="M20 20h60M20 20v24M460 20h-60M460 20v24" fill="none" stroke="#a6fb76" stroke-width="2"/></svg>`;
+
  if(['signals','looplab','forge','archive','depot','production','garden'].includes(kind))return standaloneScene(kind);
  const lime='#d1ee87',pink='#bc9aee',cyan='#73e8f5';let scene='';const grid=['code','agent','metrics','shield'].includes(kind);
  if(grid){scene=rect(0,0,480,224,'#07131f')+rect(0,142,480,82,'#091d2a');for(let x=-240;x<740;x+=48)scene+=`<path d="M240 122 L${x} 224" stroke="#194d60" fill="none"/>`;for(let y=146;y<224;y+=16)scene+=`<path d="M0 ${y}H480" stroke="#194d60"/>`;
