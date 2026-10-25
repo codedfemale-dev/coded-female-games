@@ -16,7 +16,7 @@ All levels are available. Later investigations offer a follow-up after the first
 
 ## Design and accessibility
 
-Coded Female's existing Open Sans, Playfair Display and Rokkitt families remain. The revised palette uses warm ivory `#F7F5F0`, deep forest `#253B35`, charcoal `#232B28`, antique gold `#806139` and pale sage `#E9EEE7`. White message cards, restrained borders and generous spacing keep the interface readable. No replacement logo.
+Coded Female's existing Open Sans, Playfair Display and Rokkitt families remain. The revised palette uses warm ivory `#F7F5F0`, deep forest `#253B35`, charcoal `#232B28`, antique gold `#806139` and pale sage `#E9EEE7`. Deep forest is the main page background, with warm ivory text and neutral light reading panels. Buttons on light panels and progress bars use forest; the hero’s primary button uses ivory for contrast against the forest background. Gold is reserved for small accents and focus cues. All messages and unselected answers use the same neutral surfaces regardless of whether a request is supported, suspicious or needs verification. Inspection labels indicate only that a detail was viewed; outcome colours appear only after a decision. White message cards, restrained borders and generous spacing keep the interface readable. No replacement logo.
 
 Responsive layouts use five, three or two level columns, then a single-column investigation on phones. Native buttons and disclosures support touch and keyboard. Focus moves to each new view or feedback, and text accompanies feedback colours. No hover-only inspection, drag interaction, timer or live suspicious links. Reduced-motion preferences are respected.
 
