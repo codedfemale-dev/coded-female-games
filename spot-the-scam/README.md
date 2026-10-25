@@ -28,7 +28,9 @@ Field notes are generated locally. Progress can be cleared explicitly from About
 
 ## Brand and accessibility
 
-Dark forest surrounds, ivory and white reading surfaces, subtle gold details. Playfair Display for the brand shell and headings, Open Sans for body text and simulated app interfaces. These heading and body families were verified against computed styles on codedfemale.com on 25 October 2026. The earlier Rokkitt text header was not verified as original logo typography and has been removed; this does not replace any original logo artwork.
+Dark forest surrounds, ivory and white reading surfaces, subtle gold details. Open Sans throughout the game, including headings, the text brand header and simulated apps, keeps the experience seamless. The main Coded Female website uses Playfair Display headings and Open Sans body text; this single-family choice is specific to the game and does not replace original logo artwork.
+
+The launch opens with “Spot the Scam.”, a short computer-style loading bar and the typed line “A message lands. What’s your next move?”. Start the game then opens the inbox or resumes saved work. Skip intro is keyboard accessible; reduced-motion preferences reveal the complete line and controls immediately. Returning home does not replay the animation during the same visit.
 
 Native buttons, disclosures and read-only draft textareas support keyboard and touch. Focus moves into opened readers and tool panels; text accompanies action states. Phone and desktop layouts are responsive. No timer, hint penalty, hover-only inspection or real malicious links. Keep `data-arcade-design="studio"` so the collection generator preserves this interface.
 
