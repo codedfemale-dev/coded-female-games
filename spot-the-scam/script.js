@@ -48,7 +48,7 @@
  function ensureRound(){if(saved.round)return;const q=questions.find(q=>q.id===saved.active?.id);if(!q)return;saved.round={ids:[q.id,...levelCases(q.level).filter(x=>x.id!==q.id&&!done(x)).slice(0,2).map(x=>x.id)],finished:[],opened:[q.id],practice:false};persist();}
  function resume(arrive=false){ensureRound();if(!saved.round)return openRound(arrive);mailbox(arrive,continuous);}
  function openMessage(id){if(!saved.round?.ids.includes(id))return;persist();const q=questions.find(q=>q.id===id);if(saved.round.finished.includes(id)){const r=saved.records[id];saved.active={id,step:q.stages.length-1,answers:r.answers.slice(),inspected:r.inspected.slice(),order:q.stages.at(-1).options.map(o=>o.id),history:r.history||[],latest:r.latest||r.answers.slice(),reported:false,detour:false};}else saved.active=cleanActive(saved.drafts[id])||{id,step:0,answers:[],inspected:[],detour:false,order:shuffle(q.stages[0].options).map(o=>o.id),history:[],latest:[],reported:false};saved.round.opened||=[];if(!saved.round.opened.includes(id))saved.round.opened.push(id);toolPanel=null;persist();renderCase();}
- function mailbox(arrive=false,autoplay=false){if(!saved.round)return newRound();toolPanel=null;persist();
+ function mailbox(arrive=false,autoplay=false){if(!saved.round)return newRound();toolPanel=null;persist();if(autoplay)return continueChallenge();
   const ids=saved.round.ids.filter(id=>!saved.round.finished.includes(id)&&!saved.round.opened.includes(id));
   const reduced=typeof window.matchMedia==='function'&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if(!arrive||reduced||!ids.length){if(autoplay)continueChallenge();else show(workspace(null));return;}
