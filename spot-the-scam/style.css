@@ -38,3 +38,6 @@ body,body *{font-family:'Open Sans',Arial,sans-serif!important}.brand{font-size:
 .clue-tip{font-size:11px;color:#66705f;margin:-8px 0 16px}.feedback-dialog[open]{max-height:calc(100dvh - 32px)}
 
 .alternative-route{font-size:11px;background:#f4edde;border:1px solid #d8c8aa;border-radius:5px;padding:10px;color:#654f2d}.detour .rewind-note{font-size:12px;line-height:1.7}
+
+/* Keep the default feedback to a single takeaway. */
+.feedback-dialog{width:min(400px,calc(100vw - 32px))}.feedback-dialog .feedback-takeaway{font-size:15px;line-height:1.65;margin:0 0 12px}.feedback-details{margin-top:8px;font-size:12px;color:#505a50}.feedback-details>summary{cursor:pointer;min-height:44px;padding:10px 0;color:#65705f}.feedback-dialog .feedback-details>p{font-size:12px;margin-top:12px}.feedback-dialog .feedback-details .feedback-choice{margin-top:7px}.feedback-explanation{padding-top:12px;border-top:1px solid #ded4c2}.feedback-body{margin-bottom:8px}.feedback-dialog .challenge-feedback{padding-bottom:0}.feedback-dialog .feedback-details .feedback-takeaway{font-size:15px}@media(max-width:720px){.feedback-dialog{padding:18px}.feedback-dialog .feedback-takeaway{font-size:14px}.feedback-dialog .challenge-feedback h2{font-size:22px;margin-bottom:12px}}
