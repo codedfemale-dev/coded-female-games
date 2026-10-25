@@ -8,9 +8,9 @@
  function cleanSave(raw){
   const out={version:2,records:{},active:null};
   if(!raw || raw.version!==2)return out;
-  for(const q of questions){const r=raw.records?.[q.id];if(r && typeof r.complete==='boolean' && Array.isArray(r.answers) && r.answers.length<=q.stages.length && r.answers.every((a,i)=>q.stages[i].options.some(o=>o.id===a))){out.records[q.id]={complete:r.complete,answers:r.answers,inspected:Array.isArray(r.inspected)?r.inspected.filter(v=>Number.isInteger(v)&&v>=0&&v<q.evidence.length):[]};}}
+  for(const q of questions){const r=raw.records?.[q.id];if(r && r.complete===true && Array.isArray(r.answers) && r.answers.length===q.stages.length && r.answers.every((a,i)=>q.stages[i].options.some(o=>o.id===a))){out.records[q.id]={complete:r.complete,answers:r.answers,inspected:Array.isArray(r.inspected)?r.inspected.filter(v=>Number.isInteger(v)&&v>=0&&v<q.evidence.length):[]};}}
   const a=raw.active, q=questions.find(q=>q.id===a?.id);
-  if(q && Number.isInteger(a.step)&&a.step>=0&&a.step<q.stages.length && Array.isArray(a.answers)&&a.answers.length>=a.step&&a.answers.length<=a.step+1&&a.answers.every((v,i)=>q.stages[i].options.some(o=>o.id===v))){out.active={id:q.id,step:a.step,answers:a.answers,inspected:Array.isArray(a.inspected)?a.inspected.filter(v=>Number.isInteger(v)&&v>=0&&v<q.evidence.length):[],detour:!!a.detour,order:Array.isArray(a.order)&&a.order.length===3&&new Set(a.order).size===3&&a.order.every(v=>q.stages[a.step].options.some(o=>o.id===v))?a.order:shuffle(q.stages[a.step].options).map(o=>o.id)};}
+  if(q && Number.isInteger(a.step)&&a.step>=0&&a.step<q.stages.length && Array.isArray(a.answers)&&a.answers.length>=a.step&&a.answers.length<=a.step+1&&a.answers.every((v,i)=>q.stages[i].options.some(o=>o.id===v))){out.active={id:q.id,step:a.step,answers:a.answers,inspected:Array.isArray(a.inspected)?a.inspected.filter(v=>Number.isInteger(v)&&v>=0&&v<q.evidence.length):[],detour:!!a.detour&&a.step===0&&q.stages.length>1&&a.answers.length===1&&a.answers[0]!==q.stages[0].correct,order:Array.isArray(a.order)&&a.order.length===3&&new Set(a.order).size===3&&a.order.every(v=>q.stages[a.step].options.some(o=>o.id===v))?a.order:shuffle(q.stages[a.step].options).map(o=>o.id)};}
   return out;
  }
  let saved;
