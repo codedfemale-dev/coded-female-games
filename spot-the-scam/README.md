@@ -1,58 +1,41 @@
-> This game is now maintained in the [Coded Female games collection](https://github.com/codedfemale-dev/coded-female-games). Publish the collection root, rather than this folder separately. [Play this version](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [All games](../README.md). Earlier standalone setup notes below are retained for reference.
+# Spot the Scam | Coded Female
 
-# Spot the Scam by Coded Female
+Thirty original investigations across five levels, with 48 decisions, 90 inspectable details and guided recovery branches in all 18 advanced cases. Built with static HTML, CSS and JavaScript. No installation or build step.
 
-Twenty fictional cyber security scenarios across everyday life, work and starting a tech career. Play eight per round. Investigate fictional messages, choose a safer next step and learn the reasoning behind every answer.
+[Collection game](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [All games](../README.md)
 
-[Play Spot the Scam](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [Coded Female](https://codedfemale.com)
+## Learning journey
 
-## Play
+1. **Notice the clues:** six introductory investigations about pressure, requests and independently supported messages.
+2. **Check before acting:** six investigations about trusted verification routes, recruitment, QR codes and account notices.
+3. **Put the pieces together:** six two-decision cases comparing messages, contacts and payment instructions.
+4. **Handle the convincing:** six two-decision cases about familiar conversations, voices, app permissions and account access.
+5. **Respond and recover:** six two-decision cases about sharing a password, clicking a link, payments, app access, supporting a colleague and opened attachments.
 
-Open `index.html`, or visit the online game. There is no installation or build step. Choose one answer per scenario, read the explanation, then continue. Hints are optional and do not reduce your score. Each round draws four concerning situations, two situations supported by independent checks and two where further verification is needed. Both scenarios and answer options shuffle each round. Download your field notes or replay at the end.
+All levels are available. Later investigations offer a follow-up after the first decision. A safer choice proceeds directly to new evidence. A risky choice branches to an explicit guided check before rejoining the investigation; the game never pretends the risky action produced a successful check. Original choices remain in the notes. Hints have no penalty. Scores describe practice decisions, not security certification.
 
-## Skills demonstrated
+## Design and accessibility
 
-- Vanilla JavaScript: data-driven rendering, stable answer IDs, Fisher–Yates shuffling, guarded state transitions and downloadable results.
-- Responsive CSS using Coded Female's gold, charcoal and cream identity, with Open Sans, Playfair Display and Rokkitt font families.
-- Accessible interactions: native buttons and disclosures, focus management, visible focus, progress, live announcements and text labels alongside colour feedback.
-- Educational design: plausible choices, independent verification, genuine and uncertain situations, non-judgemental feedback and practical takeaways.
+Coded Female's existing Open Sans, Playfair Display and Rokkitt families remain. The revised palette uses warm ivory `#F7F5F0`, deep forest `#253B35`, charcoal `#232B28`, antique gold `#806139` and pale sage `#E9EEE7`. Deep forest is the main page background, with warm ivory text and neutral light reading panels. Buttons on light panels and progress bars use forest; the hero’s primary button uses ivory for contrast against the forest background. Gold is reserved for small accents and focus cues. All messages and unselected answers use the same neutral surfaces regardless of whether a request is supported, suspicious or needs verification. Inspection labels indicate only that a detail was viewed; outcome colours appear only after a decision. White message cards, restrained borders and generous spacing keep the interface readable. No replacement logo.
 
-## Files and remixing
+Responsive layouts use five, three or two level columns, then a single-column investigation on phones. Native buttons and disclosures support touch and keyboard. Focus moves to each new view or feedback, and text accompanies feedback colours. No hover-only inspection, drag interaction, timer or live suspicious links. Reduced-motion preferences are respected.
 
-| File | Purpose |
-| --- | --- |
-| `index.html` | Page structure and introduction |
-| `style.css` | Responsive presentation |
-| `questions.js` | Fictional scenarios, answer IDs and shuffle helper |
-| `script.js` | Quiz state, feedback, review and download |
-| `tests.cjs` | Data integrity and shuffle checks |
+`data-arcade-design="studio"` is the collection generator's existing opt-out for games with their own presentation. Preserve it so regeneration does not overwrite this redesign.
 
-To add a question, copy a scenario in `questions.js`, give it a unique ID, provide three options with unique IDs, and set `correct` to the intended option ID. Keep addresses fictional, displayed as text rather than clickable links. Question order must not carry meaning. Set `judgement` to `suspicious`, `supported` or `verify` for the internal practice groups. Keep at least four, two and two questions in these groups respectively. `buildRound` draws eight questions with this balance; the full bank does not determine round length.
+## Progress and privacy
 
-Run `node --test tests.cjs` to check question integrity and shuffling.
+The browser stores versioned progress under `coded-female-scam-v2`: completed scenarios, choice IDs, inspected detail IDs and the current investigation. Resume restores the decision or guided check. Replaying replaces that scenario's previous choices; targeted practice uses the latest completed attempt. There is no account, analytics or remote answer storage. A storage failure leaves an in-memory playable session with a visible explanation. Malformed or obsolete data is ignored. Players can explicitly clear progress in the About disclosure. Clearing browser data also removes it.
 
-## Privacy and accessibility
+Downloads are generated locally as plain-text field notes. Google Fonts loads the established font families; fallback fonts work without it. Hosting serves ordinary page requests. Example addresses use reserved `.example` destinations or descriptive text and are never linked.
 
-No sign-up, analytics, remote answer storage or local storage. Answers exist only in page memory and reset on reload. Google Fonts supplies the existing website font families; system fallbacks work when unavailable. Fictional addresses use `.example`. No suspicious link, QR code or attachment is functional. The favicon is a game magnifier, not a replacement brand logo.
+## Development
 
-No timer. Hints are free. The game supports mouse, touch and keyboard. It avoids treating a score as proof that someone is secure. Real scams can fool anyone.
+Serve the collection root with a static HTTP server, then open `/spot-the-scam/`. Direct `index.html` use also works, subject to the browser's local-storage policy. No build is needed for GitHub Pages.
+
+Run `node --test spot-the-scam/tests.cjs migration-tests.mjs` from the collection root. Controller checks cover all 30 successful routes, all 18 guided branches, resume, malformed saves, unavailable storage, double-answer guards, downloads, explicit reset and option shuffling. Native browser QA complements these checks.
+
+Each question in `questions.js` has a stable ID, level, three inspections and one or two decision stages. Keep options uniquely identified and retain the `correct` ID after shuffling. Advanced stages include new evidence under `reveal`. Keep context, follow-up and inspection facts consistent. Supported situations should remain in the bank so learners can practise proceeding when there is sufficient evidence.
 
 ## Guidance
 
-This is an introductory practice game, not a certification or an incident-response service. For work accounts, follow organisational policy.
-
-Original content was checked against primary guidance on 9 October 2026. Twelve additions were reviewed on 12 October 2026. New messages, contexts, answer choices and explanations were drafted for Coded Female; competitor question banks, screenshots and code were not copied. Public guidance supports the lessons:
-
-- [NCSC: spotting scams](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams)
-- [NCSC: reporting suspicious emails](https://www.ncsc.gov.uk/collection/phishing-scams/report-scam-email)
-- [CISA: multi-factor authentication](https://www.cisa.gov/audiences/small-and-medium-businesses/secure-your-business/require-multifactor-authentication)
-
-- [FTC: job scams](https://consumer.ftc.gov/consumer-alerts/2023/12/how-spot-latest-job-scams)
-- [FTC: CV conversion scams](https://consumer.ftc.gov/consumer-alerts/2022/05/applying-jobs-be-lookout-scams)
-- [FTC: task scams](https://consumer.ftc.gov/consumer-alerts/2025/08/how-spot-avoid-task-scams)
-- [FTC: voice impersonation](https://consumer.ftc.gov/comment/180311)
-- [FTC: tech support scams](https://consumer.ftc.gov/articles/how-spot-avoid-and-report-tech-support-scams)
-
-## Licence
-
-MIT. See `LICENSE`. Contributions and remixes welcome.
+An introductory practice game, not a certification or incident-response service. Follow organisational procedures for work accounts. Original scenarios are informed by [NCSC spotting guidance](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams), [NCSC reporting and recovery guidance](https://www.ncsc.gov.uk/collection/phishing-scams) and [GOV.UK reporting guidance](https://www.gov.uk/report-suspicious-emails-websites-phishing). Reviewed 25 October 2026. MIT licence retained.
