@@ -1,59 +1,26 @@
-const test = require('node:test');
-const assert = require('node:assert/strict');
-const {SCAM_QUESTIONS, shuffle, buildRound} = require('./questions.js');
-
-test('Every published scenario has a unique identity, valid answer and useful learning content', () => {
-  assert.equal(SCAM_QUESTIONS.length, 20);
-  assert.equal(new Set(SCAM_QUESTIONS.map(q => q.id)).size, 20);
-  for (const q of SCAM_QUESTIONS) {
-    assert.equal(q.options.length, 3);
-    assert.equal(new Set(q.options.map(o => o.id)).size, 3);
-    assert.equal(q.options.filter(o => o.id === q.correct).length, 1);
-    assert.ok(['suspicious', 'supported', 'verify'].includes(q.judgement));
-    for (const field of ['topic', 'context', 'question', 'hint', 'explanation', 'takeaway']) {
-      assert.ok(q[field].length > 15, `${q.id}: ${field}`);
-    }
-  }
+const test=require('node:test');
+const assert=require('node:assert/strict');
+const fs=require('node:fs');
+const vm=require('node:vm');
+const {SCAM_QUESTIONS:q,SCAM_LEVELS:levels,shuffle}=require('./questions.js');
+const source=fs.readFileSync(__dirname+'/script.js','utf8');
+function app(initial=null,blocked=false){
+ let store=initial,click,toggle,downloads=[];
+ const dummy={setAttribute(){},focus(){},remove(){},textContent:'',hidden:true,querySelector(){return dummy;}};
+ const main={html:'',set innerHTML(v){this.html=v;},get innerHTML(){return this.html;},querySelector(){return dummy;},insertAdjacentHTML(_,v){this.html=v+this.html;},addEventListener(type,fn){if(type==='click')click=fn;else if(type==='toggle')toggle=fn;}};
+ const ctx={SCAM_QUESTIONS:q,SCAM_LEVELS:levels,shuffle,document:{querySelector(s){return s==='main'?main:dummy;},createElement(){return {click(){downloads.push(this.download);}};}},window:{scrollTo(){}},localStorage:{getItem(){if(blocked)throw Error();return store;},setItem(k,v){if(blocked)throw Error();store=v;}},Blob,URL:{createObjectURL(){return 'blob:test';},revokeObjectURL(){}},setTimeout(fn){fn();}};
+ vm.runInNewContext(source,ctx);
+ return {click(action,extra={}){click({target:{closest(){return {dataset:{action,...extra}};}}});},get html(){return main.html;},get saved(){return JSON.parse(store);},get raw(){return store;},downloads,inspect(i){toggle({target:{open:true,dataset:{evidence:String(i)},matches(){return true;},querySelector(){return dummy;}}});}};
+}
+test('five levels contain six complete, uniquely identified investigations each',()=>{
+ assert.equal(levels.length,5);assert.equal(q.length,30);assert.equal(new Set(q.map(x=>x.id)).size,30);
+ for(const l of levels)assert.equal(q.filter(x=>x.level===l.id).length,6);
+ for(const x of q){assert.equal(x.evidence.length,3);for(const e of x.evidence){assert.ok(e.body.length>20);assert.ok(e.title.length>4);}assert.equal(x.stages.length,x.level<3?1:2);for(const s of x.stages){assert.equal(s.options.length,3);assert.equal(new Set(s.options.map(o=>o.id)).size,3);assert.equal(s.options.filter(o=>o.id===s.correct).length,1);assert.ok(s.explanation.length>60);}if(x.level>=3){assert.ok(x.stages[1].reveal.length>30);assert.equal(x.stages[0].next.correct,'followup');}}
 });
-
-test('Rounds preserve eight distinct questions and a balanced mix after shuffling', () => {
-  const before = JSON.stringify(SCAM_QUESTIONS);
-  for (const value of [0, 0.25, 0.75, 0.999]) {
-    const round = buildRound(SCAM_QUESTIONS, () => value);
-    assert.equal(round.length, 8);
-    assert.equal(new Set(round.map(q => q.id)).size, 8);
-    for (const [group, expected] of Object.entries({suspicious:4, supported:2, verify:2})) {
-      assert.equal(round.filter(q => q.judgement === group).length, expected);
-    }
-    for (const q of round) assert.equal(q.options.filter(o => o.id === q.correct).length, 1);
-  }
-  assert.equal(JSON.stringify(SCAM_QUESTIONS), before);
-  assert.throws(() => buildRound([]), /Not enough scenarios/);
-});
-
-test('Every question can appear, and replay selection can change without changing source answers', () => {
-  let seed = 42;
-  const random = () => ((seed = (1664525 * seed + 1013904223) >>> 0) / 4294967296);
-  const seen = new Set();
-  const selections = new Set();
-  for (let i = 0; i < 100; i++) {
-    const round = buildRound(SCAM_QUESTIONS, random);
-    selections.add(round.map(q => q.id).sort().join(','));
-    for (const q of round) {
-      seen.add(q.id);
-      const source = SCAM_QUESTIONS.find(s => s.id === q.id);
-      assert.deepEqual(q.options.map(o => o.id).sort(), source.options.map(o => o.id).sort());
-      assert.equal(q.correct, source.correct);
-    }
-  }
-  assert.equal(seen.size, 20);
-  assert.ok(selections.size > 1);
-});
-
-test('Shuffling preserves all content without mutating its source', () => {
-  const before = JSON.stringify(SCAM_QUESTIONS);
-  for (const value of [0, 0.25, 0.75, 0.999]) {
-    assert.deepEqual(shuffle(SCAM_QUESTIONS, () => value).map(q => q.id).sort(), SCAM_QUESTIONS.map(q => q.id).sort());
-  }
-  assert.equal(JSON.stringify(SCAM_QUESTIONS), before);
-});
+test('all 30 investigations complete through the actual controller, with evidence counts and correct scoring',()=>{const a=app();for(const x of q){a.click('start',{id:x.id});for(let i=0;i<3;i++)a.inspect(i);for(const s of x.stages){a.click('answer',{option:s.correct});assert.match(a.html,/A safer next step\./);a.click('next');}assert.equal(a.saved.records[x.id].complete,true);assert.equal(a.saved.records[x.id].inspected.length,3);assert.match(a.html,/Investigation complete/);}assert.equal(Object.keys(a.saved.records).length,30);a.click('home');assert.match(a.html,/30 of 30 investigations complete/);});
+test('each advanced scenario has a reachable guided recovery branch that persists through reload',()=>{for(const x of q.filter(x=>x.level>=3)){let a=app();a.click('start',{id:x.id});a.click('answer',{option:x.stages[0].options.find(o=>o.id!==x.stages[0].correct).id});a.click('next');assert.match(a.html,/A guided check/);a=app(a.raw);a.click('resume');assert.match(a.html,/A guided check/);a.click('detour-next');assert.match(a.html,/After taking the safer route/);a.click('answer',{option:x.stages[1].correct});a.click('next');assert.equal(a.saved.records[x.id].complete,true);assert.match(a.html,/1\/2/);a.click('home');assert.match(a.html,/Practise tricky cases/);}});
+test('duplicate answers and premature progression cannot change the score or skip a step',()=>{const a=app(),x=q[12];a.click('start',{id:x.id});a.click('next');assert.equal(a.saved.active.step,0);a.click('answer',{option:x.stages[0].correct});a.click('answer',{option:x.stages[0].options.find(o=>o.id!==x.stages[0].correct).id});assert.deepEqual(a.saved.active.answers,[x.stages[0].correct]);a.click('next');assert.equal(a.saved.active.step,1);a.click('next');assert.equal(a.saved.active.step,1);});
+test('partial investigation resumes its decision and evidence; corrupt or outdated saves recover safely',()=>{let a=app(),x=q[12];a.click('start',{id:x.id});a.inspect(1);a.click('answer',{option:x.stages[0].correct});a.click('next');a=app(a.raw);a.click('resume');assert.equal(a.saved.active.step,1);assert.deepEqual(a.saved.active.inspected,[1]);for(const data of ['bad JSON','null','{}',JSON.stringify({version:2,records:{bad:true},active:{id:x.id,step:900,answers:[]}})]){const b=app(data);assert.match(b.html,/Start investigating/);}});
+test('storage failure leaves a playable session and explains the limitation',()=>{const a=app(null,true);assert.match(a.html,/cannot save progress/);a.click('start',{id:q[0].id});a.click('answer',{option:q[0].stages[0].correct});a.click('next');assert.match(a.html,/Investigation complete/);});
+test('field notes download and explicit reset confirmation work',()=>{const a=app();a.click('start',{id:q[0].id});a.click('answer',{option:q[0].correct});a.click('next');a.click('home');a.click('download');assert.deepEqual(a.downloads,['coded-female-scam-field-notes.txt']);a.click('reset');assert.equal(Object.keys(a.saved.records).length,1);a.click('cancel-reset');assert.equal(Object.keys(a.saved.records).length,1);a.click('confirm-reset');assert.equal(Object.keys(a.saved.records).length,0);});
+test('shuffling preserves source data and valid stable option identities',()=>{const before=JSON.stringify(q);for(const value of [0,.25,.75,.999]){for(const x of q)for(const s of x.stages){assert.deepEqual(shuffle(s.options,()=>value).map(o=>o.id).sort(),s.options.map(o=>o.id).sort());}}assert.equal(JSON.stringify(q),before);});
