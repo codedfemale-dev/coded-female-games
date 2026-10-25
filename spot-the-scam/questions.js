@@ -85,17 +85,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "open",
             "text": "Open the text link because you are expecting a delivery.",
-            "label": "Open the text link"
+            "label": "Open the text link",
+            "tool": "link"
           },
           {
             "id": "trusted",
             "text": "Use the retailer’s order page or a courier app you already trust to check the delivery.",
-            "label": "Check my order in the shop’s app"
+            "label": "Check my order in the shop’s app",
+            "tool": "verify"
           },
           {
             "id": "small",
             "text": "Check that the linked payment page has a padlock before paying.",
-            "label": "Check for a padlock, then pay"
+            "label": "Check for a padlock, then pay",
+            "tool": "pay"
           }
         ],
         "correct": "trusted",
@@ -104,7 +107,13 @@ const SCAM_QUESTIONS = [
         "insight": "Check delivery claims independently, even when you expect a parcel."
       }
     ],
-    "setup": "You’re expecting a parcel. This text arrives."
+    "setup": "You’re expecting a parcel. This text arrives.",
+    "surface": "text",
+    "contact": {
+      "name": "Retailer app",
+      "source": "Saved app",
+      "response": "Order CF-4821 · In transit. Delivery is still scheduled. No redelivery fee is due on this order."
+    }
   },
   {
     "id": "code",
@@ -159,17 +168,22 @@ const SCAM_QUESTIONS = [
           {
             "id": "send",
             "text": "Send the code because you know Sam.",
-            "label": "Send Sam the code"
+            "label": "Send Sam the code",
+            "tool": "reply",
+            "draft": "Here is the sign-in code: 381 604."
           },
           {
             "id": "partial",
             "text": "Ask Sam in this same chat to confirm which meeting they need to join.",
-            "label": "Ask about the meeting in this chat"
+            "label": "Ask about the meeting in this chat",
+            "tool": "reply",
+            "draft": "Which meeting are you trying to join?"
           },
           {
             "id": "keep",
             "text": "Keep the code private and contact Sam independently using a known route.",
-            "label": "Keep it private. Contact Sam separately"
+            "label": "Keep it private. Contact Sam separately",
+            "tool": "verify"
           }
         ],
         "correct": "keep",
@@ -178,7 +192,13 @@ const SCAM_QUESTIONS = [
         "insight": "Do not share sign-in or account recovery codes."
       }
     ],
-    "setup": "Sam’s chat account asks for a code sent to your phone."
+    "setup": "Sam’s chat account asks for a code sent to your phone.",
+    "surface": "text",
+    "contact": {
+      "name": "Sam",
+      "source": "Saved work contact",
+      "response": "Sam: I’m not locked out, and I didn’t ask for a code. Please don’t send it to that chat."
+    }
   },
   {
     "id": "report",
@@ -233,17 +253,22 @@ const SCAM_QUESTIONS = [
           {
             "id": "forward",
             "text": "Forward the working link to every colleague so they can inspect it.",
-            "label": "Forward the link to the team"
+            "label": "Forward the link to the team",
+            "tool": "forward",
+            "draft": "Please take a look at this message and its link."
           },
           {
             "id": "report",
             "text": "Use your organisation’s approved reporting route and avoid the link.",
-            "label": "Report it through work’s usual channel"
+            "label": "Report it through work’s usual channel",
+            "tool": "report"
           },
           {
             "id": "reply",
             "text": "Reply asking the sender to prove they work for IT.",
-            "label": "Ask the sender to prove they’re IT"
+            "label": "Ask the sender to prove they’re IT",
+            "tool": "reply",
+            "draft": "Can you prove that you work for IT?"
           }
         ],
         "correct": "report",
@@ -252,7 +277,13 @@ const SCAM_QUESTIONS = [
         "insight": "Report concerns through the approved route; avoid spreading risky links."
       }
     ],
-    "setup": "An unexpected email lands in your work inbox."
+    "setup": "An unexpected email lands in your work inbox.",
+    "surface": "email",
+    "contact": {
+      "name": "Work security",
+      "source": "Staff directory",
+      "response": "Your organisation’s reporting tool accepts the message without opening its link."
+    }
   },
   {
     "id": "support-pop-up",
@@ -310,17 +341,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "call",
             "text": "Contact the agent displayed in the warning.",
-            "label": "Call the number in the pop-up"
+            "label": "Call the number in the pop-up",
+            "tool": "call"
           },
           {
             "id": "remote",
             "text": "Allow remote access so the agent can prove the problem.",
-            "label": "Let the agent connect remotely"
+            "label": "Let the agent connect remotely",
+            "tool": "access"
           },
           {
             "id": "close",
             "text": "Close the warning without using its contact details; use trusted support or your existing security tools if concerned.",
-            "label": "Close it. Use my usual support"
+            "label": "Close it. Use my usual support",
+            "tool": "verify"
           }
         ],
         "correct": "close",
@@ -329,7 +363,13 @@ const SCAM_QUESTIONS = [
         "insight": "Do not grant remote access because a website tells you to."
       }
     ],
-    "setup": "You’re reading an article when this warning appears."
+    "setup": "You’re reading an article when this warning appears.",
+    "surface": "app",
+    "contact": {
+      "name": "IT help desk",
+      "source": "Staff directory",
+      "response": "We haven’t sent that repair warning. Close the web pop-up. If you need a device check, use your usual support ticket."
+    }
   },
   {
     "id": "legitimate",
@@ -384,17 +424,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "collect",
             "text": "Follow the collection instructions shown in the app; check with the shop if anything changes.",
-            "label": "Collect using the app’s instructions"
+            "label": "Collect using the app’s instructions",
+            "tool": "task"
           },
           {
             "id": "delete",
             "text": "Wait for an email link before trusting the collection notice in the app.",
-            "label": "Wait for an email link first"
+            "label": "Wait for an email link first",
+            "tool": "archive"
           },
           {
             "id": "public",
             "text": "Send the order confirmation to a customer-support account found in a social media reply.",
-            "label": "Send the order to a social support account"
+            "label": "Send the order to a social support account",
+            "tool": "forward",
+            "draft": "Please take a look at this message and its link."
           }
         ],
         "correct": "collect",
@@ -403,7 +447,13 @@ const SCAM_QUESTIONS = [
         "insight": "Trusted routes and matching context support informed decisions."
       }
     ],
-    "setup": "You open your usual bookshop app. The order and store match your purchase."
+    "setup": "You open your usual bookshop app. The order and store match your purchase.",
+    "surface": "app",
+    "contact": {
+      "name": "Bookshop",
+      "source": "Saved app",
+      "response": "The order number, collection shop and instructions match the order in the app you opened yourself."
+    }
   },
   {
     "id": "prize",
@@ -458,17 +508,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Avoid paying and check the grant through the organisation’s independently located website.",
-            "label": "Check the grant independently"
+            "label": "Check the grant independently",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Ask this account to send a winner certificate before paying.",
-            "label": "Ask this account for a certificate"
+            "label": "Ask this account for a certificate",
+            "tool": "reply",
+            "draft": "Please send me a winner certificate."
           },
           {
             "id": "c",
             "text": "Pay using a card so you can challenge the payment later.",
-            "label": "Pay now. Challenge it later if needed"
+            "label": "Pay now. Challenge it later if needed",
+            "tool": "pay"
           }
         ],
         "correct": "a",
@@ -477,7 +531,13 @@ const SCAM_QUESTIONS = [
         "insight": "A convincing document is not independent verification."
       }
     ],
-    "setup": "You haven’t entered a competition. This account messages you."
+    "setup": "You haven’t entered a competition. This account messages you.",
+    "surface": "text",
+    "contact": {
+      "name": "Career Circle",
+      "source": "Independently located website",
+      "response": "Grant applications are handled through this website. An unsolicited social message does not confirm an award or reserve a place."
+    }
   },
   {
     "id": "qr",
@@ -532,17 +592,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "logo",
             "text": "Scan and sign in because the poster has the company logo.",
-            "label": "Scan it. The logo looks right"
+            "label": "Scan it. The logo looks right",
+            "tool": "link"
           },
           {
             "id": "confirm",
             "text": "Check with IT through the usual support channel before scanning or entering details.",
-            "label": "Check with our usual IT help desk"
+            "label": "Check with our usual IT help desk",
+            "tool": "verify"
           },
           {
             "id": "https",
             "text": "Scan it and trust the page if it uses HTTPS.",
-            "label": "Scan it. Trust it if there’s a padlock"
+            "label": "Scan it. Trust it if there’s a padlock",
+            "tool": "link"
           }
         ],
         "correct": "confirm",
@@ -551,7 +614,13 @@ const SCAM_QUESTIONS = [
         "insight": "Treat QR codes as links. Verify the destination and request."
       }
     ],
-    "setup": "A new Wi-Fi poster appears at work. IT hasn’t announced a change."
+    "setup": "A new Wi-Fi poster appears at work. IT hasn’t announced a change.",
+    "surface": "app",
+    "contact": {
+      "name": "IT help desk",
+      "source": "Staff directory",
+      "response": "No staff Wi-Fi change has been announced. Please send the poster to our help desk without entering your work details on its page."
+    }
   },
   {
     "id": "cv-conversion",
@@ -609,17 +678,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "pay",
             "text": "Pay because £24 is a small cost compared with the salary.",
-            "label": "Pay the conversion fee"
+            "label": "Pay the conversion fee",
+            "tool": "pay"
           },
           {
             "id": "check",
             "text": "Decline the payment request and check the vacancy and acceptable CV formats through a verified company contact.",
-            "label": "Check CV formats with the company"
+            "label": "Check CV formats with the company",
+            "tool": "verify"
           },
           {
             "id": "discount",
             "text": "Ask the same recruiter to confirm the converter is approved before paying.",
-            "label": "Ask this recruiter to confirm the site"
+            "label": "Ask this recruiter to confirm the site",
+            "tool": "reply",
+            "draft": "Can you confirm that this converter is approved?"
           }
         ],
         "correct": "check",
@@ -628,7 +701,13 @@ const SCAM_QUESTIONS = [
         "insight": "Do not pay a recruiter’s chosen service just to remain eligible for a job."
       }
     ],
-    "setup": "A recruiter likes your CV, but says you need to pay to change its format."
+    "setup": "A recruiter likes your CV, but says you need to pay to change its format.",
+    "surface": "text",
+    "contact": {
+      "name": "Recruitment team",
+      "source": "Company careers page",
+      "response": "A PDF or DOCX CV is accepted. You do not need to pay for the recruiter’s converter to apply."
+    }
   },
   {
     "id": "mentor-fee",
@@ -686,17 +765,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "check",
             "text": "Pause and independently check the organisation, programme and fee before sharing information or paying.",
-            "label": "Check the programme independently"
+            "label": "Check the programme independently",
+            "tool": "verify"
           },
           {
             "id": "pay",
             "text": "Pay because the programme says it supports women in tech.",
-            "label": "Pay to secure the sponsored place"
+            "label": "Pay to secure the sponsored place",
+            "tool": "pay"
           },
           {
             "id": "badge",
             "text": "Ask the account for a programme brochure before deciding whether to pay.",
-            "label": "Ask this account for a brochure"
+            "label": "Ask this account for a brochure",
+            "tool": "reply",
+            "draft": "Please send me a programme brochure."
           }
         ],
         "correct": "check",
@@ -705,7 +788,13 @@ const SCAM_QUESTIONS = [
         "insight": "Check opportunities independently, even when their mission matters to you."
       }
     ],
-    "setup": "You posted about moving into tech. An unfamiliar account gets in touch."
+    "setup": "You posted about moving into tech. An unfamiliar account gets in touch.",
+    "surface": "text",
+    "contact": {
+      "name": "Programme office",
+      "source": "Independently located website",
+      "response": "Programme places are confirmed through our application process. Please verify any fee with this office before paying a social account."
+    }
   },
   {
     "id": "domain-renewal-check",
@@ -763,17 +852,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "dashboard",
             "text": "Find your provider from existing records, open its account through a trusted route and check the renewal there.",
-            "label": "Check my provider’s saved account"
+            "label": "Check my provider’s saved account",
+            "tool": "verify"
           },
           {
             "id": "name",
             "text": "Use the email link because it correctly names your portfolio.",
-            "label": "Use the link. It names my domain"
+            "label": "Use the link. It names my domain",
+            "tool": "link"
           },
           {
             "id": "ignore",
             "text": "Ignore all renewal notices, including those in your provider account.",
-            "label": "Ignore the renewal completely"
+            "label": "Ignore the renewal completely",
+            "tool": "archive"
           }
         ],
         "correct": "dashboard",
@@ -782,7 +874,13 @@ const SCAM_QUESTIONS = [
         "insight": "Verify billing claims in the service account you actually use."
       }
     ],
-    "setup": "You own a portfolio domain, but can’t remember which provider manages it."
+    "setup": "You own a portfolio domain, but can’t remember which provider manages it.",
+    "surface": "email",
+    "contact": {
+      "name": "Domain provider",
+      "source": "Saved billing record",
+      "response": "Portfolio domain · Renewal due in 7 days. Review the renewal and payment options inside this account."
+    }
   },
   {
     "id": "verified-interview",
@@ -840,17 +938,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "book",
             "text": "Choose a suitable slot in the verified portal and keep the confirmation private.",
-            "label": "Book through the verified portal"
+            "label": "Book through the verified portal",
+            "tool": "task"
           },
           {
             "id": "reject",
             "text": "Wait for a second email before using the independently verified portal.",
-            "label": "Wait for another email"
+            "label": "Wait for another email",
+            "tool": "archive"
           },
           {
             "id": "bank",
             "text": "Return to the invitation email and use its link instead of the saved portal.",
-            "label": "Use the email link instead"
+            "label": "Use the email link instead",
+            "tool": "link"
           }
         ],
         "correct": "book",
@@ -859,7 +960,13 @@ const SCAM_QUESTIONS = [
         "insight": "Independent checks help you pursue genuine opportunities confidently."
       }
     ],
-    "setup": "You confirmed the interview independently and opened your saved application portal."
+    "setup": "You confirmed the interview independently and opened your saved application portal.",
+    "surface": "app",
+    "contact": {
+      "name": "Application portal",
+      "source": "Saved application record",
+      "response": "Your independent confirmation and saved portal support booking the interview. No payment or bank details are needed."
+    }
   },
   {
     "id": "reset",
@@ -914,17 +1021,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Open the service through your saved app or bookmark and review its security settings.",
-            "label": "Check security in my usual app"
+            "label": "Check security in my usual app",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Use the cancel button because you did not request the reset.",
-            "label": "Use the email’s cancel button"
+            "label": "Use the email’s cancel button",
+            "tool": "link"
           },
           {
             "id": "c",
             "text": "Reply to the sender asking them to cancel it.",
-            "label": "Reply and ask them to cancel it"
+            "label": "Reply and ask them to cancel it",
+            "tool": "reply",
+            "draft": "Please cancel this password reset."
           }
         ],
         "correct": "a",
@@ -933,7 +1044,13 @@ const SCAM_QUESTIONS = [
         "insight": "Unexpected security messages deserve an independent check."
       }
     ],
-    "setup": "You didn’t request a password reset. This email arrives."
+    "setup": "You didn’t request a password reset. This email arrives.",
+    "surface": "email",
+    "contact": {
+      "name": "Studio Cloud",
+      "source": "Saved app",
+      "response": "Account security is available here. Review signed-in devices and password settings without using the email’s cancel button."
+    }
   },
   {
     "id": "invoice",
@@ -988,17 +1105,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "pay",
             "text": "Pay because the invoice mentions a supplier you recognise.",
-            "label": "Pay the familiar supplier"
+            "label": "Pay the familiar supplier",
+            "tool": "pay"
           },
           {
             "id": "reply",
             "text": "Reply to this email and ask whether the new details are correct.",
-            "label": "Reply to confirm the bank details"
+            "label": "Reply to confirm the bank details",
+            "tool": "reply",
+            "draft": "Can you confirm that these new bank details are yours?"
           },
           {
             "id": "verify",
             "text": "Pause payment and verify the change with the supplier using contact details you already trust.",
-            "label": "Call my established supplier contact"
+            "label": "Call my established supplier contact",
+            "tool": "verify"
           }
         ],
         "correct": "verify",
@@ -1017,17 +1138,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Keep payment paused and report the message to your finance or security team.",
-            "label": "Pause payment and report it"
+            "label": "Pause payment and report it",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Pay the old account without checking the invoice itself.",
-            "label": "Pay the old account instead"
+            "label": "Pay the old account instead",
+            "tool": "pay"
           },
           {
             "id": "c",
             "text": "Reply to the suspicious sender with the supplier’s confirmation.",
-            "label": "Reply with the supplier’s confirmation"
+            "label": "Reply with the supplier’s confirmation",
+            "tool": "reply",
+            "draft": "Northline told me the bank details have not changed."
           }
         ],
         "correct": "a",
@@ -1035,7 +1160,13 @@ const SCAM_QUESTIONS = [
         "insight": "The independent check contradicts the new instruction."
       }
     ],
-    "setup": "A supplier you use sends an invoice with different bank details."
+    "setup": "A supplier you use sends an invoice with different bank details.",
+    "surface": "email",
+    "contact": {
+      "name": "Northline finance",
+      "source": "Saved supplier number",
+      "response": "Northline finance: our bank details have not changed. Please keep the payment paused while we investigate that message."
+    }
   },
   {
     "id": "payroll-follow-up",
@@ -1093,17 +1224,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "known",
             "text": "Yes. An internal account makes the request safe.",
-            "label": "Trust the internal account"
+            "label": "Trust the internal account",
+            "tool": "reply",
+            "draft": "I will send my new salary account details here."
           },
           {
             "id": "scam",
             "text": "Yes. Any payroll request about bank details must be a scam.",
-            "label": "Treat every payroll request as a scam"
+            "label": "Treat every payroll request as a scam",
+            "tool": "report"
           },
           {
             "id": "process",
             "text": "No. Verify the request and approved process through your established payroll contact before sending details.",
-            "label": "Check payroll’s usual process"
+            "label": "Check payroll’s usual process",
+            "tool": "verify"
           }
         ],
         "correct": "process",
@@ -1122,17 +1257,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Open the usual portal yourself and complete the confirmed change there.",
-            "label": "Open my usual employee portal"
+            "label": "Open my usual employee portal",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Send bank details back to the original email instead.",
-            "label": "Send the bank details by email"
+            "label": "Send the bank details by email",
+            "tool": "reply",
+            "draft": "I will send my new bank details by email."
           },
           {
             "id": "c",
             "text": "Reject the change even after this independent confirmation.",
-            "label": "Reject it despite the independent check"
+            "label": "Reject it despite the independent check",
+            "tool": "archive"
           }
         ],
         "correct": "a",
@@ -1140,7 +1279,13 @@ const SCAM_QUESTIONS = [
         "insight": "The established contact and familiar portal provide evidence to proceed with the confirmed task."
       }
     ],
-    "setup": "You asked about changing your salary account. An internal chat account replies."
+    "setup": "You asked about changing your salary account. An internal chat account replies.",
+    "surface": "text",
+    "contact": {
+      "name": "Payroll team",
+      "source": "Internal directory",
+      "response": "Payroll: yes, we sent a follow-up. Please use the employee portal for the change, rather than sending bank details in chat."
+    }
   },
   {
     "id": "recruiter-equipment",
@@ -1198,17 +1343,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "verify",
             "text": "Pause the payment and confirm the offer and equipment policy through company contact details found independently.",
-            "label": "Check the offer with the company"
+            "label": "Check the offer with the company",
+            "tool": "verify"
           },
           {
             "id": "pay",
             "text": "Pay because the employer has promised to reimburse you.",
-            "label": "Pay. They promised reimbursement"
+            "label": "Pay. They promised reimbursement",
+            "tool": "pay"
           },
           {
             "id": "invoice",
             "text": "Ask the same recruiter for a branded invoice, then pay.",
-            "label": "Ask this recruiter for an invoice"
+            "label": "Ask this recruiter for an invoice",
+            "tool": "reply",
+            "draft": "Please send me a branded equipment invoice."
           }
         ],
         "correct": "verify",
@@ -1227,17 +1376,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Stop contact and report the account on the recruitment platform.",
-            "label": "Stop contact. Report the account"
+            "label": "Stop contact. Report the account",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Ask the recruiter for a discount on the equipment.",
-            "label": "Ask for a discount"
+            "label": "Ask for a discount",
+            "tool": "reply",
+            "draft": "Can you reduce the equipment fee?"
           },
           {
             "id": "c",
             "text": "Send identity documents to the recruiter to restart the application.",
-            "label": "Send ID to restart the application"
+            "label": "Send ID to restart the application",
+            "tool": "access"
           }
         ],
         "correct": "a",
@@ -1245,7 +1398,13 @@ const SCAM_QUESTIONS = [
         "insight": "The independently contacted employer has contradicted the offer."
       }
     ],
-    "setup": "A developer job offer arrives after a short chat. There’s an upfront equipment fee."
+    "setup": "A developer job offer arrives after a short chat. There’s an upfront equipment fee.",
+    "surface": "email",
+    "contact": {
+      "name": "Alder recruitment",
+      "source": "Company careers page",
+      "response": "We have no record of that recruiter or your offer. Please do not pay the equipment seller in that message."
+    }
   },
   {
     "id": "task-wallet",
@@ -1303,17 +1462,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "deposit",
             "text": "Deposit £45 because the service already paid you once.",
-            "label": "Top up. They paid me before"
+            "label": "Top up. They paid me before",
+            "tool": "pay"
           },
           {
             "id": "ask-group",
             "text": "Ask members of the service’s own group whether they deposited money.",
-            "label": "Ask the service’s own group"
+            "label": "Ask the service’s own group",
+            "tool": "reply",
+            "draft": "Has anyone in this group paid the deposit and withdrawn?"
           },
           {
             "id": "stop",
             "text": "Stop sending money, keep evidence of the messages and report the offer through appropriate channels.",
-            "label": "Stop paying. Keep evidence and report"
+            "label": "Stop paying. Keep evidence and report",
+            "tool": "report"
           }
         ],
         "correct": "stop",
@@ -1332,17 +1495,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "No. Stop paying and retain the messages and payment records for reporting.",
-            "label": "Stop paying. Save the records"
+            "label": "Stop paying. Save the records",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Yes. Pay once more because the balance now covers the deposit.",
-            "label": "Pay once more to unlock the balance"
+            "label": "Pay once more to unlock the balance",
+            "tool": "pay"
           },
           {
             "id": "c",
             "text": "Borrow the deposit so the earnings are not lost.",
-            "label": "Borrow the deposit"
+            "label": "Borrow the deposit",
+            "tool": "pay"
           }
         ],
         "correct": "a",
@@ -1350,7 +1516,13 @@ const SCAM_QUESTIONS = [
         "insight": "An on-screen balance is not proof that withdrawable earnings exist."
       }
     ],
-    "setup": "A task site paid you £8. Now it shows £160, but wants money before you withdraw."
+    "setup": "A task site paid you £8. Now it shows £160, but wants money before you withdraw.",
+    "surface": "app",
+    "contact": {
+      "name": "Task service",
+      "source": "Service’s own group",
+      "response": "The service’s own group is not independent evidence that a deposit or promised withdrawal is safe."
+    }
   },
   {
     "id": "verified-support-session",
@@ -1408,17 +1580,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "never",
             "text": "Cancel the confirmed session because any remote access is automatically unsafe.",
-            "label": "Cancel. Remote support is always unsafe"
+            "label": "Cancel. Remote support is always unsafe",
+            "tool": "archive"
           },
           {
             "id": "proceed",
             "text": "Yes, through the verified appointment and approved tool, following your organisation’s support procedure.",
-            "label": "Use the verified appointment and tool"
+            "label": "Use the verified appointment and tool",
+            "tool": "task"
           },
           {
             "id": "password",
             "text": "Let the technician work unattended because the appointment was verified.",
-            "label": "Let them work while I step away"
+            "label": "Let them work while I step away",
+            "tool": "access"
           }
         ],
         "correct": "proceed",
@@ -1437,17 +1612,22 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "No. Stop and check this unexpected request with the help desk through your normal route.",
-            "label": "Stop. Check with our usual help desk"
+            "label": "Stop. Check with our usual help desk",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Yes. The earlier appointment verification covers all later requests.",
-            "label": "Share it. The appointment was verified"
+            "label": "Share it. The appointment was verified",
+            "tool": "reply",
+            "draft": "Here is my email sign-in code: 381 604."
           },
           {
             "id": "c",
             "text": "Share half the code first as a compromise.",
-            "label": "Share half the code first"
+            "label": "Share half the code first",
+            "tool": "reply",
+            "draft": "Here is the first half of my sign-in code: 381."
           }
         ],
         "correct": "a",
@@ -1455,7 +1635,13 @@ const SCAM_QUESTIONS = [
         "insight": "An authorised appointment does not make every later request appropriate."
       }
     ],
-    "setup": "You booked printer support and verified the appointment in your usual help desk."
+    "setup": "You booked printer support and verified the appointment in your usual help desk.",
+    "surface": "app",
+    "contact": {
+      "name": "IT help desk",
+      "source": "Staff directory",
+      "response": "Printer ticket 204 is confirmed. Use the approved support tool and stay with the device during the session."
+    }
   },
   {
     "id": "shared-document",
@@ -1510,17 +1696,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Ask the colleague through your established work chat and locate the file in your normal workspace.",
-            "label": "Check with my colleague in our work chat"
+            "label": "Check with my colleague in our work chat",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Use the link because the subject matches your current project.",
-            "label": "Open it. The project name matches"
+            "label": "Open it. The project name matches",
+            "tool": "link"
           },
           {
             "id": "c",
             "text": "Enter your email first and decide when the password page appears.",
-            "label": "Enter my email and see what happens"
+            "label": "Enter my email and see what happens",
+            "tool": "link"
           }
         ],
         "correct": "a",
@@ -1539,17 +1728,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Use the copy in your established workspace.",
-            "label": "Open the file in our usual workspace"
+            "label": "Open the file in our usual workspace",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Return to the original email and enter your password there.",
-            "label": "Return to the email and sign in"
+            "label": "Return to the email and sign in",
+            "tool": "link"
           },
           {
             "id": "c",
             "text": "Ask the colleague to send their password to avoid another sign-in.",
-            "label": "Ask for my colleague’s password"
+            "label": "Ask for my colleague’s password",
+            "tool": "reply",
+            "draft": "Could you send me your password to open the plan?"
           }
         ],
         "correct": "a",
@@ -1557,7 +1750,13 @@ const SCAM_QUESTIONS = [
         "insight": "Independent confirmation plus the existing workspace supports opening the expected file there."
       }
     ],
-    "setup": "A colleague promised to share a plan. This email arrives."
+    "setup": "A colleague promised to share a plan. This email arrives.",
+    "surface": "email",
+    "contact": {
+      "name": "Project colleague",
+      "source": "Usual work chat",
+      "response": "Yes, I shared the plan. You can find it in our usual project workspace without using that email link."
+    }
   },
   {
     "id": "familiar-voice",
@@ -1615,17 +1814,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "voice",
             "text": "Transfer the money because you recognise the voice.",
-            "label": "Send the money. I know that voice"
+            "label": "Send the money. I know that voice",
+            "tool": "pay"
           },
           {
             "id": "callback",
             "text": "Contact your sister using her saved number or another established route to check the request.",
-            "label": "Contact my sister on her saved number"
+            "label": "Contact my sister on her saved number",
+            "tool": "verify"
           },
           {
             "id": "small",
             "text": "Send half the money now to reduce the risk.",
-            "label": "Send half to limit the risk"
+            "label": "Send half to limit the risk",
+            "tool": "pay"
           }
         ],
         "correct": "callback",
@@ -1644,17 +1846,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Report the impersonation through your workplace process and stop responding.",
-            "label": "Report it and stop responding"
+            "label": "Report it and stop responding",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Trust the voice message because it sounds familiar.",
-            "label": "Trust the familiar-sounding recording"
+            "label": "Trust the familiar-sounding recording",
+            "tool": "pay"
           },
           {
             "id": "c",
             "text": "Send a small payment to test the request.",
-            "label": "Send a small test payment"
+            "label": "Send a small test payment",
+            "tool": "pay"
           }
         ],
         "correct": "a",
@@ -1662,7 +1867,13 @@ const SCAM_QUESTIONS = [
         "insight": "A familiar-sounding voice is not a reliable identity check."
       }
     ],
-    "setup": "A recording sounds like your sister. A new text supplies bank details."
+    "setup": "A recording sounds like your sister. A new text supplies bank details.",
+    "surface": "text",
+    "contact": {
+      "name": "Your sister",
+      "source": "Saved phone contact",
+      "response": "That wasn’t me. I’m fine, and I didn’t ask you to send money."
+    }
   },
   {
     "id": "meeting-tool-permissions",
@@ -1720,17 +1931,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "sign-in",
             "text": "Accept because the account sign-in screen looks familiar.",
-            "label": "Accept. The sign-in page looks familiar"
+            "label": "Accept. The sign-in page looks familiar",
+            "tool": "access"
           },
           {
             "id": "review",
             "text": "Pause and check the app, its requested access and organisational approval through a trusted route.",
-            "label": "Check the app and permissions with IT"
+            "label": "Check the app and permissions with IT",
+            "tool": "verify"
           },
           {
             "id": "password",
             "text": "Accept because the app has not asked you to send it your password.",
-            "label": "Accept. It hasn’t asked for my password"
+            "label": "Accept. It hasn’t asked for my password",
+            "tool": "access"
           }
         ],
         "correct": "review",
@@ -1749,17 +1963,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Use the approved tool with access limited to the meeting.",
-            "label": "Use the approved, limited-access tool"
+            "label": "Use the approved, limited-access tool",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Grant the app access anyway because the meeting is genuine.",
-            "label": "Connect the original app anyway"
+            "label": "Connect the original app anyway",
+            "tool": "access"
           },
           {
             "id": "c",
             "text": "Give the app your email password instead of granting permissions.",
-            "label": "Give the app my password instead"
+            "label": "Give the app my password instead",
+            "tool": "reply",
+            "draft": "I will give the app my email password."
           }
         ],
         "correct": "a",
@@ -1767,7 +1985,13 @@ const SCAM_QUESTIONS = [
         "insight": "An approved alternative meets the need without granting this unsolicited app unrelated access."
       }
     ],
-    "setup": "An unsolicited message recommends a meeting-notes app. You see this permission request."
+    "setup": "An unsolicited message recommends a meeting-notes app. You see this permission request.",
+    "surface": "app",
+    "contact": {
+      "name": "IT help desk",
+      "source": "Staff directory",
+      "response": "Use our approved meeting tool. The unsolicited app is not needed, and should not have access to your whole mailbox."
+    }
   },
   {
     "id": "mfa",
@@ -1822,17 +2046,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "deny",
             "text": "Deny it and contact your IT or security team through your usual support route.",
-            "label": "Deny it. Contact our usual IT team"
+            "label": "Deny it. Contact our usual IT team",
+            "tool": "verify"
           },
           {
             "id": "approve",
             "text": "Approve it because the location looks familiar.",
-            "label": "Approve. London looks familiar"
+            "label": "Approve. London looks familiar",
+            "tool": "access"
           },
           {
             "id": "repeat",
             "text": "Ask a colleague whether they also received a prompt before deciding whether to approve.",
-            "label": "Ask a colleague before deciding"
+            "label": "Ask a colleague before deciding",
+            "tool": "verify"
           }
         ],
         "correct": "deny",
@@ -1851,17 +2078,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Do not approve it. Contact IT through your established help desk.",
-            "label": "Refuse. Contact the usual help desk"
+            "label": "Refuse. Contact the usual help desk",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Approve once so the caller can finish their investigation.",
-            "label": "Approve once to help the caller"
+            "label": "Approve once to help the caller",
+            "tool": "access"
           },
           {
             "id": "c",
             "text": "Ask the caller to read your name before approving.",
-            "label": "Ask them to confirm my name first"
+            "label": "Ask them to confirm my name first",
+            "tool": "reply",
+            "draft": "Can you confirm my name before I approve?"
           }
         ],
         "correct": "a",
@@ -1869,7 +2100,13 @@ const SCAM_QUESTIONS = [
         "insight": "A follow-up caller can be part of the same attempt."
       }
     ],
-    "setup": "You’re making tea. You haven’t tried to sign in."
+    "setup": "You’re making tea. You haven’t tried to sign in.",
+    "surface": "app",
+    "contact": {
+      "name": "IT help desk",
+      "source": "Staff directory",
+      "response": "Thanks for denying the sign-in. We’ll review it through the usual help-desk ticket. Do not approve prompts you did not initiate."
+    }
   },
   {
     "id": "security-alert-in-app",
@@ -1927,17 +2164,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "dismiss",
             "text": "Wait for another email alert before investigating the unfamiliar session.",
-            "label": "Wait for another alert"
+            "label": "Wait for another alert",
+            "tool": "archive"
           },
           {
             "id": "email",
             "text": "Return to the original email and use its link to fix the problem.",
-            "label": "Go back to the email link"
+            "label": "Go back to the email link",
+            "tool": "link"
           },
           {
             "id": "secure",
             "text": "Review the session through the app’s security controls and follow the service’s process to secure the account if it is not yours.",
-            "label": "Review and secure the account in the app"
+            "label": "Review and secure the account in the app",
+            "tool": "task"
           }
         ],
         "correct": "secure",
@@ -1956,17 +2196,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Review and revoke unfamiliar app access, secure the account and get trusted help if needed.",
-            "label": "Review app access and secure the account"
+            "label": "Review app access and secure the account",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Assume ending one session removes all possible access.",
-            "label": "Assume ending the session fixed everything"
+            "label": "Assume ending the session fixed everything",
+            "tool": "archive"
           },
           {
             "id": "c",
             "text": "Contact the unfamiliar app using details in an alert message.",
-            "label": "Contact the app through the alert"
+            "label": "Contact the app through the alert",
+            "tool": "reply",
+            "draft": "Please help me through the contact in the alert."
           }
         ],
         "correct": "a",
@@ -1974,7 +2218,13 @@ const SCAM_QUESTIONS = [
         "insight": "Sessions and connected app permissions can be separate."
       }
     ],
-    "setup": "You skip an email link and open your usual app. It shows an unfamiliar session."
+    "setup": "You skip an email link and open your usual app. It shows an unfamiliar session.",
+    "surface": "app",
+    "contact": {
+      "name": "Account security",
+      "source": "Saved app",
+      "response": "The real account settings show the unfamiliar session and controls to end it and review other access."
+    }
   },
   {
     "id": "thread",
@@ -2029,17 +2279,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "No. Pause payment and verify the change using an established supplier contact.",
-            "label": "Call the supplier on a saved number"
+            "label": "Call the supplier on a saved number",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Yes, because the earlier conversation is genuine.",
-            "label": "Trust the earlier emails"
+            "label": "Trust the earlier emails",
+            "tool": "pay"
           },
           {
             "id": "c",
             "text": "Ask for a second email from another address in the signature.",
-            "label": "Ask another contact from the signature"
+            "label": "Ask another contact from the signature",
+            "tool": "reply",
+            "draft": "Please confirm the payment change using the other contact in your signature."
           }
         ],
         "correct": "a",
@@ -2058,17 +2312,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "A genuine invoice can contain an unauthorised payment instruction. Keep payment paused and report it.",
-            "label": "Pause payment. Report the change"
+            "label": "Pause payment. Report the change",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "The valid invoice makes the new account safe to use.",
-            "label": "Pay the new account. The invoice is real"
+            "label": "Pay the new account. The invoice is real",
+            "tool": "pay"
           },
           {
             "id": "c",
             "text": "The supplier must have forgotten their own change, so pay it anyway.",
-            "label": "Assume the supplier forgot the change"
+            "label": "Assume the supplier forgot the change",
+            "tool": "reply",
+            "draft": "You may have forgotten the change. I will use the new details."
           }
         ],
         "correct": "a",
@@ -2076,7 +2334,13 @@ const SCAM_QUESTIONS = [
         "insight": "Assess the changed instruction separately from the legitimate background details."
       }
     ],
-    "setup": "An existing supplier email thread contains a new payment instruction."
+    "setup": "An existing supplier email thread contains a new payment instruction.",
+    "surface": "email",
+    "contact": {
+      "name": "Northline finance",
+      "source": "Saved supplier number",
+      "response": "Northline confirms the invoice is genuine but the new bank details are not theirs."
+    }
   },
   {
     "id": "portfolio",
@@ -2131,17 +2395,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Decline the broad access and ask for a review method limited to the public portfolio.",
-            "label": "Decline. Ask for a public-only review"
+            "label": "Decline. Ask for a public-only review",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Approve access temporarily and remove it after the review.",
-            "label": "Allow access just for the review"
+            "label": "Allow access just for the review",
+            "tool": "access"
           },
           {
             "id": "c",
             "text": "Approve because the reviewer knows the name of your project.",
-            "label": "Accept. They know my project"
+            "label": "Accept. They know my project",
+            "tool": "access"
           }
         ],
         "correct": "a",
@@ -2160,17 +2427,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "No. Keep access declined and use a review method limited to the work being reviewed.",
-            "label": "Keep access declined"
+            "label": "Keep access declined",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Yes. Other applicants have already accepted it.",
-            "label": "Accept. Other applicants did"
+            "label": "Accept. Other applicants did",
+            "tool": "access"
           },
           {
             "id": "c",
             "text": "Grant access now and hope the reviewer does not use it.",
-            "label": "Approve and hope they don’t use it"
+            "label": "Approve and hope they don’t use it",
+            "tool": "access"
           }
         ],
         "correct": "a",
@@ -2178,7 +2448,13 @@ const SCAM_QUESTIONS = [
         "insight": "Social pressure and a deadline do not justify unnecessary access."
       }
     ],
-    "setup": "Someone offers to review your public coding portfolio."
+    "setup": "Someone offers to review your public coding portfolio.",
+    "surface": "text",
+    "contact": {
+      "name": "Portfolio review",
+      "source": "Public project page",
+      "response": "The public portfolio can be reviewed without access to write to your private repositories."
+    }
   },
   {
     "id": "recovery",
@@ -2233,17 +2509,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "wait",
             "text": "Wait to see whether the account behaves strangely.",
-            "label": "Wait for unusual activity"
+            "label": "Wait for unusual activity",
+            "tool": "archive"
           },
           {
             "id": "again",
             "text": "Try the same page again to see whether it works now.",
-            "label": "Try signing in on that page again"
+            "label": "Try signing in on that page again",
+            "tool": "link"
           },
           {
             "id": "help",
             "text": "Contact IT or security promptly through a trusted route, stop using the page and follow the account-recovery process.",
-            "label": "Stop. Contact IT through a trusted route"
+            "label": "Stop. Contact IT through a trusted route",
+            "tool": "verify"
           }
         ],
         "correct": "help",
@@ -2262,17 +2541,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Change the reused password there through its real app or website and enable stronger sign-in protection.",
-            "label": "Give that account a unique password"
+            "label": "Give that account a unique password",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Leave it because only the work account was involved.",
-            "label": "Leave the personal account alone"
+            "label": "Leave the personal account alone",
+            "tool": "archive"
           },
           {
             "id": "c",
             "text": "Reuse your new work password so both accounts stay consistent.",
-            "label": "Reuse my new work password there"
+            "label": "Reuse my new work password there",
+            "tool": "task"
           }
         ],
         "correct": "a",
@@ -2280,7 +2562,13 @@ const SCAM_QUESTIONS = [
         "insight": "A captured password can be tried elsewhere."
       }
     ],
-    "setup": "You entered your work password through an email link, then noticed an unfamiliar address."
+    "setup": "You entered your work password through an email link, then noticed an unfamiliar address.",
+    "surface": "app",
+    "contact": {
+      "name": "IT security",
+      "source": "Staff directory",
+      "response": "Your incident report is open. Use the real work portal to secure the account and follow our recovery instructions."
+    }
   },
   {
     "id": "clicked",
@@ -2335,17 +2623,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Close the page, stop interacting and report the message through your workplace security route.",
-            "label": "Close it. Report through our usual route"
+            "label": "Close it. Report through our usual route",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Sign in once to find out whether it is genuine.",
-            "label": "Sign in once to test it"
+            "label": "Sign in once to test it",
+            "tool": "link"
           },
           {
             "id": "c",
             "text": "Delete the message and take no further action because you did not enter anything.",
-            "label": "Delete the email. Do nothing else"
+            "label": "Delete the email. Do nothing else",
+            "tool": "archive"
           }
         ],
         "correct": "a",
@@ -2364,17 +2655,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Give an accurate account of the link, time and actions, including what you did not enter or download.",
-            "label": "Explain exactly what happened"
+            "label": "Explain exactly what happened",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Say you never opened it to avoid making extra work.",
-            "label": "Say I didn’t open it"
+            "label": "Say I didn’t open it",
+            "tool": "report"
           },
           {
             "id": "c",
             "text": "Reopen the page to check whether it can capture a password.",
-            "label": "Reopen the page to investigate"
+            "label": "Reopen the page to investigate",
+            "tool": "link"
           }
         ],
         "correct": "a",
@@ -2382,7 +2676,13 @@ const SCAM_QUESTIONS = [
         "insight": "Clear facts help the team assess risk."
       }
     ],
-    "setup": "You opened the link, but entered nothing, downloaded nothing and approved nothing."
+    "setup": "You opened the link, but entered nothing, downloaded nothing and approved nothing.",
+    "surface": "app",
+    "contact": {
+      "name": "IT security",
+      "source": "Staff directory",
+      "response": "You report the link and explain that you entered nothing, downloaded nothing and approved nothing."
+    }
   },
   {
     "id": "paid",
@@ -2437,17 +2737,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Contact the bank immediately through a trusted route and alert the finance and security teams.",
-            "label": "Contact the bank and alert our teams now"
+            "label": "Contact the bank and alert our teams now",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Wait for the supplier’s investigation before contacting the bank.",
-            "label": "Wait for the supplier to investigate"
+            "label": "Wait for the supplier to investigate",
+            "tool": "archive"
           },
           {
             "id": "c",
             "text": "Email the suspected sender and request a refund first.",
-            "label": "Ask the sender for a refund"
+            "label": "Ask the sender for a refund",
+            "tool": "reply",
+            "draft": "Please refund the payment."
           }
         ],
         "correct": "a",
@@ -2466,17 +2770,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Do not pay it. Keep working through your bank and established reporting channels.",
-            "label": "Keep working with my bank"
+            "label": "Keep working with my bank",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Pay because recovering the original payment is urgent.",
-            "label": "Pay the recovery fee"
+            "label": "Pay the recovery fee",
+            "tool": "pay"
           },
           {
             "id": "c",
             "text": "Share banking access so the recovery agent can investigate.",
-            "label": "Give the recovery agent bank access"
+            "label": "Give the recovery agent bank access",
+            "tool": "access"
           }
         ],
         "correct": "a",
@@ -2484,7 +2791,13 @@ const SCAM_QUESTIONS = [
         "insight": "Be alert to follow-up recovery fraud."
       }
     ],
-    "setup": "Your team paid. The supplier confirms the new bank details weren’t theirs."
+    "setup": "Your team paid. The supplier confirms the new bank details weren’t theirs.",
+    "surface": "app",
+    "contact": {
+      "name": "Your bank",
+      "source": "Saved bank contact",
+      "response": "We’ll investigate the payment now. Please keep the transaction reference and alert your finance and security teams. Recovery cannot be guaranteed."
+    }
   },
   {
     "id": "access",
@@ -2539,17 +2852,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Revoke the app’s access through trusted account settings and report it to your security team.",
-            "label": "Revoke access in settings. Alert IT"
+            "label": "Revoke access in settings. Alert IT",
+            "tool": "task"
           },
           {
             "id": "b",
             "text": "Change only your password and leave the app connected.",
-            "label": "Change my password only"
+            "label": "Change my password only",
+            "tool": "task"
           },
           {
             "id": "c",
             "text": "Ask the app’s message sender to disconnect it for you.",
-            "label": "Ask the app’s sender to disconnect it"
+            "label": "Ask the app’s sender to disconnect it",
+            "tool": "reply",
+            "draft": "Please disconnect your app from my account."
           }
         ],
         "correct": "a",
@@ -2568,17 +2885,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Provide the details you have and follow their account review and containment instructions.",
-            "label": "Share the details with our security team"
+            "label": "Share the details with our security team",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Assume revoking access proves no data was seen.",
-            "label": "Assume no information was accessed"
+            "label": "Assume no information was accessed",
+            "tool": "archive"
           },
           {
             "id": "c",
             "text": "Reconnect the app to take a better look at it.",
-            "label": "Reconnect the app to investigate"
+            "label": "Reconnect the app to investigate",
+            "tool": "access"
           }
         ],
         "correct": "a",
@@ -2586,7 +2906,13 @@ const SCAM_QUESTIONS = [
         "insight": "Revocation stops that grant, but does not establish what happened beforehand."
       }
     ],
-    "setup": "You approved an unfamiliar app. Account settings confirm it can read mail and files."
+    "setup": "You approved an unfamiliar app. Account settings confirm it can read mail and files.",
+    "surface": "app",
+    "contact": {
+      "name": "Account settings",
+      "source": "Saved app",
+      "response": "You open connected-app settings in the real account. Access grants can be revoked separately from changing the password."
+    }
   },
   {
     "id": "colleague",
@@ -2641,17 +2967,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Thank them for speaking up and help them contact the security team immediately.",
-            "label": "Thank them. Help them report it now"
+            "label": "Thank them. Help them report it now",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Promise to keep it private unless anything unusual happens.",
-            "label": "Keep it private unless something happens"
+            "label": "Keep it private unless something happens",
+            "tool": "archive"
           },
           {
             "id": "c",
             "text": "Help them reset the password but keep the incident from the security team.",
-            "label": "Reset the password without telling IT"
+            "label": "Reset the password without telling IT",
+            "tool": "task"
           }
         ],
         "correct": "a",
@@ -2670,17 +2999,21 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Share an anonymised lesson through the appropriate team process, with security guidance.",
-            "label": "Share an anonymous lesson appropriately"
+            "label": "Share an anonymous lesson appropriately",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Publish their name so everyone remembers the incident.",
-            "label": "Post their name as a warning"
+            "label": "Post their name as a warning",
+            "tool": "forward",
+            "draft": "Here is who made the mistake and what they did."
           },
           {
             "id": "c",
             "text": "Avoid sharing any useful lesson with the team.",
-            "label": "Keep every lesson private"
+            "label": "Keep every lesson private",
+            "tool": "archive"
           }
         ],
         "correct": "a",
@@ -2688,7 +3021,13 @@ const SCAM_QUESTIONS = [
         "insight": "Learning can help others without exposing or blaming the person who reported the incident."
       }
     ],
-    "setup": "A colleague shared a work sign-in code with someone claiming to be IT."
+    "setup": "A colleague shared a work sign-in code with someone claiming to be IT.",
+    "surface": "text",
+    "contact": {
+      "name": "Security team",
+      "source": "Staff directory",
+      "response": "You help your colleague report promptly, without blame. The team can assess whether the sign-in code was used."
+    }
   },
   {
     "id": "attachment",
@@ -2743,17 +3082,20 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Stop using the device and contact IT or security from another trusted device, following your incident procedure.",
-            "label": "Stop. Contact IT from a trusted device"
+            "label": "Stop. Contact IT from a trusted device",
+            "tool": "verify"
           },
           {
             "id": "b",
             "text": "Install the first highly rated cleanup tool you can find.",
-            "label": "Install a cleanup tool from an advert"
+            "label": "Install a cleanup tool from an advert",
+            "tool": "link"
           },
           {
             "id": "c",
             "text": "Restart the device and wait to see whether the unusual behaviour returns.",
-            "label": "Restart and see if the problem returns"
+            "label": "Restart and see if the problem returns",
+            "tool": "task"
           }
         ],
         "correct": "a",
@@ -2772,17 +3114,22 @@ const SCAM_QUESTIONS = [
           {
             "id": "a",
             "text": "Tell the security team who else may have received it and warn the colleague through a trusted route without forwarding the file.",
-            "label": "Tell IT and warn them without the file"
+            "label": "Tell IT and warn them without the file",
+            "tool": "report"
           },
           {
             "id": "b",
             "text": "Send the attachment again so the colleague recognises it.",
-            "label": "Forward the file again"
+            "label": "Forward the file again",
+            "tool": "forward",
+            "draft": "Here is the same attachment again."
           },
           {
             "id": "c",
             "text": "Ask the colleague to open it and compare results.",
-            "label": "Ask them to open it and compare"
+            "label": "Ask them to open it and compare",
+            "tool": "reply",
+            "draft": "Please open that file and compare what happens."
           }
         ],
         "correct": "a",
@@ -2790,7 +3137,13 @@ const SCAM_QUESTIONS = [
         "insight": "Help the team find others at risk without spreading or reopening the attachment."
       }
     ],
-    "setup": "You opened an unexpected work file and enabled content. Your device is behaving unusually."
+    "setup": "You opened an unexpected work file and enabled content. Your device is behaving unusually.",
+    "surface": "app",
+    "contact": {
+      "name": "IT security",
+      "source": "Staff directory",
+      "response": "Stop using the affected device and follow the incident procedure. Contact us from another trusted device; do not forward the file."
+    }
   }
 ]
 function shuffle(items, random = Math.random) { const a = items.slice(); for(let i=a.length-1;i>0;i--){ const j=Math.floor(random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }

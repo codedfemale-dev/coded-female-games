@@ -1,40 +1,41 @@
 # Spot the Scam | Coded Female
 
-A message lands. What’s your next move? Play a three-case inbox, tap message details, choose a short action and see what happens.
+An immersive, local practice inbox. Open mail, texts and app notifications, investigate the details and act through simulated tools.
 
-[Play](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [Original link, which redirects here](https://codedfemale-dev.github.io/spot-the-scam/)
+[Play](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [Original link](https://codedfemale-dev.github.io/spot-the-scam/)
 
-## Play-first design
+## Experience
 
-The opening screen has one sentence and an **Open your inbox** action. The level map lives in the optional **Your progress** screen. Each case has one short setup, one message and three short actions. Tap a sender, destination, attachment label or earlier record to inspect it. All inspections remain inside the game.
+Three items arrive in a selectable inbox with All, Mail, Messages and Apps folders, sender names, previews and unread/read/filed states. Open them in any order. Desktop keeps the list beside the reader; mobile opens each item with an Inbox back control.
 
-After a choice, the other options disappear. The player sees one takeaway and can open **Why?** for the full explanation. Later cases reveal new information or offer a brief guided alternative after a risky choice. Rounds end after three cases, with three pocket notes and an **Another inbox** action. Full decision notes and downloads remain available separately.
+Emails use a mail reader with From/To details. Texts and chats use a phone frame, status bar, contact header, incoming and outgoing bubbles, and a local message composer. Other channels use an app or account screen. The channel determines presentation; the scenario judgement never determines message colours.
 
-Thirty original cases and 48 decisions cover five levels of increasing complexity. Each level has six cases; new inboxes prefer unseen cases in the earliest unfinished level. When possible, a round includes a supported message as well as requests needing checks. Genuine messages have the same presentation as suspicious ones. Replays can fill a round when only one or two unseen cases remain in a level. Targeted practice can contain fewer than three cases if only one or two need revisiting.
+Use Reply, Check elsewhere, Report and More inside the simulated app. Replies use prewritten practice drafts. Independent checks open a saved contact or account. Supplied links open an internal page preview; payment, permission, forwarding and app actions use local confirmation panels. No actual message, payment, sign-in, permission grant, phone call or suspicious navigation occurs. Source links and guidance links are ordinary external links outside these tools.
 
-## Progress and privacy
+There are no answer letters or adjacent multiple-choice questions. Players can inspect records, act, switch to another item, return and investigate again before filing. Activity and outgoing replies remain in the conversation. Later cases add follow-up information and guided alternatives. Detailed learning notes are optional; the recap appears after all three items have been filed.
 
-The existing `coded-female-scam-v2` browser-storage key is retained. Completed case records and active investigations from the previous version are preserved. The added `round` object records up to three case IDs and the cases finished in that inbox. Pausing or reloading restores the current decision, guided branch and round position. Replays replace that case’s latest choices. Malformed saves are ignored; unavailable storage leaves a playable in-memory session with an explanation. No account, analytics or remote answer storage.
+## Learning and records
 
-Field notes are generated locally. Players can clear progress through the About disclosure. Google Fonts provides the established Open Sans, Playfair Display and Rokkitt families, with system fallbacks.
+Thirty original cases and 48 decision stages cover five levels. New rounds prefer unseen cases in the earliest unfinished level and mix message channels and supported situations where available. All cases remain reachable. The optional progress screen holds levels, targeted practice and notes.
 
-## Presentation and accessibility
+The first action per stage is retained for the recap and targeted practice. Later actions are logged separately, and the latest action controls the next branch. A later check does not erase an earlier action from the notes. Replays replace a case’s previous record. Practice is not a security certification.
 
-Dark forest surrounds, ivory actions on dark surfaces, neutral light message cards and small gold accents. Sender details and unopened evidence never encode whether a message is genuine. Keyboard-accessible native disclosures and buttons, visible focus, focus on new views and feedback, and live announcements. No hover-only interactions, timer or hint penalty. Phone layouts stack the message and actions. Reduced-motion preferences are respected.
+## Save and privacy
 
-Preserve `data-arcade-design="studio"`: the collection generator uses it to retain this game’s own interface.
+The existing `coded-female-scam-v2` storage key is preserved. Old completed records and active investigations migrate without losing choices or inspected evidence. `round` contains item IDs, filed IDs and opened IDs. `drafts` stores each unfinished conversation independently, including activity, first choices and latest actions. Reloading returns to the inbox; reopening an item restores its conversation. Corrupt data is validated; unavailable storage leaves an in-memory session with a visible note. No account, analytics or remote answer storage.
 
-## Development
+Field notes are generated locally. Progress can be cleared explicitly from About. No actual personal details are requested in the simulated tools.
 
-Static HTML, CSS and JavaScript. No build step. Serve the collection root and open `/spot-the-scam/`.
+## Brand and accessibility
 
-- `questions.js`: original cases, short setups, short action labels, full explanations and stable answer IDs.
-- `script.js`: inbox rounds, inspection, branches, progress, resume and downloads.
-- `style.css`: responsive dark-forest interface.
-- `tests.cjs`: all case routes and recovery branches, old-save compatibility, three-case boundaries, progression, malformed saves, storage failures, duplicate-answer guards and notes.
+Dark forest surrounds, ivory and white reading surfaces, subtle gold details. Playfair Display for the brand shell and headings, Open Sans for body text and simulated app interfaces. These heading and body families were verified against computed styles on codedfemale.com on 25 October 2026. The earlier Rokkitt text header was not verified as original logo typography and has been removed; this does not replace any original logo artwork.
 
-Run `node --test spot-the-scam/tests.cjs migration-tests.mjs` from the collection root. Browser checks complement the controller tests.
+Native buttons, disclosures and read-only draft textareas support keyboard and touch. Focus moves into opened readers and tool panels; text accompanies action states. Phone and desktop layouts are responsive. No timer, hint penalty, hover-only inspection or real malicious links. Keep `data-arcade-design="studio"` so the collection generator preserves this interface.
 
-## Guidance
+## Development and checks
 
-Introductory practice, not a security certification or incident-response service. Follow organisational procedures for work accounts. Lessons are informed by [NCSC spotting guidance](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams), [NCSC reporting and recovery guidance](https://www.ncsc.gov.uk/collection/phishing-scams) and [GOV.UK reporting guidance](https://www.gov.uk/report-suspicious-emails-websites-phishing). Original cases; MIT licence retained.
+Static HTML/CSS/JavaScript. Serve the collection root and open `/spot-the-scam/`; no build step.
+
+Run `node --test spot-the-scam/tests.cjs migration-tests.mjs`. Checks cover every case and every action option through its actual tool, independent draft persistence, any-order completion, old saves, all advanced branches, folder filters, three-item rounds, malformed storage, double submission, multiple actions, downloads and reset. Native browser checks complement the controller tests.
+
+Original lessons are informed by [NCSC spotting guidance](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams), [reporting and recovery guidance](https://www.ncsc.gov.uk/collection/phishing-scams) and [GOV.UK reporting guidance](https://www.gov.uk/report-suspicious-emails-websites-phishing). Follow organisational procedures for real work incidents. MIT licence retained.
