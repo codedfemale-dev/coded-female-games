@@ -6,7 +6,7 @@ An immersive, local practice inbox. Open mail, texts and app notifications, inve
 
 ## Experience
 
-Three items arrive in a selectable inbox with All, Mail, Messages and Apps folders, sender names, previews and unread/read/filed states. Open them in any order. Desktop keeps the list beside the reader; mobile opens each item with an Inbox back control.
+Three items arrive in a selectable inbox with All, Mail, Messages and Apps folders, sender names, previews and unread/read/filed states. Normal play opens the first challenge automatically after delivery. Next challenge records the completed case and opens the next, continuing across inboxes and all five levels without a batch recap. A completion screen appears after all 30 cases. The optional Inbox control still lets players browse messages in any order. Desktop keeps the list beside the reader; mobile opens each item with an Inbox back control.
 
 Emails use a mail reader with From/To details. Texts and chats use a phone frame, status bar, contact header, incoming and outgoing bubbles, and a local message composer. Other channels use an app or account screen. The channel determines presentation; the scenario judgement never determines message colours.
 
