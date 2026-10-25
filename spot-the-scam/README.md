@@ -10,6 +10,10 @@ Three items arrive in a selectable inbox with All, Mail, Messages and Apps folde
 
 Emails use a mail reader with From/To details. Texts and chats use a phone frame, status bar, contact header, incoming and outgoing bubbles, and a local message composer. Other channels use an app or account screen. The channel determines presentation; the scenario judgement never determines message colours.
 
+Open message details and use Mark as clue to save the details you think matter. Marking is reversible and does not submit an answer. Feedback reviews marked details as useful evidence or context that does not prove identity on its own. These notes support genuine messages too; marking every detail does not earn a score. Marks persist across switching, reloading and completed records.
+
+Each of the 144 action options has an authored simulated consequence. It arrives in the conversation after acting, then feedback opens after a short pause; reduced motion removes the pause. Outcomes remain in the thread and the modal. Leaving or opening another tool cancels the pending popup. The modal’s primary action remains visible while longer feedback scrolls inside it. Existing advanced branches still follow their authored information.
+
 Use Reply, Check elsewhere, Report and More inside the simulated app. Replies use prewritten practice drafts. Independent checks open a saved contact or account. Supplied links open an internal page preview; payment, permission, forwarding and app actions use local confirmation panels. No actual message, payment, sign-in, permission grant, phone call or suspicious navigation occurs. Source links and guidance links are ordinary external links outside these tools.
 
 There are no answer letters or adjacent multiple-choice questions. Players can inspect records, act, switch to another item, return and investigate again before filing. Activity and outgoing replies remain in the conversation. Later cases add follow-up information and guided alternatives. Detailed learning notes are optional; the recap appears after all three items have been filed.
