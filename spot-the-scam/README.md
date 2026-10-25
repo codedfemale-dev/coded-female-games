@@ -1,41 +1,40 @@
 # Spot the Scam | Coded Female
 
-Thirty original investigations across five levels, with 48 decisions, 90 inspectable details and guided recovery branches in all 18 advanced cases. Built with static HTML, CSS and JavaScript. No installation or build step.
+A message lands. What’s your next move? Play a three-case inbox, tap message details, choose a short action and see what happens.
 
-[Collection game](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [All games](../README.md)
+[Play](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [Original link, which redirects here](https://codedfemale-dev.github.io/spot-the-scam/)
 
-## Learning journey
+## Play-first design
 
-1. **Notice the clues:** six introductory investigations about pressure, requests and independently supported messages.
-2. **Check before acting:** six investigations about trusted verification routes, recruitment, QR codes and account notices.
-3. **Put the pieces together:** six two-decision cases comparing messages, contacts and payment instructions.
-4. **Handle the convincing:** six two-decision cases about familiar conversations, voices, app permissions and account access.
-5. **Respond and recover:** six two-decision cases about sharing a password, clicking a link, payments, app access, supporting a colleague and opened attachments.
+The opening screen has one sentence and an **Open your inbox** action. The level map lives in the optional **Your progress** screen. Each case has one short setup, one message and three short actions. Tap a sender, destination, attachment label or earlier record to inspect it. All inspections remain inside the game.
 
-All levels are available. Later investigations offer a follow-up after the first decision. A safer choice proceeds directly to new evidence. A risky choice branches to an explicit guided check before rejoining the investigation; the game never pretends the risky action produced a successful check. Original choices remain in the notes. Hints have no penalty. Scores describe practice decisions, not security certification.
+After a choice, the other options disappear. The player sees one takeaway and can open **Why?** for the full explanation. Later cases reveal new information or offer a brief guided alternative after a risky choice. Rounds end after three cases, with three pocket notes and an **Another inbox** action. Full decision notes and downloads remain available separately.
 
-## Design and accessibility
-
-Coded Female's existing Open Sans, Playfair Display and Rokkitt families remain. The revised palette uses warm ivory `#F7F5F0`, deep forest `#253B35`, charcoal `#232B28`, antique gold `#806139` and pale sage `#E9EEE7`. Deep forest is the main page background, with warm ivory text and neutral light reading panels. Buttons on light panels and progress bars use forest; the hero’s primary button uses ivory for contrast against the forest background. Gold is reserved for small accents and focus cues. All messages and unselected answers use the same neutral surfaces regardless of whether a request is supported, suspicious or needs verification. Inspection labels indicate only that a detail was viewed; outcome colours appear only after a decision. White message cards, restrained borders and generous spacing keep the interface readable. No replacement logo.
-
-Responsive layouts use five, three or two level columns, then a single-column investigation on phones. Native buttons and disclosures support touch and keyboard. Focus moves to each new view or feedback, and text accompanies feedback colours. No hover-only inspection, drag interaction, timer or live suspicious links. Reduced-motion preferences are respected.
-
-`data-arcade-design="studio"` is the collection generator's existing opt-out for games with their own presentation. Preserve it so regeneration does not overwrite this redesign.
+Thirty original cases and 48 decisions cover five levels of increasing complexity. Each level has six cases; new inboxes prefer unseen cases in the earliest unfinished level. When possible, a round includes a supported message as well as requests needing checks. Genuine messages have the same presentation as suspicious ones. Replays can fill a round when only one or two unseen cases remain in a level. Targeted practice can contain fewer than three cases if only one or two need revisiting.
 
 ## Progress and privacy
 
-The browser stores versioned progress under `coded-female-scam-v2`: completed scenarios, choice IDs, inspected detail IDs and the current investigation. Resume restores the decision or guided check. Replaying replaces that scenario's previous choices; targeted practice uses the latest completed attempt. There is no account, analytics or remote answer storage. A storage failure leaves an in-memory playable session with a visible explanation. Malformed or obsolete data is ignored. Players can explicitly clear progress in the About disclosure. Clearing browser data also removes it.
+The existing `coded-female-scam-v2` browser-storage key is retained. Completed case records and active investigations from the previous version are preserved. The added `round` object records up to three case IDs and the cases finished in that inbox. Pausing or reloading restores the current decision, guided branch and round position. Replays replace that case’s latest choices. Malformed saves are ignored; unavailable storage leaves a playable in-memory session with an explanation. No account, analytics or remote answer storage.
 
-Downloads are generated locally as plain-text field notes. Google Fonts loads the established font families; fallback fonts work without it. Hosting serves ordinary page requests. Example addresses use reserved `.example` destinations or descriptive text and are never linked.
+Field notes are generated locally. Players can clear progress through the About disclosure. Google Fonts provides the established Open Sans, Playfair Display and Rokkitt families, with system fallbacks.
+
+## Presentation and accessibility
+
+Dark forest surrounds, ivory actions on dark surfaces, neutral light message cards and small gold accents. Sender details and unopened evidence never encode whether a message is genuine. Keyboard-accessible native disclosures and buttons, visible focus, focus on new views and feedback, and live announcements. No hover-only interactions, timer or hint penalty. Phone layouts stack the message and actions. Reduced-motion preferences are respected.
+
+Preserve `data-arcade-design="studio"`: the collection generator uses it to retain this game’s own interface.
 
 ## Development
 
-Serve the collection root with a static HTTP server, then open `/spot-the-scam/`. Direct `index.html` use also works, subject to the browser's local-storage policy. No build is needed for GitHub Pages.
+Static HTML, CSS and JavaScript. No build step. Serve the collection root and open `/spot-the-scam/`.
 
-Run `node --test spot-the-scam/tests.cjs migration-tests.mjs` from the collection root. Controller checks cover all 30 successful routes, all 18 guided branches, resume, malformed saves, unavailable storage, double-answer guards, downloads, explicit reset and option shuffling. Native browser QA complements these checks.
+- `questions.js`: original cases, short setups, short action labels, full explanations and stable answer IDs.
+- `script.js`: inbox rounds, inspection, branches, progress, resume and downloads.
+- `style.css`: responsive dark-forest interface.
+- `tests.cjs`: all case routes and recovery branches, old-save compatibility, three-case boundaries, progression, malformed saves, storage failures, duplicate-answer guards and notes.
 
-Each question in `questions.js` has a stable ID, level, three inspections and one or two decision stages. Keep options uniquely identified and retain the `correct` ID after shuffling. Advanced stages include new evidence under `reveal`. Keep context, follow-up and inspection facts consistent. Supported situations should remain in the bank so learners can practise proceeding when there is sufficient evidence.
+Run `node --test spot-the-scam/tests.cjs migration-tests.mjs` from the collection root. Browser checks complement the controller tests.
 
 ## Guidance
 
-An introductory practice game, not a certification or incident-response service. Follow organisational procedures for work accounts. Original scenarios are informed by [NCSC spotting guidance](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams), [NCSC reporting and recovery guidance](https://www.ncsc.gov.uk/collection/phishing-scams) and [GOV.UK reporting guidance](https://www.gov.uk/report-suspicious-emails-websites-phishing). Reviewed 25 October 2026. MIT licence retained.
+Introductory practice, not a security certification or incident-response service. Follow organisational procedures for work accounts. Lessons are informed by [NCSC spotting guidance](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams), [NCSC reporting and recovery guidance](https://www.ncsc.gov.uk/collection/phishing-scams) and [GOV.UK reporting guidance](https://www.gov.uk/report-suspicious-emails-websites-phishing). Original cases; MIT licence retained.
