@@ -818,7 +818,7 @@ const SCAM_QUESTIONS = [
     "difficulty": "starter",
     "topic": "Question compulsory application fees",
     "channel": "Professional networking message",
-    "sender": "Ellis Recruitment",
+    "sender": "Alex, recruiter",
     "address": "Profile you have not verified",
     "subject": "Your CV cannot enter our system",
     "context": "A recruiter has asked for your CV. They now say you must purchase a conversion from their chosen website to remain eligible.",
