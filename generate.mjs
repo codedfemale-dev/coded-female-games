@@ -3,6 +3,7 @@ import {legacyGames} from './legacy-games.js';
 import {worlds,identity,categories,scenePanel,sceneSvg} from './arcade-worlds.js';
 import {mkdir,writeFile} from 'node:fs/promises';
 import {refreshStandalone} from './generate-standalone.mjs';
+import {ensureArcadeNavigation} from './arcade-navigation.mjs';
 const escape=s=>s.replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const symbols={window:'▤',code:'{ }',agent:'◎',design:'◇',metrics:'▥',people:'◌'};
 const header=prefix=>`<a class="skip" href="#main">Skip to content</a><div class="shell"><header><a class="brand" href="https://codedfemale.com"><b class="brand-monogram">CF</b><span>CODED FEMALE<small>THE LEARNING ARCADE</small></span></a><nav aria-label="Main navigation"><a href="${prefix}">All games</a><a class="external" href="https://codedfemale.com">Explore Coded Female ↗</a></nav></header>`;
@@ -21,4 +22,5 @@ for(const [slug,g] of entries){
   await writeFile(new URL(`${slug}/index.html`,import.meta.url),html);
 }
 await refreshStandalone();
+await ensureArcadeNavigation([...Object.keys(games),...Object.keys(legacyGames)]);
 console.log('Built the 16-game arcade, six shared-engine pages and seven standalone worlds.');
