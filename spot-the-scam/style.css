@@ -46,3 +46,5 @@ body,body *{font-family:'Open Sans',Arial,sans-serif!important}.brand{font-size:
 
 /* Show the actual actions, without generic tool menus. */
 .app-toolbar{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px}.app-toolbar .app-action{font-size:12px;line-height:1.45;min-height:52px;padding:11px 12px;white-space:normal;text-align:left;justify-content:flex-start}.phone>.app-toolbar{display:grid;grid-template-columns:1fr;gap:5px;padding:10px;margin-top:0;border-top:1px solid #d6ddcf}.phone .app-toolbar .app-action{font-size:11px;line-height:1.4;min-height:44px;padding:9px 12px;text-align:left}.phone .app-toolbar .app-action:before{content:'›';color:#806139;margin-right:8px}@media(max-width:720px){.app-toolbar{grid-template-columns:1fr}.app-toolbar .app-action{font-size:12px;min-height:44px;padding:10px 12px}}
+
+.action-receipt{display:flex;align-items:center;justify-content:space-between;gap:14px}.action-receipt>.primary{min-width:150px;min-height:48px;margin:0}.action-receipt>.receipt-label{flex:1}@media(max-width:720px){.action-receipt>.primary{min-width:155px}}
