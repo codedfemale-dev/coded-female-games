@@ -97,11 +97,6 @@ document.addEventListener('keydown',e=>{if(e.repeat||document.querySelector('dia
 document.addEventListener('visibilitychange',()=>{if(document.hidden){walking=null;paused=true;render();}});
 setInterval(()=>{if(!started||state.phase!=='run'||paused||state.mode==='practice'||walking||document.querySelector('dialog[open]'))return;remaining--;if(remaining<=0)tickDay();else{if($('#clock-label'))$('#clock-label').textContent=clockText();if($('#clock-fill'))$('#clock-fill').style.width=100*(12-remaining)/12+'%';}},1000);
 render();
-// Installation stays optional; normal browser play uses the same campaign.
-let installPrompt;
-window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();installPrompt=e;$('#install').hidden=false;});
-$('#install').addEventListener('click',async()=>{if(!installPrompt)return;await installPrompt.prompt();await installPrompt.userChoice;installPrompt=null;$('#install').hidden=true;});
-window.addEventListener('appinstalled',()=>{$('#install').hidden=true;$('#app-status').textContent='APP INSTALLED · YOUR CAREER STAYS ON THIS DEVICE';});
 if('serviceWorker' in navigator){navigator.serviceWorker.register('./sw.js',{scope:'./',updateViaCache:'none'}).then(async registration=>{
  registration.installing?.addEventListener('statechange',()=>{if(registration.installing?.state==='redundant')$('#app-status').textContent='ONLINE PLAY READY · OFFLINE FILES COULD NOT BE SAVED';});
  const ready=await navigator.serviceWorker.ready;

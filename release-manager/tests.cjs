@@ -16,7 +16,7 @@ test('offline shell installs every required file and stays scoped to this game',
  const fs=require('node:fs/promises'),path=require('node:path'),vm=require('node:vm');
  const handlers={},stored=new Map(),deleted=[];let added=[];
  const cache={addAll:async requests=>{assert(requests.every(r=>r.cache==='reload'));added=requests.map(r=>r.url);for(const u of added)stored.set(u,{cached:u});},match:async r=>stored.get(typeof r==='string'?r:r.url)};
- const sandbox={URL,Request,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v12'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
+ const sandbox={URL,Request,self:{location:{href:'https://codedfemale-dev.github.io/coded-female-games/release-manager/sw.js'},clients:{claim:async()=>{}},addEventListener:(name,cb)=>handlers[name]=cb},caches:{open:async()=>cache,keys:async()=>['other-game','cf-release-manager-obsolete','cf-release-manager-v13'],delete:async k=>deleted.push(k)},fetch:async()=>{throw Error('offline');}};
  vm.runInNewContext(await fs.readFile(path.join(__dirname,'sw.js'),'utf8'),sandbox);
  let pending;handlers.install({waitUntil:p=>pending=p});await pending;
  for(const u of added){const relative=new URL(u).pathname.replace('/coded-female-games/','');await fs.access(path.join(__dirname,'..',relative));}

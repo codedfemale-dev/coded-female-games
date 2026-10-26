@@ -4,11 +4,11 @@ A standalone Coded Female management arcade web app, styled as a companion to Pr
 
 **[Play the web app](https://codedfemale-dev.github.io/coded-female-games/release-manager/)**
 
-## Play and install
+## Play in your browser
 
 Open the link in a browser. Choose an arcade campaign (12 seconds per workday) or untimed play. The clock starts paused, and stops for stakeholder decisions. Run/Pause controls the clock; Next day advances manually. A campaign takes about 15–25 minutes including planning and feedback.
 
-The app can be added to a home screen or installed in supporting browsers. Use the in-game Install app button when offered; otherwise use the browser's install menu. On iPhone/iPad Safari, Share → Add to Home Screen. The manifest scopes the installed app to this game. Installation availability and wording vary by browser.
+Play directly in your browser. There are no in-game installation prompts or buttons. Supporting browsers may still offer their own option to add the game to a home screen; the manifest scopes that option to this game.
 
 Wait for **OFFLINE PLAY READY** after a successful first visit. Then this game can reopen without a connection, including its artwork, fonts, rules and saved career. Links to other games and learning sources require a connection. A service worker caches a complete version of the game and affects only this game's directory, plus its explicit shared font request; it does not take over the collection. Updates activate after all old game windows close. The app tells you when an update is waiting. Increment the cache version in `sw.js` whenever releasing changed game files, and update versioned asset URLs and precache entries together when changing those URLs.
 

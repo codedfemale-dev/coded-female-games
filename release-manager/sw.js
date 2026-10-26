@@ -1,6 +1,6 @@
 // Keep a complete release together. New versions activate after old game tabs close.
-const VERSION='cf-release-manager-v12';
-const FILES=['./','./index.html','./app.js?v=12','./style.css?v=12','./content.js','./engine.js','./art.js','./scene.js','./movement.js','./people.js','./team-room.js','./manifest.webmanifest','./icon.svg','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','../assets/open-sans.ttf'];
+const VERSION='cf-release-manager-v13';
+const FILES=['./','./index.html','./app.js?v=13','./style.css?v=13','./content.js','./engine.js','./art.js','./scene.js','./movement.js','./people.js','./team-room.js','./manifest.webmanifest','./icon.svg','./icons/icon-192.png','./icons/icon-512.png','./icons/maskable-512.png','../assets/open-sans.ttf'];
 const urls=FILES.map(p=>new URL(p,self.location.href).href);
 self.addEventListener('install',e=>e.waitUntil(caches.open(VERSION).then(c=>c.addAll(urls.map(url=>new Request(url,{cache:'reload'}))))));
 self.addEventListener('activate',e=>e.waitUntil(Promise.all([caches.keys().then(keys=>Promise.all(keys.filter(k=>k.startsWith('cf-release-manager-')&&k!==VERSION).map(k=>caches.delete(k)))),self.clients.claim()])));
