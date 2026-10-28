@@ -1,35 +1,30 @@
 # Product Quest
 
-An original retro pixel-art browser RPG for Coded Female. You are a Product Manager at MEGACORP in 1995. Your big idea is a spoon. Your real challenge is seven stakeholders.
+An original retro pixel-art browser game for Coded Female. You are a Product Manager at MEGACORP, working with seven stakeholders on a bounded spoon pilot. The office is retro; the product decisions are present-day.
 
 ## Play
 
-**[Play Product Quest in your browser →](https://codedfemale-dev.github.io/coded-female-games/product-quest/)**
+Choose with the mouse, touch or keys **1–3**. **C** takes an optional breather. **Enter** starts or continues; native buttons support Tab and Enter. Sound is off by default. There is no timer.
 
-Choose dialogue with the mouse, touch, or keys **1–3**. Press **C** for a coffee break; **Enter** starts the game or advances after a win. Native buttons also support Tab and Enter. Sound is off by default and can be toggled. There is no timer. The field guide explains the full rules before play.
+Each meeting covers three evidence-based situations. Each situation offers two defensible approaches, both worth 30 alignment, and one approach that leaves a material gap, worth 10. Three sound decisions earn 90 against a target of 80. You must cover all three decisions and resolve every gap before moving on. A focused review replaces the earlier 10 with 30, adding 20 without restarting the run. Feedback explains the consequence, trade-off and next check.
 
-Reach 80 alignment within three turns per boss. Strong arguments earn 40 alignment for 14 energy and +4 confidence. Partial arguments earn 24 for 8 energy and −5 confidence. Corporate nonsense earns 8 for 4 energy and −24 confidence. The dialogue order changes by encounter. Read the stakeholder intel rather than memorising button positions.
+Energy is a pacing cue only. It never blocks choices or affects XP. A decision uses 6 energy; an optional once-per-meeting breather restores 24. Moving to the next meeting restores 18. Energy stays between 0 and 100. There is no confidence penalty, required coffee or game over.
 
-Start with 80 energy and confidence. Two coffees each restore 32 energy and 8 confidence, with one per boss. Advancing after an approval restores 18 energy and 8 confidence. Resources cap at 100. Zero confidence, insufficient energy without an available coffee, or failing to align in three turns ends the run. You can replay immediately. All seven approvals unlock the successful scorecard. The review includes the scoring formula and meeting minutes, and can be copied to the clipboard (with a text-selection fallback).
+Completion XP is 100 per grounded decision plus 150 per stakeholder agreement, totalling 3,150 for all 21 decisions and seven agreements. Both sound approaches and successful reviews earn equal credit. Speed, breaks and first attempts do not change the score. The final screen records the conditions agreed before the pilot; it does not imply a real product is ready to release. Players can save or copy their decision record, including revised choices and trade-offs.
 
 ## Run and test
 
-No installation or build step is required. From the repository root, serve the directory with any static HTTP server, for example `python3 -m http.server 8080`, then open `http://localhost:8080/product-quest/`. JavaScript modules require HTTP.
+No installation or build step is required. Serve the repository with a static HTTP server, for example `python3 -m http.server 8080`, then open `http://localhost:8080/product-quest/`. JavaScript modules require HTTP.
 
 ```sh
 node --test product-quest/tests.cjs
-# All repository tests, including this game:
 node --test tests.mjs learning-tests.mjs migration-tests.mjs */tests.cjs
 ```
 
-`engine.js` contains pure state transitions and scoring; `app.js` renders semantic HTML controls; `art.js` draws original sprites on a low-resolution canvas; `style.css` provides the responsive interface. Add new encounters in `engine.js`. No remote fonts, image assets, services, analytics or runtime packages are needed. Progress is held in memory and resets on reload.
+`content.js` holds the 21 situations and feedback. `engine.js` contains pure state transitions and scoring. `app.js` renders semantic HTML controls, `art.js` draws the existing original pixel artwork, and `style.css` provides the responsive interface. No runtime packages or external services are needed. Progress is held in memory and resets on reload. This is a fictional learning exercise: no payments, orders or messages are sent.
 
-## GitHub Pages
+## Publishing and scope
 
-This is a plain static subdirectory in the existing collection. The repository already contains `.nojekyll` and documents publishing `main` from `/ (root)`. Once these changes are merged into that publishing branch, Pages serves `/product-quest/` alongside the other games. No separate build or replacement deployment workflow is needed. If Pages is disabled, choose Settings → Pages → Deploy from a branch → main → / (root). See [GitHub’s publishing-source guidance](https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site).
+This static directory runs within the existing GitHub Pages arcade. Review locally before merging into the publishing branch. Product Quest changes do not require regenerating or replacing the arcade catalogue or changing another game.
 
-The catalogue is generated from `legacy-games.js`; run `node generate.mjs` after changing its entry and keep the generated `index.html` tracked.
-
-## Scope
-
-Seven bosses: CEO, CFO, engineering, marketing, legal, sales and the executive board. Twenty-one authored encounters; a strong run can finish in fourteen turns. This is fictional workplace satire with simplified strategic mechanics, not advice or a model of real people. Artwork and dialogue were made for this game. Existing repository content and brand permissions apply; no new licence is granted.
+The seven meetings cover discovery, costs, engineering, marketing, legal, sales and a final board review. Simplified fictional situations support practice, rather than measuring professional ability. Existing repository content and brand permissions apply; no new licence is granted.
