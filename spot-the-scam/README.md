@@ -1,47 +1,42 @@
 # Spot the Scam | Coded Female
 
-An immersive, local practice inbox. Open mail, texts and app notifications, investigate the details and act through simulated tools.
+A local practice inbox with 30 fictional cases across five levels and 48 decision stages. Read mail, texts and app notifications, inspect details, mark clues and act through simulated tools. The existing forest, ivory and gold design, Open Sans font, phone and mail surfaces remain in place.
 
-[Play](https://codedfemale-dev.github.io/coded-female-games/spot-the-scam/) · [Original link](https://codedfemale-dev.github.io/spot-the-scam/)
+## One decision, one committed action
 
-## Experience
+Inspecting a message, marking a clue or opening a tool does not commit a decision. Confirming the chosen action records it once, adds one authored outcome and closes the action controls for that decision. Repeated taps cannot append another action. View feedback opens the existing native modal; it stays closed until requested.
 
-Three items arrive in a selectable inbox with All, Mail, Messages and Apps folders, sender names, previews and unread/read/filed states. Start the game opens the first or saved challenge directly, without rendering the inbox first. Each assessed action reveals a short feedback card showing what the player spotted or missed, using individually authored feedback for all 144 action options. Each response repeats the chosen action, explains its safety or risk, and identifies the relevant scenario clue. Feedback follows the latest action while earlier decisions remain in the record. Riskier actions include the safer move; changing course is acknowledged without erasing earlier decisions. Feedback opens in a compact native modal dialog showing a short heading, one action-specific takeaway and Next challenge or the branching follow-up action. See details is closed by default and contains the full reason, chosen action, consequence, clue, safer move, marked clues and longer explanation. The background is inert while it is open. Escape or Back to message dismisses it, and View feedback reopens it. Focus enters the dialog; longer explanation is optional. Next challenge records the completed case and opens the next, continuing across inboxes and all five levels without a batch recap. A completion screen appears after all 30 cases. The optional Inbox control still lets players browse messages in any order. Desktop keeps the list beside the reader; mobile opens each item with an Inbox back control.
+**Compare another choice** rewinds to just before the current decision in a separately labelled alternative timeline. Choose one other action and inspect its outcome and feedback. The original choice is disabled in that comparison. Return to original timeline restores the committed outcome. Only the original timeline can continue or file the challenge. Each distinct comparison is saved once; repeating it does not duplicate an event.
 
-Emails use a mail reader with From/To details. Texts and chats use a phone frame, status bar, contact header, incoming and outgoing bubbles, and a local message composer. Other channels use an app or account screen. The channel determines presentation; the scenario judgement never determines message colours.
+Some advanced cases need an independent check before their authored follow-up. If the original risky route stops, the player explicitly opens a **guided follow-up timeline** from a hypothetical independent check. Its working thread contains that check and the follow-up. The original first action and outcome stay in a separate disclosure, rather than appearing to be undone. Comparisons within the follow-up remain separate too.
 
-Open message details and use Mark as clue to save the details you think matter. Marking is reversible and does not submit an answer. Feedback reviews marked details as useful evidence or context that does not prove identity on its own. These notes support genuine messages too; marking every detail does not earn a score. Marks persist across switching, reloading and completed records.
+All 144 action options retain their specific reasons, scenario clues and authored consequences. Genuine messages remain among the scenarios. Checking a supported request can lead to a useful action; safe practice does not mean rejecting everything.
 
-Each of the 144 action options has an authored simulated consequence. It arrives in the conversation after acting. Feedback opens only when the player presses Next, with no automatic timer, including on reload or resume. The popup’s Next challenge button then continues the game. Outcomes remain in the thread and the modal. Players can read the outcome or investigate further before opening feedback. The modal’s primary action remains visible while longer feedback scrolls inside it. Existing advanced branches still follow their authored information.
+## Records and privacy
 
-The bottom toolbar shows each specific action for the current challenge, in the saved shuffled order. Selecting an action directly opens its contact, draft or confirmation. Generic Reply, Check elsewhere and More menus and the duplicate phone composer are removed. Mobile and phone actions stack as full-width buttons so their labels remain readable. Unsupported generic replies and reports are not offered, and message-record inspection stays in the expandable message details. Submitting any available action records a decision and leads to feedback and a next-step control. A sticky challenge counter with a subtle gold completion bar remains visible on mobile and desktop. Practice rounds have their own counter. Replies use prewritten practice drafts. Independent checks open a saved contact or account. Supplied links open an internal page preview; payment, permission, forwarding and app actions use local confirmation panels. No actual message, payment, sign-in, permission grant, phone call or suspicious navigation occurs. Source links and guidance links are ordinary external links outside these tools.
+The original first-action record is retained. Notes distinguish original decisions, decisions in a guided follow-up and alternative timelines. Downloads contain their labelled actions and outcomes, reasoning, marked clues and takeaways. First-action history supports targeted practice; it is not a security certification or a score of professional ability.
 
-There are no answer letters or adjacent multiple-choice questions. Players can inspect records, act, switch to another item, return and investigate again before filing. Activity and outgoing replies remain in the conversation. Later cases add follow-up information and guided alternatives. Detailed learning notes are optional; the recap appears after all three items have been filed.
+The existing `coded-female-scam-v2` storage key and version are preserved. Timeline fields have their own marker. Older saves keep their first decisions; mixed later activity is preserved in a labelled archive and never treated as a single current world state. Later legacy choice IDs are retained even without an old transcript. Active comparisons, selected alternatives, clue marks and unfinished conversations survive reload and message switching. Changing levels retains unfinished drafts. Completed records are locked.
 
-## Learning and records
+No real message, payment, sign-in, phone call, permission grant or suspicious navigation happens. Tool confirmations and outcomes are scripted simulations. No account, analytics or remote answer storage is used. Notes download locally. Clear saved progress affects this game only, after an explicit confirmation. If storage is unavailable, a visible note explains that the session stays in memory. Fonts use the existing Google Fonts request with system fallbacks.
 
-Thirty original cases and 48 decision stages cover five levels. New rounds prefer unseen cases in the earliest unfinished level and mix message channels and supported situations where available. All cases remain reachable. The optional progress screen holds levels, targeted practice and notes.
+## Play and preview
 
-The first action per stage is retained for the recap and targeted practice. Later actions are logged separately, and the latest action controls the next branch. A later check does not erase an earlier action from the notes. Replays replace a case’s previous record. Practice is not a security certification.
+Serve the collection root over HTTP and open `/spot-the-scam/`. No package installation or build step is needed. The preview is reviewed locally before publication through the existing GitHub Pages collection. Changing this game does not require editing the catalogue, shared navigation, shared styles or any other game.
 
-## Save and privacy
+The launch animation can be skipped and respects reduced motion. Native buttons, disclosures, read-only drafts, modal focus and text labels support keyboard and touch. A prominent timeline banner names the current route. Responsive controls wrap at narrow widths. This has not been audited with every browser or assistive technology.
 
-The existing `coded-female-scam-v2` storage key is preserved. Old completed records and active investigations migrate without losing choices or inspected evidence. `round` contains item IDs, filed IDs and opened IDs. `drafts` stores each unfinished conversation independently, including activity, first choices and latest actions. Reloading returns to the inbox; reopening an item restores its conversation. Corrupt data is validated; unavailable storage leaves an in-memory session with a visible note. No account, analytics or remote answer storage.
+## Development
 
-Field notes are generated locally. Progress can be cleared explicitly from About. No actual personal details are requested in the simulated tools.
+- `questions.js`: the existing 30 cases, clues, trusted-route context, tools and authored feedback.
+- `timeline.js`: bounded comparison records, canonical route events, legacy-field migration and commit guards.
+- `script.js`: inbox, tools, modal feedback, save validation, progress and notes.
+- `style.css`: the existing appearance plus local timeline styles.
+- `tests.cjs`: controller tests for all cases/actions, comparisons, repeats, saved-state recovery, legacy migration and records.
 
-## Brand and accessibility
+```sh
+node --test spot-the-scam/tests.cjs
+node --test *tests.mjs */*tests.cjs
+```
 
-Dark forest surrounds, ivory and white reading surfaces, subtle gold details. Open Sans throughout the game, including headings, the text brand header and simulated apps, keeps the experience seamless. The main Coded Female website uses Playfair Display headings and Open Sans body text; this single-family choice is specific to the game and does not replace original logo artwork.
-
-The launch opens with “Spot the Scam.”, a short computer-style loading bar and the typed line “A message lands. What’s your next move?”. Start the game then opens the inbox or resumes saved work. Normal play bypasses inbox delivery and opens a challenge immediately. The optional inbox remains available for browsing. Read and filed messages remain in place; returning from an investigation never replays delivery. Gold badges, unread dots and selected tabs mark activity without encoding scenario judgements. Leaving the inbox cancels pending delivery animations. Skip intro is keyboard accessible; reduced-motion preferences reveal the complete line and controls immediately. Returning home does not replay the animation during the same visit.
-
-Native buttons, disclosures and read-only draft textareas support keyboard and touch. Focus moves into opened readers and tool panels; text accompanies action states. Phone and desktop layouts are responsive. No timer, hint penalty, hover-only inspection or real malicious links. Keep `data-arcade-design="studio"` so the collection generator preserves this interface.
-
-## Development and checks
-
-Static HTML/CSS/JavaScript. Serve the collection root and open `/spot-the-scam/`; no build step.
-
-Run `node --test spot-the-scam/tests.cjs migration-tests.mjs`. Checks cover every case and every action option through its actual tool, independent draft persistence, any-order completion, old saves, all advanced branches, folder filters, three-item rounds, malformed storage, double submission, multiple actions, downloads and reset. Native browser checks complement the controller tests.
-
-Original lessons are informed by [NCSC spotting guidance](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams), [reporting and recovery guidance](https://www.ncsc.gov.uk/collection/phishing-scams) and [GOV.UK reporting guidance](https://www.gov.uk/report-suspicious-emails-websites-phishing). Follow organisational procedures for real work incidents. MIT licence retained.
+Learning references retained: [NCSC spotting guidance](https://www.ncsc.gov.uk/collection/phishing-scams/spot-scams), [NCSC reporting and recovery](https://www.ncsc.gov.uk/collection/phishing-scams) and [GOV.UK reporting guidance](https://www.gov.uk/report-suspicious-emails-websites-phishing). Follow organisational procedures for real work incidents. MIT licence retained.

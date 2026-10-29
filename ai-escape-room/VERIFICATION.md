@@ -1,23 +1,19 @@
-# Verification
+# AI Escape Room preview verification
 
-Checked locally and published on GitHub Pages on 10 October 2026. Repository: https://github.com/codedfemale-dev/coded-female-games/tree/main/ai-escape-room. Play: https://codedfemale-dev.github.io/coded-female-games/ai-escape-room/. GitHub Pages deployment completed successfully.
+Status: local preview, not published.
 
-## Passed
+Checked in the in-app browser:
 
-- JavaScript syntax check and five automated checks for lock logic, clues, hint content, page wiring and local assets.
-- Exhaustive answer-combination checks: each room has exactly one intended passing solution. The control lock requires both relevant lines and draft-only permission.
-- Full browser playthrough across all three rooms and the final exit.
-- Incorrect answers left rooms locked and identified the part needing revision. Correct answers revealed the corresponding code fragment and disabled further submissions.
-- Clue switching and both hint levels worked. The final screen acknowledged the room where hints were used.
-- The evidence room rejected “contradicted” for a claim absent from the record, then accepted “not stated” and displayed all four explanations.
-- The control room rejected sending and accepted drafting with the two relevant facts.
-- The final door rejected an incorrect code and accepted the collected fragments in order.
-- Escape notes downloaded as `coded-female-ai-escape-notes.txt`.
-- Replay returned to the first room and hid all previously collected fragments.
-- Phone layout at 390 pixels wide and desktop layout at 1280 pixels wide showed no horizontal overflow in the checked states.
-- After final readability changes, the five automated checks passed again.
-- A full live browser playthrough passed all three rooms and the final exit without hints, verifying the other final-screen branch. No browser errors or warnings were reported.
+- The new clue colours replace the observed pale-on-white labels. Normal and selected states have explicit, readable colour pairs. Keyboard focus has a visible outline.
+- An incorrect audience keeps the other settings and moves focus to useful feedback. Correcting it opens the lock and shows the verified 40-word welcome email.
+- The evidence room produces a corrected report with all four claim verdicts, source references and respondent denominators.
+- The control room produces a two-sentence draft, with no send or export action.
+- Incorrect transfer choices keep all selections and leave the exit locked. Correcting them creates the selected, bounded draft.
+- An incorrect exit code is marked invalid and keeps the checked draft. Correct fragments reach completion with four inspectable outputs.
+- The downloaded text record was opened and checked: all four outputs, evidence notes, selected transfer summary, practice history and simulation limits are present.
+- At 360 pixels wide, clue text and controls wrap; the decorative room scene is omitted. Tab and Enter open clues. Native keyboard select controls can repair and complete the first room, including recovery from an incorrect audience.
+- Desktop document width does not overflow.
 
-## Limits
+Pure tests cover all original lock combinations, both accepted transfer summaries, all transfer option combinations, inherited or unknown answer keys, output word limits, retained denominators, two-sentence control output and required local assets.
 
-These checks are not a complete screen-reader or cross-browser audit. All AI outputs and source documents are scripted, fictional examples.
+Not established: screen-reader usability, every narrow-screen branch, device performance, cross-browser coverage or learner comprehension. No live AI or external actions are involved.

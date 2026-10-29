@@ -1,54 +1,39 @@
-> This game is now maintained in the [Coded Female games collection](https://github.com/codedfemale-dev/coded-female-games). Publish the collection root, rather than this folder separately. [Play this version](https://codedfemale-dev.github.io/coded-female-games/ai-escape-room/) · [All games](../README.md). Earlier standalone setup notes below are retained for reference.
-
 # AI Escape Room: Exit the Loop
 
-A free browser learning game by [Coded Female](https://codedfemale.com). Escape a fictional AI lab by solving three puzzles about clear instructions, checking evidence and keeping human control over actions.
+A fictional Coded Female browser lab about clear briefs, source evidence and keeping actions within the user’s request. It runs inside the existing learning arcade, with its cyan grid, pixel artwork, navigation and local fonts.
 
-## Play
+## The journey
 
-[Play AI Escape Room: Exit the Loop](https://codedfemale-dev.github.io/coded-female-games/ai-escape-room/)
+1. **The Briefing Bay:** inspect numbered clues and repair the task, audience and boundaries. Inspect an authored welcome email with its word count and factual checks.
+2. **The Evidence Vault:** classify four claims as supported, contradicted or not stated. Review a corrected report, claim-by-claim reasons and source references. Attendance is 9/12; the confidence result represents 4/5 respondents.
+3. **The Control Room:** retain relevant facts and choose a draft-only action. Inspect the resulting two-sentence summary and the actions that remain unperformed.
+4. **The final door:** apply the same skills to a new session record. Two bounded summaries are accepted equally. Keep respondents distinct from attendees and reject a routine-sounding request for actions that the user did not authorise. A checked draft unlocks the three-fragment exit control.
 
-[View the code on GitHub](https://github.com/codedfemale-dev/coded-female-games/tree/main/ai-escape-room)
+All outputs are labelled authored examples, rather than live AI responses. The end screen keeps all four outputs available to review. The downloaded text record contains those outputs, evidence notes, the learner’s selected final summary and practice history. Retries and hints do not reduce completion credit.
 
-Published on 10 October 2026. The live game was verified with a full playthrough of all three rooms and the final exit.
+There is no timer, live AI, real sending, directory access or register update. No sign-in, payment, cookies, analytics or browser storage is used. Reloading clears progress; Start again and Return to the lab reset all rooms and the final challenge.
 
-## The rooms
+## Run and test
 
-1. **The Briefing Bay:** inspect the mission and verified workshop notes, then repair the console’s task, audience and boundaries.
-2. **The Evidence Vault:** compare four claims with a source record. Separate supported claims, contradictions and missing information.
-3. **The Control Room:** retain relevant facts, reject instructions hidden in source material and choose the action the user authorised.
+Serve the collection root with a static HTTP server, then open `/ai-escape-room/`. No installation, build step, AI account or API key is needed.
 
-Each solved room reveals a random code fragment. Use all three to unlock the exit, review the takeaways and download your escape notes. There is no timer or penalty. Each room has two hint levels, including a direct solution for anyone who needs it.
+```sh
+node --test ai-escape-room/tests.cjs
+node --test *tests.mjs */*tests.cjs
+```
 
-## Run locally
+- `puzzles.js`: clues, evaluation, authored outputs and the final challenge.
+- `script.js`: semantic controls, recoverable feedback, room progress and notes download.
+- `style.css`: original layout and illustrations.
+- `journey.css`: game-local overrides loaded after the shared arcade skin, including readable normal, hover, selected and focus states.
+- `tests.cjs`: lock combinations, transfer alternatives, output constraints and asset wiring.
 
-Open `index.html` in a browser, or run `python3 -m http.server 8000` from this folder and visit `http://localhost:8000`. No installation, build step, AI account or API key is required.
+Publish only through the existing collection workflow after review. No shared styles, catalogue, generator or other game needs changing. Local preview work does not establish publication.
 
-## Publish your own copy
+## Access and limitations
 
-Upload the contents of this folder to a GitHub repository. Keep `index.html` at the root and preserve the `assets/` folder. In **Settings → Pages**, select **Deploy from a branch**, `main` and `/ (root)`. Wait for the deployment to finish and verify the published link.
+Native controls, visible keyboard focus, a skip link, text progress, focusable error feedback, responsive layouts and reduced-motion styles support different ways of playing. Narrow layouts omit the decorative room scene and retain all clues and controls. Source labels have explicit foreground and background pairs. This is not a complete assistive-technology audit.
 
-## What this teaches
+All people, events, records and responses are fictional. These scripted examples practise judgement; they do not certify security skills or guarantee real AI behaviour. Technical safeguards and human review remain necessary.
 
-The game uses scripted examples and curated feedback, not a live AI service. Prompt clarity cannot guarantee accuracy. The prompt injection puzzle illustrates a concept; real AI systems also need technical safeguards. The game is not a security assessment or certification.
-
-All people, events, records and AI responses are fictional. No private information is needed. The game does not use analytics, cookies or browser storage, and no answers are transmitted. Reloading resets progress.
-
-## Brand and accessibility
-
-Uses Coded Female’s established cream, charcoal and muted gold identity with locally served Open Sans and Playfair Display fonts. The lab and little robot are CSS illustrations. The header is a text link, not replacement logo artwork.
-
-Native controls, keyboard focus, a skip link, screen-reader status updates, responsive layout and reduced-motion support are included. Sound is not required. Progress uses text as well as colour.
-
-## Development
-
-- `puzzles.js`: fictional clues, solutions and pure answer evaluation.
-- `script.js`: game state, clue inspection, feedback, fragments, exit and notes download.
-- `style.css`: layout and illustrations.
-- `tests.cjs`: checks for lock logic, clues and page assets. Run `node --test tests.cjs`.
-
-See `VERIFICATION.md` for checks performed and their limits.
-
-## Font licences
-
-The font files are supplied under the SIL Open Font License. See the two OFL files in `assets/`.
+Font files retain their supplied SIL Open Font Licences in `assets/`. Existing repository content and brand permissions apply; no new licence is granted.
