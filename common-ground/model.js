@@ -14,7 +14,7 @@ export function validateDetails(details) {
   if(!value.name)errors.name='Enter your name so we know who the place is for.';
   else if(value.name.length>100)errors.name='Use 100 characters or fewer for your name.';
   if(!value.email)errors.email='Enter your email address.';
-  else if(value.email.length>254 || !/^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/.test(value.email))errors.email='Enter an email address with an @ sign, such as jo@example.com.';
+  else if(value.email.length>254 || !/^[^\s@]+@[^\s@.]+(?:\.[^\s@.]+)+$/.test(value.email))errors.email='Enter an email address in the format jo@example.com.';
   return {value,errors};
 }
 

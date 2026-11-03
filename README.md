@@ -154,3 +154,12 @@ Use WASD/arrows and E, click consoles on the map, use named console buttons or f
 `engine.js` owns the actual circuit, drone and schedule rules. `panels.js` renders interactive consoles, `journey.js` provides objectives, and `app.js` connects them to the original `scene.js` bridge. Changed entry files and module imports are versioned. `content.js` holds mission copy and verified primary-source links. Original generated bridge artwork remains local as WebP with its retained prompt.
 
 Run `node --test mission-control/tests.cjs` for all nine circuit configurations, six drone allocations, 32 post-discovery schedule/capacity combinations, real JavaScript edge cases, phase gates, retries, full campaign completion, notes and actionable journey guidance. The repository-wide test script includes these checks.
+
+
+### Open for Everyone workshop, 3 November 2026
+
+The Common Ground entry point now owns its five-repair workshop, leaving the shared engine in place for other games. Each choice has specific reasoning, selected previews announce updates, completed repairs unlock working demonstrations, and the checklist supports revisiting lessons. Practice bookings and reflections survive lesson revisits within the tab. Restart has a cancellable confirmation. Field notes include checked alternatives, practical checks, sources and optional reflection; partial notes can also be read or copied. No new storage, tracking or network calls.
+
+The contrast sample deliberately contains faint text, with a readable duplicate and measured ratios. The checks introduce five ideas and do not constitute a complete audit or assistive-technology compatibility claim. Test keyboard order, errors, reflow and real user journeys before applying the examples to a service. The booking radio controls have concise names and separate date/location descriptions.
+
+Workshop rules: `common-ground/access-lessons.js`. UI: `common-ground/access-game.js` and `common-ground/access-game.css`. Run `node --test common-ground/access-tests.cjs common-ground/tests.cjs` for workshop and booking rules. The normal root test command includes both files.
