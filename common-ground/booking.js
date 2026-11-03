@@ -2,7 +2,7 @@ import {workshops,findWorkshop,freshBooking,chooseWorkshop,reviewDetails,confirm
 
 const esc=value=>String(value).replace(/[&<>"']/g,char=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[char]));
 
-export function mountBooking(host,{standalone=false}={}) {
+export function mountBooking(host,{standalone=false,onProgress=()=>{}}={}) {
   let state=freshBooking();
   const top=standalone?'h1':'h2',sub=standalone?'h2':'h3';
   host.classList.add('cg-booking');
@@ -47,6 +47,7 @@ export function mountBooking(host,{standalone=false}={}) {
     host.innerHTML=`<div class="cg-masthead"><div><span class="cg-pixel-mark" aria-hidden="true">▥</span><span>COMMON GROUND<small>THE COMMUNITY WORKSHOP</small></span></div><span class="cg-demo-label">FICTIONAL PRACTICE WEBSITE</span></div><div class="cg-content"><ol class="cg-steps" aria-label="Booking progress">${['Workshop','Your details','Review','Confirmation'].map((name,i)=>`<li${i===stage?' aria-current="step"':''} class="${i<stage?'cg-done':''}"><span aria-hidden="true">${i<stage?'✓':String(i+1).padStart(2,'0')}</span>${name}</li>`).join('')}</ol><p class="eyebrow">${stage===3?'Journey complete':`Step ${stage+1} of 4`}</p><${top} id="cg-heading" tabindex="-1">${titles[stage]}</${top}>${intro}${stage<2?'<p class="cg-demo-note">Fictional workshops and dates. No real booking or email. Your entries clear on reload.</p>':''}${state.step==='choose'?chooseScreen():state.step==='details'?detailsScreen(workshop):state.step==='review'?reviewScreen(workshop):confirmedScreen(workshop)}${state.booking&&state.step!=='confirmed'?'<div class="cg-edit-note"><p>You are editing your practice booking. Changes apply when you confirm. Your original booking stays in place until then.</p><button type="button" class="cg-text" data-cg="discard">Keep my original booking</button></div>':''}</div>`;
     wire();
     if(moveFocus)focus(Object.keys(state.errors).length?'#cg-error-summary':'#cg-heading');
+    onProgress(state);
   }
   function wire() {
     find('#cg-choose-form')?.addEventListener('submit',event=>{

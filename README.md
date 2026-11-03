@@ -163,3 +163,12 @@ The Common Ground entry point now owns its five-repair workshop, leaving the sha
 The contrast sample deliberately contains faint text, with a readable duplicate and measured ratios. The checks introduce five ideas and do not constitute a complete audit or assistive-technology compatibility claim. Test keyboard order, errors, reflow and real user journeys before applying the examples to a service. The booking radio controls have concise names and separate date/location descriptions.
 
 Workshop rules: `common-ground/access-lessons.js`. UI: `common-ground/access-game.js` and `common-ground/access-game.css`. Run `node --test common-ground/access-tests.cjs common-ground/tests.cjs` for workshop and booking rules. The normal root test command includes both files.
+
+
+### A simpler, more playful workshop
+
+Open for Everyone now pairs each completed repair with a small pixel scene: the sign lights up, the windows glow, the door opens and visitors arrive. The scene has a readable caption, uses no animation and reflects repair progress rather than an accessibility rating. A labelled Before / After button group compares the original problem with the current choice. Selecting a choice switches to After; the learner still checks whether that choice works.
+
+Feedback leads with one explanation. Why this matters and code examples remain optional. The final booking mission tracks three optional achievements from the real local booking state: choosing a workshop, correcting a submitted email error, and confirming a booking. A clean booking completes the first and third tasks without falsely ticking error recovery. History survives lesson revisits and booking edits, clears on restart/reload and is included in field notes. The independent booking page continues to work without the mission.
+
+New progress rules and the decorative scene are in `common-ground/playful.js`; checks are in `common-ground/playful-tests.cjs`. No new libraries, storage, tracking or network services.
