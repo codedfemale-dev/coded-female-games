@@ -1,4 +1,4 @@
-import {missionNotes} from './playful.js?v=20261103-play2';
+import {missionNotes} from './playful.js?v=20261106-quests1';
 import {games} from '../data.js';
 import {contrast} from '../models.js';
 export const game=games['open-for-everyone'];
@@ -24,6 +24,6 @@ export function checkRepair(progress,index,choice){
  return progress.map((entry,i)=>i===index?{selected:choice,attempts:[...entry.attempts,choice],complete:choice===lessons[index].good}:entry);
 }
 export const colourEvidence=colour=>({ratio:contrast(colour),passes:contrast(colour)>=4.5});
-export function fieldNotes(progress,{practice=[],reflection='',mission=null}={}){
- return ['OPEN FOR EVERYONE | MY FIELD NOTES','Fictional learning exercise. Five repairs are a starting point, not a full accessibility audit.',`${progress.filter(p=>p.complete).length}/5 repairs completed. Progress clears on reload.`,...lessons.map((lesson,i)=>['',`${i+1}. ${lesson.short}: ${progress[i].complete?'repaired':'still to explore'}`,...progress[i].attempts.map(choice=>`Checked: ${lesson.options[choice]}\nWhy: ${lesson.explanations[choice]}`),`Takeaway: ${lesson.takeaway}`,`Try it: ${lesson.test}`].join('\n')),...(mission?['',missionNotes(mission)]:[]),'','NEXT SITUATION',...practice,'','MY REFLECTION',reflection||'No reflection entered.','','NEXT REAL-WORLD CHECK','Try a complete task using only a keyboard, inspect names and errors with assistive technology, and include people with access needs in testing.','Supporting guidance:',...game.sources.map(([title,url])=>`${title}: ${url}`)].join('\n');
+export function fieldNotes(progress,{practice=[],reflection='',mission=null,remember=false}={}){
+ return ['OPEN FOR EVERYONE | MY FIELD NOTES','Fictional learning exercise. Five repairs are a starting point, not a full accessibility audit.',`${progress.filter(p=>p.complete).length}/5 repairs completed. ${remember?'Repair progress is saved in this tab. Booking details and reflections clear on reload.':'Progress clears on reload unless you enable the optional tab save.'}`,...lessons.map((lesson,i)=>['',`${i+1}. ${lesson.short}: ${progress[i].complete?'repaired':'still to explore'}`,...progress[i].attempts.map(choice=>`Checked: ${lesson.options[choice]}\nWhy: ${lesson.explanations[choice]}`),`Takeaway: ${lesson.takeaway}`,`Try it: ${lesson.test}`].join('\n')),...(mission?['',missionNotes(mission)]:[]),'','NEXT SITUATION',...practice,'','MY REFLECTION',reflection||'No reflection entered.','','NEXT REAL-WORLD CHECK','Try a complete task using only a keyboard, inspect names and errors with assistive technology, and include people with access needs in testing.','Supporting guidance:',...game.sources.map(([title,url])=>`${title}: ${url}`)].join('\n');
 }
