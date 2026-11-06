@@ -3,8 +3,8 @@ export const games = {
   'open-for-everyone': {
     title: 'Open for Everyone', kicker: 'The accessibility makeover', verb: 'Open the workshop', icon: 'window',
     short: 'Repair a community website so more people can use it.',
-    intro: 'The Common Ground community centre is ready to open its doors. Its website needs a little more thought. Make five repairs, watch the page change and help visitors book a place.',
-    mode: 'access', facts: '5 repairs · Beginner friendly', finish: 'Common Ground is ready to welcome visitors.',
+    intro: 'The Common Ground community centre is ready to open its doors. Its website needs a little more thought. Explore fifteen repairs, watch the page change and help visitors book a place.',
+    mode: 'access', facts: '15 repairs · Beginner friendly', finish: 'Common Ground is ready to welcome visitors.',
     lesson: 'A small repair can remove a real barrier. Keep testing with people, keyboards and assistive technology.',
     sources: [['W3C: labels and controls', 'https://www.w3.org/WAI/tutorials/forms/labels/'], ['W3C: text contrast', 'https://www.w3.org/WAI/WCAG22/Understanding/contrast-minimum.html'], ['W3C: focus order', 'https://www.w3.org/WAI/WCAG22/Understanding/focus-order.html'], ['W3C: form notifications', 'https://www.w3.org/WAI/tutorials/forms/notifications/'], ['W3C: image alternatives', 'https://www.w3.org/WAI/tutorials/images/decision-tree/']],
     rounds: [

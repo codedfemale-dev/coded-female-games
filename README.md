@@ -172,3 +172,11 @@ Open for Everyone now pairs each completed repair with a small pixel scene: the 
 Feedback leads with one explanation. Why this matters and code examples remain optional. The final booking mission tracks three optional achievements from the real local booking state: choosing a workshop, correcting a submitted email error, and confirming a booking. A clean booking completes the first and third tasks without falsely ticking error recovery. History survives lesson revisits and booking edits, clears on restart/reload and is included in field notes. The independent booking page continues to work without the mission.
 
 New progress rules and the decorative scene are in `common-ground/playful.js`; checks are in `common-ground/playful-tests.cjs`. No new libraries, storage, tracking or network services.
+
+### Open for Everyone: fifteen examples and visible change feedback
+
+The workshop now has fifteen repair examples, including ten new topics: descriptive links, page headings, required fields, grouped radio choices, visible focus, touch targets, text reflow, persistent format instructions, status announcements and clear confirmations. The example selector reaches every repair; the map shows five examples at a time. Each new example includes three choices, specific explanations, before/after samples, a practical demonstration, implementation code and W3C guidance. Completion and exported notes count all fifteen repairs. The three optional extension challenges and practice booking remain.
+
+Selecting a choice makes the inspection panel dark teal and adds a visible “Preview updated” label. This indicates a changed preview, including an unsuccessful proposed repair. Only checking the correct repair earns the “Repaired preview” label. Before returns to the original light presentation. The inner sample stays light to preserve the contrast lesson's measured background. Feedback also uses text and existing status announcements. Optional tab checkpoints now use version 2; version 1 checkpoints retain their five repair records and gain ten unfinished examples. Booking details and reflections remain excluded.
+
+Relevant model checks: `node --test common-ground/tests.cjs common-ground/access-tests.cjs common-ground/playful-tests.cjs common-ground/quest-tests.cjs`.

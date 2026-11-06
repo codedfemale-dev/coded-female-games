@@ -1,4 +1,5 @@
-import {missionNotes} from './playful.js?v=20261106-teal1';
+import {additionalLessons} from './more-lessons.js?v=20261106-examples1';
+import {missionNotes} from './playful.js?v=20261106-examples1';
 import {games} from '../data.js';
 import {contrast} from '../models.js';
 export const game=games['open-for-everyone'];
@@ -18,6 +19,7 @@ const checks=[
 ];
 export const lessons=game.rounds.map((round,i)=>({...round,explanations:explanations[i],test:checks[i],short:['Labels','Contrast','Button names','Keyboard order','Error recovery'][i]}));
 lessons[4].code='<label for="email">Email address</label>\n<input id="email" type="email" value="jo.example"\n  aria-invalid="true" aria-describedby="email-error">\n<p id="email-error">Enter an email address,\n  such as jo@example.com.</p>\n<!-- After correction, remove aria-invalid and the error. -->';
+lessons.push(...additionalLessons);
 export const freshProgress=()=>lessons.map(()=>({selected:null,attempts:[],complete:false}));
 export function checkRepair(progress,index,choice){
  if(!Number.isInteger(index)||!lessons[index]||!Number.isInteger(choice)||!lessons[index].options[choice]||progress[index].complete)return progress;
@@ -25,5 +27,5 @@ export function checkRepair(progress,index,choice){
 }
 export const colourEvidence=colour=>({ratio:contrast(colour),passes:contrast(colour)>=4.5});
 export function fieldNotes(progress,{practice=[],reflection='',mission=null,remember=false}={}){
- return ['OPEN FOR EVERYONE | MY FIELD NOTES','Fictional learning exercise. Five repairs are a starting point, not a full accessibility audit.',`${progress.filter(p=>p.complete).length}/5 repairs completed. ${remember?'Repair progress is saved in this tab. Booking details and reflections clear on reload.':'Progress clears on reload unless you enable the optional tab save.'}`,...lessons.map((lesson,i)=>['',`${i+1}. ${lesson.short}: ${progress[i].complete?'repaired':'still to explore'}`,...progress[i].attempts.map(choice=>`Checked: ${lesson.options[choice]}\nWhy: ${lesson.explanations[choice]}`),`Takeaway: ${lesson.takeaway}`,`Try it: ${lesson.test}`].join('\n')),...(mission?['',missionNotes(mission)]:[]),'','NEXT SITUATION',...practice,'','MY REFLECTION',reflection||'No reflection entered.','','NEXT REAL-WORLD CHECK','Try a complete task using only a keyboard, inspect names and errors with assistive technology, and include people with access needs in testing.','Supporting guidance:',...game.sources.map(([title,url])=>`${title}: ${url}`)].join('\n');
+ return ['OPEN FOR EVERYONE | MY FIELD NOTES','Fictional learning exercise. These repairs are a starting point, not a full accessibility audit.',`${progress.filter(p=>p.complete).length}/${lessons.length} repairs completed. ${remember?'Repair progress is saved in this tab. Booking details and reflections clear on reload.':'Progress clears on reload unless you enable the optional tab save.'}`,...lessons.map((lesson,i)=>['',`${i+1}. ${lesson.short}: ${progress[i].complete?'repaired':'still to explore'}`,...progress[i].attempts.map(choice=>`Checked: ${lesson.options[choice]}\nWhy: ${lesson.explanations[choice]}`),`Takeaway: ${lesson.takeaway}`,`Try it: ${lesson.test}`].join('\n')),...(mission?['',missionNotes(mission)]:[]),'','NEXT SITUATION',...practice,'','MY REFLECTION',reflection||'No reflection entered.','','NEXT REAL-WORLD CHECK','Try a complete task using only a keyboard, inspect names and errors with assistive technology, and include people with access needs in testing.','Supporting guidance:',...game.sources.map(([title,url])=>`${title}: ${url}`),...additionalLessons.map(l=>`${l.short}: ${l.source}`)].join('\n');
 }

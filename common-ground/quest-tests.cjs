@@ -2,8 +2,8 @@ const {test}=require('node:test'),assert=require('node:assert/strict');
 const extension=import('./quests.js'),base=import('./access-lessons.js');
 test('out-of-order exploration visits every unfinished repair before completing',async()=>{
  const {nextRepair}=await extension,{freshProgress,checkRepair,lessons}=await base;let p=freshProgress();
- for(const i of [4,2,0,3,1]){assert.notEqual(nextRepair(p,i),null);p=checkRepair(p,i,lessons[i].good);}
- assert.equal(nextRepair(p,4),null);let partial=freshProgress();partial=checkRepair(partial,4,lessons[4].good);assert.equal(nextRepair(partial,4),0);
+ for(const i of [14,12,10,8,6,4,2,0,13,11,9,7,5,3,1]){assert.notEqual(nextRepair(p,i),null);p=checkRepair(p,i,lessons[i].good);}
+ assert.equal(nextRepair(p,4),null);let partial=freshProgress();partial=checkRepair(partial,4,lessons[4].good);assert.equal(nextRepair(partial,4),5);
 });
 test('extra challenges give specific feedback, allow retries and freeze completed achievements',async()=>{
  const {quests,freshQuests,checkQuest,questNotes}=await extension;let state=freshQuests();
@@ -18,8 +18,15 @@ test('checkpoint round-trip excludes booking, reflection and unexpected extra pr
 test('malformed, incompatible and falsified checkpoints cannot resume',async()=>{
  const {makeCheckpoint,readCheckpoint,freshQuests}=await extension,{freshProgress}=await base;const fresh=()=>makeCheckpoint(freshProgress(),0,freshQuests());
  for(const raw of ['',null,'{','null','[]','{"version":2}'])assert.equal(readCheckpoint(raw),null);
- for(const mutate of [s=>s.index=5,s=>s.progress=[],s=>s.bonus=null,s=>s.progress[0].selected=9,s=>s.progress[0].attempts=[NaN],s=>s.progress[0].complete=true,s=>s.progress[0].attempts=Array(101).fill(0)]){let s=fresh();mutate(s);assert.equal(readCheckpoint(JSON.stringify(s)),null);}
+ for(const mutate of [s=>s.index=15,s=>s.progress=[],s=>s.bonus=null,s=>s.progress[0].selected=9,s=>s.progress[0].attempts=[NaN],s=>s.progress[0].complete=true,s=>s.progress[0].attempts=Array(101).fill(0)]){let s=fresh();mutate(s);assert.equal(readCheckpoint(JSON.stringify(s)),null);}
 });
 test('saved attempt history is bounded without losing the latest repair',async()=>{
  const {makeCheckpoint,readCheckpoint,freshQuests}=await extension,{freshProgress,lessons}=await base;let p=freshProgress();p[0]={selected:lessons[0].good,complete:true,attempts:[...Array(200).fill(0),lessons[0].good]};const s=makeCheckpoint(p,0,freshQuests());assert.equal(s.progress[0].attempts.length,100);assert(readCheckpoint(JSON.stringify(s)).progress[0].complete);
+});
+
+test('legacy five-repair checkpoints keep achievements and append ten unfinished examples',async()=>{
+ const {readCheckpoint,makeCheckpoint,freshQuests}=await extension,{freshProgress,checkRepair,lessons}=await base;let p=freshProgress();for(let i=0;i<5;i++)p=checkRepair(p,i,lessons[i].good);const saved=makeCheckpoint(p,4,freshQuests());saved.version=1;saved.progress=saved.progress.slice(0,5);const restored=readCheckpoint(JSON.stringify(saved));assert.equal(restored.version,2);assert.equal(restored.progress.length,15);assert.equal(restored.progress.filter(e=>e.complete).length,5);assert(restored.progress.slice(5).every(e=>!e.complete&&e.selected===null));
+});
+test('ten additional examples have changing previews, unique topics, practical demos and primary guidance',async()=>{
+ const {lessons}=await base;assert.equal(lessons.length,15);assert.equal(new Set(lessons.map(l=>l.short)).size,15);for(const lesson of lessons.slice(5)){assert.equal(lesson.samples.length,3);assert(lesson.before);assert.notEqual(lesson.before,lesson.samples[lesson.good]);assert(lesson.tryHTML);assert(lesson.source.startsWith('https://www.w3.org/'));assert(lesson.code.length>20);}
 });

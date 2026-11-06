@@ -17,14 +17,15 @@ export function nextRepair(progress,index){
 export const checkpointKey='cf-open-for-everyone-workshop-v1';
 export function makeCheckpoint(progress,index,bonus){
  const clean=(entries,definitions)=>entries.map((s,i)=>({selected:Number.isInteger(s.selected)&&definitions[i].options[s.selected]?s.selected:null,attempts:s.attempts.filter(c=>Number.isInteger(c)&&definitions[i].options[c]).slice(-100),complete:Boolean(s.complete&&s.selected===definitions[i].good)}));
- return {version:1,index,progress:clean(progress,baseDefinitions),bonus:clean(bonus,quests)};
+ return {version:2,index,progress:clean(progress,baseDefinitions),bonus:clean(bonus,quests)};
 }
 // Avoid coupling checkpoint validation to the rendering module.
-import {lessons as baseDefinitions} from './access-lessons.js?v=20261106-teal1';
+import {lessons as baseDefinitions} from './access-lessons.js?v=20261106-examples1';
 export function readCheckpoint(raw){
  try{
   const s=JSON.parse(raw);
-  if(s?.version!==1||!Number.isInteger(s.index)||s.index<0||s.index>=5)return null;
+  if(!s||![1,2].includes(s.version)||!Number.isInteger(s.index)||s.index<0||s.index>=(s.version===1?5:baseDefinitions.length))return null;
+  if(s.version===1){if(!Array.isArray(s.progress)||s.progress.length!==5)return null;s.progress=[...s.progress,...baseDefinitions.slice(5).map(()=>({selected:null,attempts:[],complete:false}))];}
   for(const [entries,defs] of [[s.progress,baseDefinitions],[s.bonus,quests]]){
    if(!Array.isArray(entries)||entries.length!==defs.length)return null;
    if(entries.some((e,i)=>!e||!Array.isArray(e.attempts)||e.attempts.length>100||typeof e.complete!=='boolean'||(e.selected!==null&&(!Number.isInteger(e.selected)||!defs[i].options[e.selected]))||e.attempts.some(c=>!Number.isInteger(c)||!defs[i].options[c])||(e.complete&&(e.selected!==defs[i].good||!e.attempts.includes(defs[i].good)))))return null;
