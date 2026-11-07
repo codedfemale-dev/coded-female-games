@@ -1,5 +1,5 @@
-import {additionalLessons} from './more-lessons.js?v=20261106-examples1';
-import {missionNotes} from './playful.js?v=20261106-examples1';
+import {additionalLessons} from './more-lessons.js?v=20261107-mobile1';
+import {missionNotes} from './playful.js?v=20261107-mobile1';
 import {games} from '../data.js';
 import {contrast} from '../models.js';
 export const game=games['open-for-everyone'];

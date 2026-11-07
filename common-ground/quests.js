@@ -20,7 +20,7 @@ export function makeCheckpoint(progress,index,bonus){
  return {version:2,index,progress:clean(progress,baseDefinitions),bonus:clean(bonus,quests)};
 }
 // Avoid coupling checkpoint validation to the rendering module.
-import {lessons as baseDefinitions} from './access-lessons.js?v=20261106-examples1';
+import {lessons as baseDefinitions} from './access-lessons.js?v=20261107-mobile1';
 export function readCheckpoint(raw){
  try{
   const s=JSON.parse(raw);

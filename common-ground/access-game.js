@@ -1,9 +1,9 @@
-import {progressVisual} from './modern-view.js?v=20261106-examples1';
-import {quests,visitorReports,freshQuests,checkQuest,nextRepair,checkpointKey,makeCheckpoint,readCheckpoint,questNotes} from './quests.js?v=20261106-examples1';
-import {lessons,freshProgress,checkRepair,colourEvidence,fieldNotes} from './access-lessons.js?v=20261106-examples1';
+import {progressVisual} from './modern-view.js?v=20261107-mobile1';
+import {quests,visitorReports,freshQuests,checkQuest,nextRepair,checkpointKey,makeCheckpoint,readCheckpoint,questNotes} from './quests.js?v=20261107-mobile1';
+import {lessons,freshProgress,checkRepair,colourEvidence,fieldNotes} from './access-lessons.js?v=20261107-mobile1';
 import {learning} from '../learning.js?v=20261014-1';
-import {townScene,freshMission,advanceMission,missionTasks} from './playful.js?v=20261106-examples1';
-import {mountBooking} from './booking.js?v=20261106-examples1';
+import {townScene,freshMission,advanceMission,missionTasks} from './playful.js?v=20261107-mobile1';
+import {mountBooking} from './booking.js?v=20261107-mobile1';
 const app=document.getElementById('app'),intro=app.innerHTML;
 const esc=value=>String(value).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 let progress=freshProgress(),index=0,reflection='',practice=[],practiceChoice=null,resultsNode=null,mission=freshMission(),comparison='before';

@@ -42,3 +42,8 @@ body[data-game="open-for-everyone"] .of-preview-updated .of-preview-state{backgr
 @media(max-width:760px){.of-example-jump{display:block}.of-example-jump select{display:block;width:100%;margin-top:8px}.of-live-example{padding:15px}.of-live-example .actions{flex-direction:column;align-items:stretch}}
 @media(forced-colors:active){.of-preview-updated{border:3px solid Highlight!important}.of-preview-state{border:1px solid CanvasText}}
 .of-try .cg-errors{background:#fff4f3;border:2px solid #a92e36;color:#743841;border-radius:11px}.of-try .cg-errors :is(h4,p,a){color:#743841!important}.of-preview-updated .of-try .cg-errors:focus{outline-color:#ffe8d2!important}.of-preview-updated .of-guidance a{color:#fff1dd}.of-guidance{font-size:12px!important}
+/* Wrapped links keep a continuous, comfortable tap area on narrow screens. */
+body[data-game="open-for-everyone"] :is(.of-try .cg-errors a,.cg-booking .cg-errors a,.of-live-example>a,.of-guidance>a){display:block;min-height:44px;padding-top:8px;padding-bottom:8px;line-height:1.8}
+/* Keyboard focus stays distinct on both the dark panel and its light examples. */
+body[data-game="open-for-everyone"] .of-preview-updated :is(button,a,input,summary):focus-visible{outline-color:#ffe8d2!important}
+body[data-game="open-for-everyone"] .of-preview-updated :is(#of-sample,.of-live-example,.cg-errors) :is(button,a,input,summary):focus-visible{outline-color:#006874!important}
