@@ -275,7 +275,7 @@ export const additionalLessons=[
       "<div class=\"of-example-card\"><strong>Workshop date</strong><div class=\"of-faux-input\">DD/MM/YYYY (placeholder only)</div></div>"
     ],
     "test": "Type a date into the example box. The format hint should remain visible while you type, with a programmatic connection to the input.",
-    "tryHTML": "<label for=\"of-extra-date\">Workshop date</label><p id=\"of-date-hint\">Use DD/MM/YYYY, for example 14/11/2026.</p><input id=\"of-extra-date\" type=\"text\" inputmode=\"numeric\" aria-describedby=\"of-date-hint\" autocomplete=\"off\" maxlength=\"10\">",
+    "tryHTML": "<label for=\"of-extra-date\">Workshop date</label><p id=\"of-date-hint\">Use DD/MM/YYYY, for example 14/11/2026.</p><input id=\"of-extra-date\" type=\"text\" aria-describedby=\"of-date-hint\" autocomplete=\"off\" maxlength=\"10\">",
     "code": "<label for=\"date\">Workshop date</label>\n<p id=\"date-hint\">Use DD/MM/YYYY, for example 14/11/2026.</p>\n<input id=\"date\" aria-describedby=\"date-hint\">",
     "source": "https://www.w3.org/WAI/tutorials/forms/instructions/",
     "visitor": [
