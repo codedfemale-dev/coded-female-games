@@ -8,7 +8,7 @@ test('out-of-order exploration visits every unfinished repair before completing'
 test('extra challenges give specific feedback, allow retries and freeze completed achievements',async()=>{
  const {quests,freshQuests,checkQuest,questNotes}=await extension;let state=freshQuests();
  for(let i=0;i<quests.length;i++){for(let c=0;c<3;c++){assert(quests[i].why[c]);if(c===quests[i].good)continue;state=checkQuest(state,i,c);assert.equal(state[i].complete,false);}state=checkQuest(state,i,quests[i].good);assert(state[i].complete);assert.strictEqual(checkQuest(state,i,0),state);}
- assert.equal(state.filter(s=>s.complete).length,3);assert(questNotes(state).includes('Captions: completed'));
+ assert.equal(state.filter(s=>s.complete).length,8);assert(questNotes(state).includes('Captions: completed'));
 });
 test('checkpoint round-trip excludes booking, reflection and unexpected extra properties',async()=>{
  const {makeCheckpoint,readCheckpoint,freshQuests}=await extension,{freshProgress,checkRepair,lessons}=await base;let p=checkRepair(freshProgress(),3,lessons[3].good);p[3].private='sensitive';
@@ -29,4 +29,15 @@ test('legacy five-repair checkpoints keep achievements and append ten unfinished
 });
 test('ten additional examples have changing previews, unique topics, practical demos and primary guidance',async()=>{
  const {lessons}=await base;assert.equal(lessons.length,15);assert.equal(new Set(lessons.map(l=>l.short)).size,15);for(const lesson of lessons.slice(5)){assert.equal(lesson.samples.length,3);assert(lesson.before);assert.notEqual(lesson.before,lesson.samples[lesson.good]);assert(lesson.tryHTML);assert(lesson.source.startsWith('https://www.w3.org/'));assert(lesson.code.length>20);}
+});
+
+test('the previous three-challenge save upgrades without losing completed work',async()=>{
+ const {makeCheckpoint,readCheckpoint,freshQuests,checkQuest}=await extension,{freshProgress}=await base;
+ const bonus=checkQuest(freshQuests(),1,2),old=makeCheckpoint(freshProgress(),0,bonus);old.bonus=old.bonus.slice(0,3);
+ const restored=readCheckpoint(JSON.stringify(old));assert.equal(restored.bonus.length,8);assert(restored.bonus[1].complete);assert(restored.bonus.slice(3).every(s=>!s.complete&&s.attempts.length===0));
+});
+test('new challenges retain distinct explanations, primary references and practical checks',async()=>{
+ const {quests,freshQuests,checkQuest,questNotes}=await extension;assert.equal(quests.length,8);assert.equal(new Set(quests.map(q=>q.id)).size,8);let state=freshQuests();
+ for(let i=3;i<quests.length;i++){const q=quests[i];assert.equal(new Set(q.why).size,3);assert(q.source.startsWith('https://www.w3.org/WAI/'));assert(q.example.length>80);state=checkQuest(state,i,q.good);assert(questNotes(state).includes(q.source));}
+ assert(quests.find(q=>q.id==='targets').example.includes('24 × 24'));assert(quests.find(q=>q.id==='motion').example.includes('AAA'));
 });

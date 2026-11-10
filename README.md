@@ -8,7 +8,7 @@ Play the collection: https://codedfemale-dev.github.io/coded-female-games/
 | --- | --- | --- |
 | Release Manager: Ship Happens | Team hiring, release planning, MoSCoW, RICE and consequences across six releases | [Play](https://codedfemale-dev.github.io/coded-female-games/release-manager/) |
 | Product Quest | Stakeholder pitches, trade-offs and resource management in a retro RPG | [Play](https://codedfemale-dev.github.io/coded-female-games/product-quest/) |
-| Open for Everyone | Labels, contrast, button names, focus order and error recovery | [Play](https://codedfemale-dev.github.io/coded-female-games/open-for-everyone/) |
+| Access Lab | Labels, contrast, button names, focus order and error recovery | [Play](https://codedfemale-dev.github.io/coded-female-games/open-for-everyone/) |
 | Ship It or Fix It | Read requirements, predict actual tests, select code repairs and keep working code | [Play](https://codedfemale-dev.github.io/coded-female-games/ship-it-or-fix-it/) |
 | Agent Mission Control | Tool boundaries, human approval, budget limits, external instructions and handovers | [Play](https://codedfemale-dev.github.io/coded-female-games/agent-mission-control/) |
 | Undo the Nudge | Clear pricing, voluntary extras, neutral choices, honest urgency and cancellation | [Play](https://codedfemale-dev.github.io/coded-female-games/undo-the-nudge/) |
@@ -101,7 +101,7 @@ Six shared-engine learning games now have distinct visual worlds and authored mi
 | Ship It or Fix It | Neon grid | Pip’s patch circuit: predict JavaScript behaviour, inspect actual tests and repair code. |
 | Agent Mission Control | Neon grid | Orbit control: permissions, external instructions, reviewed spending and handover. |
 | Metric Makeover | Neon grid | Signal observatory: activation, retention, denominators, guardrails and investigations. |
-| Open for Everyone | Pixel world | Common Ground: repair a community centre’s booking barriers. |
+| Access Lab | Pixel world | Common Ground: repair a community centre’s booking barriers. |
 | Undo the Nudge | Pixel world | Loopbox: fair pricing, voluntary extras, neutral choices and an easy exit. |
 | The Stakeholder Room | Pixel world | The agreement room: listen, negotiate scope, protect capacity and record commitments. |
 
@@ -156,7 +156,7 @@ Use WASD/arrows and E, click consoles on the map, use named console buttons or f
 Run `node --test mission-control/tests.cjs` for all nine circuit configurations, six drone allocations, 32 post-discovery schedule/capacity combinations, real JavaScript edge cases, phase gates, retries, full campaign completion, notes and actionable journey guidance. The repository-wide test script includes these checks.
 
 
-### Open for Everyone workshop, 3 November 2026
+### Access Lab workshop, 3 November 2026
 
 The Common Ground entry point now owns its five-repair workshop, leaving the shared engine in place for other games. Each choice has specific reasoning, selected previews announce updates, completed repairs unlock working demonstrations, and the checklist supports revisiting lessons. Practice bookings and reflections survive lesson revisits within the tab. Restart has a cancellable confirmation. Field notes include checked alternatives, practical checks, sources and optional reflection; partial notes can also be read or copied. No new storage, tracking or network calls.
 
@@ -167,13 +167,13 @@ Workshop rules: `common-ground/access-lessons.js`. UI: `common-ground/access-gam
 
 ### A simpler, more playful workshop
 
-Open for Everyone now pairs each completed repair with a small pixel scene: the sign lights up, the windows glow, the door opens and visitors arrive. The scene has a readable caption, uses no animation and reflects repair progress rather than an accessibility rating. A labelled Before / After button group compares the original problem with the current choice. Selecting a choice switches to After; the learner still checks whether that choice works.
+Access Lab now pairs each completed repair with a small pixel scene: the sign lights up, the windows glow, the door opens and visitors arrive. The scene has a readable caption, uses no animation and reflects repair progress rather than an accessibility rating. A labelled Before / After button group compares the original problem with the current choice. Selecting a choice switches to After; the learner still checks whether that choice works.
 
 Feedback leads with one explanation. Why this matters and code examples remain optional. The final booking mission tracks three optional achievements from the real local booking state: choosing a workshop, correcting a submitted email error, and confirming a booking. A clean booking completes the first and third tasks without falsely ticking error recovery. History survives lesson revisits and booking edits, clears on restart/reload and is included in field notes. The independent booking page continues to work without the mission.
 
 New progress rules and the decorative scene are in `common-ground/playful.js`; checks are in `common-ground/playful-tests.cjs`. No new libraries, storage, tracking or network services.
 
-### Open for Everyone: fifteen examples and visible change feedback
+### Access Lab: fifteen examples and visible change feedback
 
 The workshop now has fifteen repair examples, including ten new topics: descriptive links, page headings, required fields, grouped radio choices, visible focus, touch targets, text reflow, persistent format instructions, status announcements and clear confirmations. The example selector reaches every repair; the map shows five examples at a time. Each new example includes three choices, specific explanations, before/after samples, a practical demonstration, implementation code and W3C guidance. Completion and exported notes count all fifteen repairs. The three optional extension challenges and practice booking remain.
 
