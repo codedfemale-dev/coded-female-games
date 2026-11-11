@@ -85,3 +85,54 @@ body[data-game="open-for-everyone"] .feedback.of-feedback-error{background:#FFF1
 body[data-game="open-for-everyone"] .feedback.of-feedback-error :is(h3,p){color:#8A1C13!important}
 body[data-game="open-for-everyone"] :is(.of-preview-updated,.of-preview-complete) :is(.instruction,.of-guidance a,#of-demo-status){color:#FFFFFF}
 @media(forced-colors:active){body[data-game="open-for-everyone"] .of-grid :is(.of-preview-updated,.of-preview-complete){border-color:Highlight}.of-preview-state{border:2px solid CanvasText!important}}
+
+/* Approved Plum & white theme, 11 November 2026. */
+body[data-game="open-for-everyone"]{--pv-bg:#FFFFFF;--pv-card:#FFFFFF;--pv-ink:#482C46;--pv-text:#443A42;--pv-muted:#6A5C65;--pv-line:#DDD3E3;--pv-tint:#F2EDF6;--pv-ring:#744D70;--pv-gold:#482C46}
+body[data-game="open-for-everyone"]{background:var(--pv-bg);color:var(--pv-text);--ink:var(--pv-ink);--body:var(--pv-text);--muted:var(--pv-muted);--line:var(--pv-line);--accent:var(--pv-ring)}
+body[data-game="open-for-everyone"] :is(h1,h2,h3,.lead,.hero h1>span,header .brand){color:var(--pv-ink)}
+body[data-game="open-for-everyone"] :is(.instruction,.hero-copy>p:not(.eyebrow):not(.lead),.eyebrow,.text-button,.about,.about summary,.footer,.of-brief,.of-example-jump,.of-route-bar label){color:var(--pv-muted)}
+body[data-game="open-for-everyone"] :is(.arcade-return-bar,.arcade-return-bar a[data-arcade-return]){background:var(--pv-bg);color:var(--pv-muted)}
+body[data-game="open-for-everyone"] :is(.primary,.cg-booking .primary){background:var(--pv-gold);color:#191919;border-color:var(--pv-gold);box-shadow:0 3px 0 #785420}
+body[data-game="open-for-everyone"] .primary:hover{background:#D6B078;color:#191919}
+body[data-game="open-for-everyone"] :is(.secondary,.of-route-bar select,.of-example-jump select,.of-grid .panel,.of-mission,.of-bonus,.of-results .practice,.of-repair-record,.of-dialog){background:var(--pv-card);color:var(--pv-text);border-color:var(--pv-line)}
+body[data-game="open-for-everyone"] :is(.of-modern-progress,.of-save-panel,.of-reference,.facts span,.of-visitor-report,.of-ledger li[aria-current]){background:var(--pv-tint);color:var(--pv-text);border-color:var(--pv-line)}
+body[data-game="open-for-everyone"] :is(.of-progress-copy label,.of-progress-copy p,.of-progress-meter,.of-progress-meter strong,.of-visitor-report p,.of-visitor-report .eyebrow,.of-reference summary,.of-topic-list summary,.of-save-panel label){color:var(--pv-text)}
+body[data-game="open-for-everyone"] :is(.of-grid .choice,.of-bonus .choice,.of-ledger li){background:var(--pv-card);color:var(--pv-text);border-color:var(--pv-line)}
+body[data-game="open-for-everyone"] :is(.of-grid,.of-bonus) .choice[aria-pressed=true]{background:var(--pv-tint);color:var(--pv-ink);border-color:var(--pv-ring)}
+body[data-game="open-for-everyone"] .of-grid .choice[aria-pressed=true] .letter{background:var(--pv-ring);color:var(--pv-bg)}
+body[data-game="open-for-everyone"] :is(button,a,input,select,textarea,summary):focus-visible{outline-color:var(--pv-ring)}
+body[data-game="open-for-everyone"] :is(.of-grid .of-preview-updated,.of-grid .of-preview-complete){background:var(--pv-card);color:var(--pv-text);border:3px solid var(--pv-ring);box-shadow:none}
+body[data-game="open-for-everyone"] .of-preview-updated :is(h2,h3,.eyebrow,.instruction,.of-try>p,.of-try>label,.of-ratios,.of-try>details>summary){color:var(--pv-text)!important}
+body[data-game="open-for-everyone"] .of-preview-updated .of-preview-state{background:var(--pv-tint);color:var(--pv-ink);border-color:var(--pv-ring)}
+body[data-game="open-for-everyone"] .of-preview-complete .of-preview-state{background:#EAF5ED;color:#14532D;border-color:#166534}
+body[data-game="open-for-everyone"] .of-preview-state{background:var(--pv-tint);color:var(--pv-ink);border-color:var(--pv-line)}
+body[data-game="open-for-everyone"] :is(.of-comparison,.of-preview-updated .of-comparison){background:var(--pv-tint);border-color:var(--pv-line)}
+body[data-game="open-for-everyone"] :is(.of-comparison button,.of-preview-updated .of-comparison button){color:var(--pv-text)}
+body[data-game="open-for-everyone"] :is(.of-comparison [aria-pressed=true],.of-preview-updated .of-comparison [aria-pressed=true]){background:var(--pv-card);color:var(--pv-ink)}
+body[data-game="open-for-everyone"] .of-preview-updated #of-sample>.mock-label{background:#FAF0DD;color:#482F13;border-left:5px solid #CA9B52;padding:10px 14px;border-radius:4px}
+body[data-game="open-for-everyone"] .of-grid summary{color:var(--pv-muted)}
+body[data-game="open-for-everyone"] .of-preview-updated .of-guidance a{color:var(--pv-ink)}
+body[data-game="open-for-everyone"] .of-reference a{color:var(--pv-ink)}
+body[data-game="open-for-everyone"] .of-grid .choice:disabled[aria-pressed=false]{background:var(--pv-bg);color:var(--pv-muted)}
+body[data-game="open-for-everyone"] .of-grid .choice:disabled[aria-pressed=true]{background:#EAF5ED;color:#14532D;border-color:#166534}
+body[data-game="open-for-everyone"] .of-grid .choice:disabled[aria-pressed=true] .letter{background:#166534;color:white}
+body[data-game="open-for-everyone"] .hero h1>span{text-decoration-color:var(--pv-gold)}
+body[data-game="open-for-everyone"] .of-board-content h2{color:#191919}
+body[data-game="open-for-everyone"] .of-preview-updated #of-sample .instruction{color:#555!important}
+body[data-game="open-for-everyone"] .of-preview-updated :is(#of-sample,.of-live-example,.cg-errors) :is(button,a,input,summary):focus-visible{outline-color:#785420!important}
+body[data-game="open-for-everyone"] :is(.primary,.cg-booking .primary){background:#482C46;color:#FFFFFF;border-color:#482C46;box-shadow:0 3px 0 #2E1A2D}
+body[data-game="open-for-everyone"] .primary:hover{background:#613D5F;color:#FFFFFF}
+body[data-game="open-for-everyone"] .hero h1>span{text-decoration-color:#C5B4D1}
+body[data-game="open-for-everyone"] .of-preview-updated #of-sample>.mock-label{background:#F2EDF6;color:#482C46;border-color:#744D70}
+body[data-game="open-for-everyone"] :is(.of-board-bottom,.of-live-pill,.of-note-icon,.of-event-icon,.of-floating-bottom .of-note-icon){background:#F2EDF6;color:#482C46}
+body[data-game="open-for-everyone"] :is(.of-faux-button,.of-mini-action,.of-mini-logo){background:#482C46;color:#FFFFFF}
+
+/* Readable focus and form feedback on the light repair panels. */
+body[data-game="open-for-everyone"] .of-preview-updated :is(button,a,input,summary):focus-visible,body[data-game="open-for-everyone"] .of-preview-updated .of-try [tabindex="-1"]:focus{outline-color:#744D70!important}
+body[data-game="open-for-everyone"] .of-preview-updated .of-try :is(#of-email-hint,#of-demo-status,form>label){color:#443A42!important}
+body[data-game="open-for-everyone"] .of-preview-updated .of-try #of-email-error{color:#B42318!important}
+body[data-game="open-for-everyone"] .cg-booking{--cg-ink:#482C46;--cg-body:#443A42;--cg-muted:#6A5C65;--cg-line:#DDD3E3;--cg-accent:#744D70;--cg-deep:#F2EDF6}
+body[data-game="open-for-everyone"] .cg-booking :is(#cg-heading,.cg-workshop-title){color:#482C46}
+body[data-game="open-for-everyone"] .cg-booking :is(.cg-masthead,.cg-aside,.cg-review){background:#F2EDF6;border-color:#DDD3E3}
+body[data-game="open-for-everyone"] .cg-booking .cg-workshop:has(input:checked){background:#F2EDF6;border-color:#744D70;box-shadow:inset 4px 0 #744D70}
+body[data-game="open-for-everyone"] [tabindex="-1"]:focus{outline-color:#744D70!important}
