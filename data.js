@@ -45,11 +45,11 @@ export const games = {
     ]
   },
   'undo-the-nudge': {
-    title:'Undo the Nudge',kicker:'The fair design studio',verb:'Open the design studio',icon:'design',mode:'design',facts:'5 redesigns · Two changes each',
-    short:'Transform a pushy fictional subscription into a clearer experience.',
-    intro:'The fictional Loopbox craft subscription has a confusing checkout and a cancellation maze. Change two settings in each screen, preview the result and make the visitor’s choice easier to understand.',
+    title:'Choice Matters',kicker:'The fair design studio',verb:'Open the design studio',icon:'design',mode:'design',facts:'8 repairs · Guided studio & mixed casebook',
+    short:'Redesign confusing screens. Make pricing clear, remove the pressure and put people in control.',
+    intro:'Repair five Loopbox subscription screens, then tackle permissions, a free trial and sponsored recommendations. Compare the original with your design, understand each change and plan a check with real people.',
     finish:'Loopbox gives visitors room to decide.',lesson:'Use clear prices, voluntary choices and straightforward exits. Test whether people understand the decision before measuring how many click.',
-    sources:[['OECD: dark commercial patterns','https://www.oecd.org/en/publications/dark-commercial-patterns_44f5e846-en.html']],
+    sources:[['OECD: dark commercial patterns','https://www.oecd.org/en/publications/dark-commercial-patterns_44f5e846-en.html'],['Deceptive Patterns: types and vocabulary','https://deceptive.design/types/']],
     rounds:[
       {title:'The price that grows',brief:'The box is £12, with a £3 delivery charge. A monthly subscription renews until cancelled. Repair the headline price and the commitment text.',kind:'price',fields:[{label:'Price shown before checkout',options:['£12, with delivery revealed later','£15 total, including £3 delivery'],good:1},{label:'Subscription explanation',options:['£15 each month; renews until cancelled','Details in the small print'],good:0}],hint:'Let the visitor understand the total cost and the recurring commitment before choosing.',feedback:'The total and renewal are visible before the order. Someone can make a decision without discovering extra information at the last moment.',takeaway:'Show unavoidable charges and recurring commitments before the visitor agrees.',reaction:'“I understand what this will cost each month.”'},
       {title:'An extra they did not choose',brief:'A £4 gift wrap option has already been selected. Change the default and explain the extra clearly.',kind:'extra',fields:[{label:'Gift wrap default',options:['Selected automatically','Off until the visitor chooses it'],good:1},{label:'Gift wrap description',options:['Recommended upgrade','Optional gift wrap: add £4 to this order'],good:1}],hint:'An optional paid extra should come from an informed choice.',feedback:'The extra stays off until selected, and its price is clear. Visitors who want it can still choose it.',takeaway:'Make paid extras optional and describe their cost clearly.',reaction:'“I can choose the extra without accidentally buying it.”'},

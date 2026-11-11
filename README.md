@@ -11,7 +11,7 @@ Play the collection: https://codedfemale-dev.github.io/coded-female-games/
 | Access Lab | Labels, contrast, button names, focus order and error recovery | [Play](https://codedfemale-dev.github.io/coded-female-games/open-for-everyone/) |
 | Ship It or Fix It | Read requirements, predict actual tests, select code repairs and keep working code | [Play](https://codedfemale-dev.github.io/coded-female-games/ship-it-or-fix-it/) |
 | Agent Mission Control | Tool boundaries, human approval, budget limits, external instructions and handovers | [Play](https://codedfemale-dev.github.io/coded-female-games/agent-mission-control/) |
-| Undo the Nudge | Clear pricing, voluntary extras, neutral choices, honest urgency and cancellation | [Play](https://codedfemale-dev.github.io/coded-female-games/undo-the-nudge/) |
+| Choice Matters | Clear pricing, voluntary extras, neutral choices, honest urgency and cancellation | [Play](https://codedfemale-dev.github.io/coded-female-games/undo-the-nudge/) |
 | Metric Makeover | Outcome measures, denominators, tail performance, funnels, guardrails and causation | [Play](https://codedfemale-dev.github.io/coded-female-games/metric-makeover/) |
 | The Stakeholder Room | Questions, trade-offs, scope, risk, promises and shared agreements | [Play](https://codedfemale-dev.github.io/coded-female-games/the-stakeholder-room/) |
 
@@ -102,7 +102,7 @@ Six shared-engine learning games now have distinct visual worlds and authored mi
 | Agent Mission Control | Neon grid | Orbit control: permissions, external instructions, reviewed spending and handover. |
 | Metric Makeover | Neon grid | Signal observatory: activation, retention, denominators, guardrails and investigations. |
 | Access Lab | Pixel world | Common Ground: repair a community centre’s booking barriers. |
-| Undo the Nudge | Pixel world | Loopbox: fair pricing, voluntary extras, neutral choices and an easy exit. |
+| Choice Matters | Pixel world | Loopbox: fair pricing, voluntary extras, neutral choices and an easy exit. |
 | The Stakeholder Room | Pixel world | The agreement room: listen, negotiate scope, protect capacity and record commitments. |
 
 The styling carries through introductions, active missions, choices, feedback, results and further practice. The existing 32 authored challenges, real predefined code tests, decisions, scores and field notes remain in place. The illustrated accessibility and ethical-design screens retain their original light palette and deliberate faults, so the redesign does not remove the evidence the player must inspect. The six games remain untimed. Product Quest and Release Manager retain their own standalone implementations.
@@ -180,3 +180,14 @@ The workshop now has fifteen repair examples, including ten new topics: descript
 Selecting a choice makes the inspection panel dark teal and adds a visible “Preview updated” label. This indicates a changed preview, including an unsuccessful proposed repair. Only checking the correct repair earns the “Repaired preview” label. Before returns to the original light presentation. The inner sample stays light to preserve the contrast lesson's measured background. Feedback also uses text and existing status announcements. Optional tab checkpoints now use version 2; version 1 checkpoints retain their five repair records and gain ten unfinished examples. Booking details and reflections remain excluded.
 
 Relevant model checks: `node --test common-ground/tests.cjs common-ground/access-tests.cjs common-ground/playful-tests.cjs common-ground/quest-tests.cjs`.
+
+
+## Choice Matters, 10 November 2026
+
+The renamed design game retains its existing `undo-the-nudge/` address so saved links continue to work. The title, agreed tagline, arcade card, practice-shop return link and Access Lab recommendation now use Choice Matters. Its dedicated `loopbox/studio.js` replaces the shared design UI on this page only; the five base cases in `data.js` remain available to the original shared engine and its tests.
+
+Eight original repair cases cover total price, paid extras, decline wording, false urgency, cancellation, optional permissions, trial renewal and sponsored recommendations. Guided play offers hints immediately. The mixed casebook shuffles cases, design settings and evidence-check choices; hints become available after the first valid check. Both modes are untimed and allow retries. Specific feedback covers each setting, an original/design comparison preserves the visible evidence, and optional review prompts connect repairs to checks with real people. These prompts are authored learning exercises, not recorded user studies. No business-performance benefit is claimed.
+
+Repair choices, attempts and review selections can optionally be kept in session storage for the tab. Saving is off by default. Unticking the option or confirming a restart removes the checkpoint; malformed checkpoints are rejected. Reflections, transfer-exercise responses and shop details are never in the checkpoint. Notes can be read, copied or downloaded during play, including actual checked settings, attempts, review feedback, a reflection and a practical checklist. The existing working subscription and cancellation demo and worked example are retained. The shop survives a visit back to the cases, but clears on refresh.
+
+The eight cases are in `loopbox/studio-content.js`; progress, validation and text notes in `studio-model.js`; screen illustrations in `studio-preview.js`; scoped presentation in `studio.css`. Versioned imports keep the release together. No backend, analytics, accounts, external assets or new fonts are needed. Run the repository test command, which includes `loopbox/studio-tests.cjs`.
