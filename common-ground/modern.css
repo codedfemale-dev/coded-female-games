@@ -141,7 +141,7 @@ body[data-game="open-for-everyone"] [tabindex="-1"]:focus{outline-color:#744D70!
 body[data-game="open-for-everyone"] .of-preview-updated .of-guidance>a{color:#482C46!important;text-decoration:underline;text-underline-offset:3px}
 body[data-game="open-for-everyone"] .feedback.of-feedback-success p.of-caption-sample{color:#FFFFFF!important}
 body[data-game="open-for-everyone"] .of-preview-updated :is(#of-sample,.of-live-example,.cg-errors) :is(button,a,input,summary):focus-visible{outline-color:#744D70!important}
-@media(max-width:900px){
+@media(max-width:1200px),(pointer:coarse){
  body[data-game="open-for-everyone"] :is(header .brand,header nav a,.arcade-return-bar a[data-arcade-return]){min-height:44px}
  body[data-game="open-for-everyone"] header nav a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;padding:8px}
  body[data-game="open-for-everyone"] :is(.hero .instruction>a,main>.about a,.of-bonus .feedback a,.practice>p>a,.footer>a,.cg-preview-back>a){display:block;min-height:44px;padding-top:10px;padding-bottom:10px;line-height:1.7}
