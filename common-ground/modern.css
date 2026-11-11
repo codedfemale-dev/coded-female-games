@@ -136,3 +136,20 @@ body[data-game="open-for-everyone"] .cg-booking :is(#cg-heading,.cg-workshop-tit
 body[data-game="open-for-everyone"] .cg-booking :is(.cg-masthead,.cg-aside,.cg-review){background:#F2EDF6;border-color:#DDD3E3}
 body[data-game="open-for-everyone"] .cg-booking .cg-workshop:has(input:checked){background:#F2EDF6;border-color:#744D70;box-shadow:inset 4px 0 #744D70}
 body[data-game="open-for-everyone"] [tabindex="-1"]:focus{outline-color:#744D70!important}
+
+/* Mobile readability audit, 11 November 2026. */
+body[data-game="open-for-everyone"] .of-preview-updated .of-guidance>a{color:#482C46!important;text-decoration:underline;text-underline-offset:3px}
+body[data-game="open-for-everyone"] .feedback.of-feedback-success p.of-caption-sample{color:#FFFFFF!important}
+body[data-game="open-for-everyone"] .of-preview-updated :is(#of-sample,.of-live-example,.cg-errors) :is(button,a,input,summary):focus-visible{outline-color:#744D70!important}
+@media(max-width:900px){
+ body[data-game="open-for-everyone"] :is(header .brand,header nav a,.arcade-return-bar a[data-arcade-return]){min-height:44px}
+ body[data-game="open-for-everyone"] header nav a{display:inline-flex;align-items:center;justify-content:center;min-width:44px;padding:8px}
+ body[data-game="open-for-everyone"] :is(.hero .instruction>a,main>.about a,.of-bonus .feedback a,.practice>p>a,.footer>a,.cg-preview-back>a){display:block;min-height:44px;padding-top:10px;padding-bottom:10px;line-height:1.7}
+ body[data-game="open-for-everyone"] summary{min-height:44px;padding-top:10px;padding-bottom:10px}
+ body[data-game="open-for-everyone"] :is(.of-route-bar select,.of-example-jump select,.field textarea){font-size:16px}
+ body[data-game="open-for-everyone"] .of-save-panel label{min-height:44px;align-items:center}
+ body[data-game="open-for-everyone"] :is(.feedback p,.of-grid details p,.of-guidance,.of-ratios,.about){font-size:14px!important}
+ body[data-game="open-for-everyone"] .of-code pre{font-size:13px;line-height:1.7}
+ body[data-game="open-for-everyone"] .footer{font-size:12px}
+ body[data-game="open-for-everyone"] .of-live-example fieldset label{min-height:44px;margin-top:8px;margin-bottom:8px}
+}
