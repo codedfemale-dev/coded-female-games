@@ -1,3 +1,4 @@
+import {gamePath} from './game-routes.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,access} from 'node:fs/promises';
@@ -10,8 +11,8 @@ test('all six games contain complete original challenges and usable page links',
   let challenges=0;
   for(const [slug,g] of Object.entries(games)){
     assert(g.rounds.length>=5);assert(g.sources.length);challenges+=g.rounds.length;
-    assert(catalogue.includes(`href="${slug}/"`));
-    const html=await readFile(new URL(`${slug}/index.html`,import.meta.url),'utf8');
+    assert(catalogue.includes(`href="${gamePath(slug)}/"`));
+    const html=await readFile(new URL(`${gamePath(slug)}/index.html`,import.meta.url),'utf8');
     assert(html.includes(`data-game="${slug}"`));assert(html.includes('id="start"'));assert(html.includes('lang="en-GB"'));
     const titles=new Set();
     for(const r of g.rounds){assert(r.title&&r.hint);assert(!titles.has(r.title));titles.add(r.title);assert(r.takeaway||r.responses?.every(x=>x.takeaway));}

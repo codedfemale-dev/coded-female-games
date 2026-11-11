@@ -11,7 +11,7 @@ Play the collection: https://codedfemale-dev.github.io/coded-female-games/
 | Access Lab | Labels, contrast, button names, focus order and error recovery | [Play](https://codedfemale-dev.github.io/coded-female-games/open-for-everyone/) |
 | Ship It or Fix It | Read requirements, predict actual tests, select code repairs and keep working code | [Play](https://codedfemale-dev.github.io/coded-female-games/ship-it-or-fix-it/) |
 | Agent Mission Control | Tool boundaries, human approval, budget limits, external instructions and handovers | [Play](https://codedfemale-dev.github.io/coded-female-games/agent-mission-control/) |
-| Choice Matters | Clear pricing, voluntary extras, neutral choices, honest urgency and cancellation | [Play](https://codedfemale-dev.github.io/coded-female-games/undo-the-nudge/) |
+| Choice Matters | Clear pricing, voluntary extras, neutral choices, honest urgency and cancellation | [Play](https://codedfemale-dev.github.io/coded-female-games/choice-matters/) |
 | Metric Makeover | Outcome measures, denominators, tail performance, funnels, guardrails and causation | [Play](https://codedfemale-dev.github.io/coded-female-games/metric-makeover/) |
 | The Stakeholder Room | Questions, trade-offs, scope, risk, promises and shared agreements | [Play](https://codedfemale-dev.github.io/coded-female-games/the-stakeholder-room/) |
 
@@ -184,7 +184,7 @@ Relevant model checks: `node --test common-ground/tests.cjs common-ground/access
 
 ## Choice Matters, 10 November 2026
 
-The renamed design game retains its existing `undo-the-nudge/` address so saved links continue to work. The title, agreed tagline, arcade card, practice-shop return link and Access Lab recommendation now use Choice Matters. Its dedicated `loopbox/studio.js` replaces the shared design UI on this page only; the five base cases in `data.js` remain available to the original shared engine and its tests.
+The renamed design game now lives at `choice-matters/`. The previous `undo-the-nudge/` address redirects to it, and the previous practice-shop address redirects to `choice-matters/loopbox.html`. JavaScript preserves query strings and fragments and replaces browser history; a meta refresh and visible link provide fallbacks on this static GitHub Pages host. Canonical links point to the new addresses. Internal game identifiers and the saved-progress key stay unchanged. The title, agreed tagline, arcade card, practice-shop return link and Access Lab recommendation now use Choice Matters. Its dedicated `loopbox/studio.js` replaces the shared design UI on this page only; the five base cases in `data.js` remain available to the original shared engine and its tests.
 
 Eight original repair cases cover total price, paid extras, decline wording, false urgency, cancellation, optional permissions, trial renewal and sponsored recommendations. Guided play offers hints immediately. The mixed casebook shuffles cases, design settings and evidence-check choices; hints become available after the first valid check. Both modes are untimed and allow retries. Specific feedback covers each setting, an original/design comparison preserves the visible evidence, and optional review prompts connect repairs to checks with real people. These prompts are authored learning exercises, not recorded user studies. No business-performance benefit is claimed.
 

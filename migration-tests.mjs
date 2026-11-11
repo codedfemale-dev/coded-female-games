@@ -1,3 +1,4 @@
+import {gamePath} from './game-routes.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile,readdir,access} from 'node:fs/promises';
@@ -10,8 +11,8 @@ test('all catalogue games are local catalogue entries with return links',async()
  const html=await readFile(path.join(root,'index.html'),'utf8');
  assert.equal((html.match(/<article class="card"(?:\s[^>]*)?>/g)||[]).length,Object.keys(games).length+Object.keys(legacyGames).length);
  for(const slug of [...Object.keys(games),...Object.keys(legacyGames)]){
-  assert(html.includes(`href="${slug}/"`));
-  const page=await readFile(path.join(root,slug,'index.html'),'utf8');
+  assert(html.includes(`href="${gamePath(slug)}/"`));
+  const page=await readFile(path.join(root,gamePath(slug),'index.html'),'utf8');
   assert(page.includes('href="../"'),slug+' collection link');
   assert(!page.match(/https:\/\/codedfemale-dev.github.io\/(?!coded-female-games\/)/),slug+' standalone cross-link');
  }

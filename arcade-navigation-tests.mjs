@@ -1,3 +1,4 @@
+import {gamePath} from './game-routes.js';
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
@@ -10,7 +11,7 @@ test('every catalogue game has a static return link outside the changing game co
   const slugs=[...Object.keys(games),...Object.keys(legacyGames)];
   assert.equal(new Set(slugs).size,16);
   for(const slug of slugs){
-    const html=await readFile(new URL(`${slug}/index.html`,import.meta.url),'utf8');
+    const html=await readFile(new URL(`${gamePath(slug)}/index.html`,import.meta.url),'utf8');
     assert.equal((html.match(/data-arcade-return\b/g)||[]).length,1,slug);
     assert.match(html,/<a data-arcade-return href="\.\.\/">← Return to arcade<\/a>/,slug);
     assert.ok(html.indexOf('class="arcade-return-bar"')<html.indexOf('<main'),slug);
